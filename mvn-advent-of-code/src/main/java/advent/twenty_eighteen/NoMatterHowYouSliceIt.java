@@ -3,7 +3,6 @@ package advent.twenty_eighteen;
 import advent.common.DailyProblem;
 import advent.common.Pair;
 import advent.common.Rectangle;
-import advent.utilities.ArrayUtilities;
 import advent.utilities.FileUtilities;
 
 import java.util.Comparator;
@@ -46,7 +45,7 @@ public class NoMatterHowYouSliceIt implements DailyProblem<Integer, Integer> {
 
         int lowest = input.stream().map(p -> p.getSecond().getBottom()).max(Comparator.naturalOrder()).get();
         int furthest = input.stream().map(p -> p.getSecond().getRight()).max(Comparator.naturalOrder()).get();
-        
+
         String fabric[][] = new String[furthest][lowest];
         for (int c = 0; c != fabric.length; c++) {
             fabric[c] = new String[fabric[c].length];
