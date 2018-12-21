@@ -2,7 +2,7 @@ package advent.common;
 
 import java.util.Objects;
 
-public class IndexedPoint extends Point {
+public final class IndexedPoint extends Point {
     private final int id;
 
     public IndexedPoint(int id, int x, int y) {

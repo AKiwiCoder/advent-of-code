@@ -2,7 +2,7 @@ package advent.common;
 
 import java.util.Objects;
 
-public class Pair<F,S> {
+public final class Pair<F,S> {
     private final F first;
     private final S second;
 
