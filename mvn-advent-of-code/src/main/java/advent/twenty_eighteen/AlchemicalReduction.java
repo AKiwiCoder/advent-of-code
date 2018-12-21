@@ -17,18 +17,22 @@ public class AlchemicalReduction implements DailyProblem<Integer, Integer> {
         this.input = FileUtilities.readLines(filename, Parsers::ToString).get(0);
     }
 
-    private int performReduction(String replaced) {
+    private int performReduction(String input) {
+        char[] replaced = input.toCharArray();
+        int limit = replaced.length;
+
         int i = 0;
-        while (i < replaced.length() - 1) {
-            if (Math.abs('A' - 'a') == Math.abs(replaced.charAt(i) - replaced.charAt(i + 1))) {
-                replaced = replaced.substring(0, i) + replaced.substring(i + 2);
+        while (i < limit - 1) {
+            if (Math.abs('A' - 'a') == Math.abs(replaced[i] - replaced[i + 1])) {
+                System.arraycopy(replaced, i + 2, replaced, i, limit - i - 2);
+                limit -= 2;
                 if (i > 0)
                     i--;
             } else {
                 i++;
             }
         }
-        return replaced.length();
+        return limit;
     }
 
     @Override
