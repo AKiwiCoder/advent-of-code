@@ -42,9 +42,7 @@ public class AlchemicalReduction implements DailyProblem<Integer, Integer> {
         for (int k = 0; k != 26; k++) {
             String key = "" + LOWER.charAt(k) + UPPER.charAt(k);
             String replaced = input.replaceAll("[" + key + "]", "");
-            long start = System.currentTimeMillis();
             reductions.put(key, performReduction(replaced));
-            System.out.println(System.currentTimeMillis() - start);
         }
         return reductions.values().stream().min(Integer::compareTo).get();
     }
