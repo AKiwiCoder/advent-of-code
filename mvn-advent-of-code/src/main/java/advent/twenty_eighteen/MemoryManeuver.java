@@ -34,7 +34,7 @@ public class MemoryManeuver implements DailyProblem<Integer, Integer> {
         int numChildren = steps.pop();
         int numMetadata = steps.pop();
 
-        int childValue[] = new int[numChildren];
+        int[] childValue = new int[numChildren];
         for (int i = 0; i != numChildren; i++) {
             childValue[i] = walkTree2(steps);
         }

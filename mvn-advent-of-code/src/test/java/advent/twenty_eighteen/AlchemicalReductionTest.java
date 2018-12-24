@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class AlchemicalReductionTest {
     @Test
     public void checkReal() {
-        AlchemicalReduction im = new  AlchemicalReduction("/twenty_eighteen/AlchemicalReduction-input.txt");
+        AlchemicalReduction im = new AlchemicalReduction("/twenty_eighteen/AlchemicalReduction-input.txt");
 
         assertEquals(11242, im.getPart1Answer().intValue());
         assertEquals(5492, im.getPart2Answer().intValue());
@@ -15,7 +15,7 @@ public class AlchemicalReductionTest {
 
     @Test
     public void checkExample1() {
-        AlchemicalReduction im = new  AlchemicalReduction("/twenty_eighteen/AlchemicalReduction-example#1.txt");
+        AlchemicalReduction im = new AlchemicalReduction("/twenty_eighteen/AlchemicalReduction-example#1.txt");
 
         assertEquals(10, im.getPart1Answer().intValue());
         assertEquals(4, im.getPart2Answer().intValue());

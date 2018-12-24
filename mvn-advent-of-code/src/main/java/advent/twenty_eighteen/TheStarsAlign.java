@@ -27,7 +27,7 @@ public class TheStarsAlign implements DailyProblem<String, Integer> {
 
     public TheStarsAlign(String name) {
         List<Pair<MutablePoint, Velocity>> input = FileUtilities.readLines(name, TheStarsAlign::parse);
-        
+
         int previousWidth = Integer.MAX_VALUE;
         int previousHeight = Integer.MAX_VALUE;
         int currentWidth = Integer.MAX_VALUE;

@@ -10,9 +10,9 @@ public class ReposeRecord implements DailyProblem<Integer, Integer> {
     private final List<String> input;
 
     private static final Comparator<String> SORTER = (s1, s2) -> {
-        String s1Date=s1.substring(1,17).replaceAll("-", "").replaceAll(" ", "").replaceAll(":", "");
-        String s2Date=s2.substring(1,17).replaceAll("-", "").replaceAll(" ", "").replaceAll(":", "");
-        return Long.compare(Long.parseLong(s1Date),Long.parseLong(s2Date));
+        String s1Date = s1.substring(1, 17).replaceAll("-", "").replaceAll(" ", "").replaceAll(":", "");
+        String s2Date = s2.substring(1, 17).replaceAll("-", "").replaceAll(" ", "").replaceAll(":", "");
+        return Long.compare(Long.parseLong(s1Date), Long.parseLong(s2Date));
     };
 
     private final int part1Answer;
@@ -22,13 +22,13 @@ public class ReposeRecord implements DailyProblem<Integer, Integer> {
         this.input = FileUtilities.readLines(filename, Parsers::ToString);
         this.input.sort(SORTER);
 
-        final Integer currentGuard[] = new Integer[1];
+        final Integer[] currentGuard = new Integer[1];
         Map<Integer, Map<String, Boolean[]>> schedule = new HashMap<>();
         input.forEach(line -> {
-            String date=line.substring(6,12);
-            Integer hour=Integer.parseInt(line.substring(12,14));
-            Integer minute=Integer.parseInt(line.substring(15,17));
-            char action=line.charAt(19);
+            String date = line.substring(6, 12);
+            Integer hour = Integer.parseInt(line.substring(12, 14));
+            Integer minute = Integer.parseInt(line.substring(15, 17));
+            char action = line.charAt(19);
             if (action == 'G') {
                 // new Guard
                 String guard = line.substring(26).split(" ")[0];
@@ -60,14 +60,14 @@ public class ReposeRecord implements DailyProblem<Integer, Integer> {
             }
         }
 
-        Map<Integer,Integer> minutes = new HashMap<>();
+        Map<Integer, Integer> minutes = new HashMap<>();
         schedule.get(guard).forEach((key, value) -> {
             for (int i = 0; i != 60; i++) {
                 if (value[i] != null && value[i]) {
                     if (!minutes.containsKey(i)) {
                         minutes.put(i, 1);
                     } else {
-                        minutes.put(i, minutes.get(i)+1);
+                        minutes.put(i, minutes.get(i) + 1);
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class ReposeRecord implements DailyProblem<Integer, Integer> {
         int maxMinute = -1;
         for (Map.Entry<Integer, Integer> m1 : minutes.entrySet()) {
             int key = m1.getKey();
-            int value= m1.getValue();
+            int value = m1.getValue();
             if (value > m) {
                 m = value;
                 maxMinute = key;
@@ -86,16 +86,16 @@ public class ReposeRecord implements DailyProblem<Integer, Integer> {
 
         this.part1Answer = guard * maxMinute;
 
-        Map<Integer, Map<Integer,Integer>> asleepMinuteCount = new HashMap<>();
+        Map<Integer, Map<Integer, Integer>> asleepMinuteCount = new HashMap<>();
         schedule.forEach((guardId, scheduleMap) -> {
-            for (Map.Entry<String, Boolean[]> sch: scheduleMap.entrySet()) {
+            for (Map.Entry<String, Boolean[]> sch : scheduleMap.entrySet()) {
                 Boolean[] s = sch.getValue();
                 for (int i = 0; i != 60; i++) {
                     if (s[i] != null && s[i]) {
                         if (!asleepMinuteCount.containsKey(i)) {
                             asleepMinuteCount.put(i, new HashMap<>());
                         }
-                        Map<Integer,Integer> gMap = asleepMinuteCount.get(i);
+                        Map<Integer, Integer> gMap = asleepMinuteCount.get(i);
                         if (!gMap.containsKey(guardId)) {
                             gMap.put(guardId, 1);
                         } else {
@@ -106,14 +106,16 @@ public class ReposeRecord implements DailyProblem<Integer, Integer> {
             }
         });
 
-        int maxGuardId[] = new int[1];
-        int maxMinuteNum[] = new int[1];
-        int maxMinuteCount[] = new int[1];
-        asleepMinuteCount.forEach((minId, mMap) -> mMap.forEach((gid, mCnt) -> {if (mCnt > maxMinuteCount[0]) {
-            maxMinuteCount[0] = mCnt;
-            maxMinuteNum[0] = minId;
-            maxGuardId[0] = gid;
-        }}));
+        int[] maxGuardId = new int[1];
+        int[] maxMinuteNum = new int[1];
+        int[] maxMinuteCount = new int[1];
+        asleepMinuteCount.forEach((minId, mMap) -> mMap.forEach((gid, mCnt) -> {
+            if (mCnt > maxMinuteCount[0]) {
+                maxMinuteCount[0] = mCnt;
+                maxMinuteNum[0] = minId;
+                maxGuardId[0] = gid;
+            }
+        }));
 
         this.part2Answer = maxGuardId[0] * maxMinuteNum[0];
     }
@@ -128,13 +130,13 @@ public class ReposeRecord implements DailyProblem<Integer, Integer> {
         return result;
     }
 
-    private static void update(boolean asleep, Map<String, Boolean[]> schedule,String date, int hour, int minute) {
+    private static void update(boolean asleep, Map<String, Boolean[]> schedule, String date, int hour, int minute) {
         if (!schedule.containsKey(date)) {
-            Boolean data[] = new Boolean[60];
+            Boolean[] data = new Boolean[60];
             schedule.put(date, data);
         }
 
-        Boolean data[] = schedule.get(date);
+        Boolean[] data = schedule.get(date);
         if (hour == 23) {
             minute = 0;
         }

@@ -46,7 +46,7 @@ public class NoMatterHowYouSliceIt implements DailyProblem<Integer, Integer> {
         int lowest = input.stream().map(p -> p.getSecond().getBottom()).max(Comparator.naturalOrder()).get();
         int furthest = input.stream().map(p -> p.getSecond().getRight()).max(Comparator.naturalOrder()).get();
 
-        String fabric[][] = new String[furthest][lowest];
+        String[][] fabric = new String[furthest][lowest];
         for (int c = 0; c != fabric.length; c++) {
             fabric[c] = new String[fabric[c].length];
             for (int r = 0; r != fabric[c].length; r++) {
@@ -64,7 +64,7 @@ public class NoMatterHowYouSliceIt implements DailyProblem<Integer, Integer> {
         for (int c = 0; c != fabric.length; c++) {
             for (int r = 0; r != fabric[c].length; r++) {
                 if (fabric[c][r].length() > 1) {
-                    String split[] = fabric[c][r].split(",");
+                    String[] split = fabric[c][r].split(",");
                     if (split.length > 1) {
                         for (int i = 0; i != split.length; i++) {
                             Integer n = Integer.parseInt(split[i].replace(",", ""));

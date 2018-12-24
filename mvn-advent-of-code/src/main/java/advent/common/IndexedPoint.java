@@ -6,8 +6,8 @@ public final class IndexedPoint extends Point {
     private final int id;
 
     public IndexedPoint(int id, int x, int y) {
-        super(x,y);
-    this.id =id;
+        super(x, y);
+        this.id = id;
     }
 
     public int getId() {

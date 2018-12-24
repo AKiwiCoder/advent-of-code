@@ -49,7 +49,7 @@ public class MarbleMania implements DailyProblem<Long, Long> {
     }
 
     private static long calculate(int players, long maxMarblePoint) {
-        long marblesScored[] = new long[players];
+        long[] marblesScored = new long[players];
 
         Node board = new Node();
         board.marble = 0;

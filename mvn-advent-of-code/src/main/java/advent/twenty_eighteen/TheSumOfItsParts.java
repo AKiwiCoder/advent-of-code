@@ -51,7 +51,7 @@ public class TheSumOfItsParts implements DailyProblem<String, Integer> {
         Set<Character> done = new HashSet<>();
         Set<Character> inProgress = new HashSet<>();
         Map<Character, Integer> ticks = new HashMap<>();
-        Character elves[] = new Character[numberOfElfWorkers];
+        Character[] elves = new Character[numberOfElfWorkers];
         while (done.size() != ordered.size()) {
             for (int elfNumber = 0; elfNumber != elves.length; elfNumber++) {
                 if (elves[elfNumber] != null) {

@@ -19,11 +19,11 @@ public interface FileUtilities {
     }
 
     static <T> List<T> readLinesWithIndex(String name, BiFunction<Integer, String, T> parser) {
-       List<String> lines = readLines(name, Parsers::ToString);
-       List<T> results = new ArrayList<>(lines.size());
-       for (int i = 0; i != lines.size(); i++) {
-           results.add(parser.apply(i, lines.get(i)));
-       }
-       return results;
+        List<String> lines = readLines(name, Parsers::ToString);
+        List<T> results = new ArrayList<>(lines.size());
+        for (int i = 0; i != lines.size(); i++) {
+            results.add(parser.apply(i, lines.get(i)));
+        }
+        return results;
     }
 }
