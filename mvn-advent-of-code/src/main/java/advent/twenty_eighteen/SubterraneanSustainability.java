@@ -1,7 +1,7 @@
 package advent.twenty_eighteen;
 
 import advent.common.DailyProblem;
-import advent.common.Rule;
+import advent.twenty_eighteen.support.Rule;
 import advent.utilities.FileUtilities;
 import advent.utilities.Parsers;
 

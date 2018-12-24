@@ -1,6 +1,9 @@
 package advent.twenty_eighteen;
 
 import advent.common.DailyProblem;
+import advent.twenty_eighteen.support.Cart;
+import advent.twenty_eighteen.support.EDirection;
+import advent.twenty_eighteen.support.ETurn;
 import advent.utilities.FileUtilities;
 import advent.utilities.Parsers;
 
@@ -10,72 +13,14 @@ import java.util.List;
 
 public class MineCartMadness implements DailyProblem<String, String> {
     private static Comparator<Cart> compareCarts = (o1, o2) -> {
-        if (o1.row == o2.row) {
-            return Integer.compare(o1.col, o2.col);
+        if (o1.getRow() == o2.getRow()) {
+            return Integer.compare(o1.getCol(), o2.getCol());
         }
-        return Integer.compare(o1.row, o2.row);
+        return Integer.compare(o1.getRow(), o2.getRow());
     };
 
     private final String part1Answer;
     private final String part2Answer;
-
-    enum Direction {
-        North, South, East, West;
-
-        public static Direction turn(Direction orig, Turn turn) {
-            switch (turn) {
-                case Left:
-                    switch (orig) {
-                        case North:
-                            return West;
-                        case South:
-                            return East;
-                        case East:
-                            return North;
-                        case West:
-                            return South;
-                    }
-                    break;
-                case Straight:
-                    return orig;
-                case Right:
-                    switch (orig) {
-                        case North:
-                            return East;
-                        case South:
-                            return West;
-                        case East:
-                            return South;
-                        case West:
-                            return North;
-                    }
-                    break;
-            }
-            throw new IllegalArgumentException(orig + " " + turn + " huh?");
-        }
-    }
-
-    enum Turn {
-        Left, Straight, Right
-    }
-
-    static class Cart {
-        int row;
-        int col;
-        Direction direction;
-        Turn lastTurned;
-
-        @Override
-        public String toString() {
-            return "Cart{" +
-                    "row=" + row +
-                    ", col=" + col +
-                    ", direction=" + direction +
-                    ", lastTurned=" + lastTurned +
-                    '}';
-        }
-    }
-
 
     public MineCartMadness(String name) {
         List<String> lines = FileUtilities.readLines(name, Parsers::ToStringNoTrim);
@@ -90,55 +35,28 @@ public class MineCartMadness implements DailyProblem<String, String> {
         for (int row = 0; row != map.length; row++) {
             for (int col = 0; col != map[row].length; col++) {
                 if (map[row][col] == '^') {
-                    Cart c = new Cart();
-                    c.row = row;
-                    c.col = col;
-                    c.direction = Direction.North;
-                    c.lastTurned = Turn.Right;
-                    carts.add(c);
+                    carts.add(new Cart(row, col, EDirection.North, ETurn.Right));
                     map[row][col] = '|';
                 }
                 if (map[row][col] == '>') {
-                    Cart c = new Cart();
-                    c.row = row;
-                    c.col = col;
-                    c.direction = Direction.East;
-                    c.lastTurned = Turn.Right;
-                    carts.add(c);
+                    carts.add(new Cart(row, col, EDirection.East, ETurn.Right));
                     map[row][col] = '-';
                 }
                 if (map[row][col] == '<') {
-                    Cart c = new Cart();
-                    c.row = row;
-                    c.col = col;
-                    c.direction = Direction.West;
-                    c.lastTurned = Turn.Right;
-                    carts.add(c);
+                    carts.add(new Cart(row, col, EDirection.West, ETurn.Right));
                     map[row][col] = '-';
                 }
                 if (map[row][col] == 'v') {
-                    Cart c = new Cart();
-                    c.row = row;
-                    c.col = col;
-                    c.direction = Direction.South;
-                    c.lastTurned = Turn.Right;
-                    carts.add(c);
+                    carts.add(new Cart(row, col, EDirection.South, ETurn.Right));
                     map[row][col] = '|';
                 }
             }
-        }
-
-        for (int y = 0; y != map.length; y++) {
-            for (int x = 0; x != map[y].length; x++) {
-                System.out.print(map[y][x]);
-            }
-            System.out.println();
         }
 
         Cart crashes[] = new Cart[2];
         findCrash(map, new LinkedList<>(carts), crashes);
-        this.part1Answer = +crashes[0].col + "," + crashes[0].row;
-        this.part2Answer = crashes[1].col + "," + crashes[1].row;
+        this.part1Answer = +crashes[0].getCol() + "," + crashes[0].getRow();
+        this.part2Answer = crashes[1].getCol() + "," + crashes[1].getRow();
     }
 
     private static void findCrash(char[][] map, List<Cart> carts, Cart[] crashes) {
@@ -147,57 +65,57 @@ public class MineCartMadness implements DailyProblem<String, String> {
             carts.sort(compareCarts);
 
             for (Cart cart : carts) {
-                switch (cart.direction) {
+                switch (cart.getDirection()) {
                     case North:
-                        cart.row--;
+                        cart.setRow(cart.getRow() - 1);
                         break;
                     case South:
-                        cart.row++;
+                        cart.setRow(cart.getRow() + 1);
                         break;
                     case East:
-                        cart.col++;
+                        cart.setCol(cart.getCol() + 1);
                         break;
                     case West:
-                        cart.col--;
+                        cart.setCol(cart.getCol() - 1);
                         break;
                 }
 
-                char m = map[cart.row][cart.col];
+                char m = map[cart.getRow()][cart.getCol()];
                 switch (m) {
                     case '/':
-                        switch (cart.direction) {
+                        switch (cart.getDirection()) {
                             case North:
-                                cart.direction = Direction.East;
+                                cart.setDirection(EDirection.East);
                                 break;
                             case South:
-                                cart.direction = Direction.West;
+                                cart.setDirection(EDirection.West);
                                 break;
                             case East:
-                                cart.direction = Direction.North;
+                                cart.setDirection(EDirection.North);
                                 break;
                             case West:
-                                cart.direction = Direction.South;
+                                cart.setDirection(EDirection.South);
                                 break;
                         }
                         break;
                     case '\\':
-                        switch (cart.direction) {
+                        switch (cart.getDirection()) {
                             case North:
-                                cart.direction = Direction.West;
+                                cart.setDirection(EDirection.West);
                                 break;
                             case South:
-                                cart.direction = Direction.East;
+                                cart.setDirection(EDirection.East);
                                 break;
                             case East:
-                                cart.direction = Direction.South;
+                                cart.setDirection(EDirection.South);
                                 break;
                             case West:
-                                cart.direction = Direction.North;
+                                cart.setDirection(EDirection.North);
                                 break;
                         }
                         break;
                     case '-':
-                        switch (cart.direction) {
+                        switch (cart.getDirection()) {
                             case North:
                             case South:
                                 throw new IllegalStateException("Cart off track " + cart + " '" + m + "'");
@@ -207,7 +125,7 @@ public class MineCartMadness implements DailyProblem<String, String> {
                         }
                         break;
                     case '|':
-                        switch (cart.direction) {
+                        switch (cart.getDirection()) {
                             case North:
                             case South:
                                 break;
@@ -217,17 +135,17 @@ public class MineCartMadness implements DailyProblem<String, String> {
                         }
                         break;
                     case '+':
-                        switch (cart.lastTurned) {
+                        switch (cart.getLastTurned()) {
                             case Left:
-                                cart.lastTurned = Turn.Straight;
+                                cart.setLastTurned(ETurn.Straight);
                                 break;
                             case Straight:
-                                cart.lastTurned = Turn.Right;
-                                cart.direction = Direction.turn(cart.direction, Turn.Right);
+                                cart.setLastTurned(ETurn.Right);
+                                cart.setDirection(EDirection.turn(cart.getDirection(), ETurn.Right));
                                 break;
                             case Right:
-                                cart.lastTurned = Turn.Left;
-                                cart.direction = Direction.turn(cart.direction, Turn.Left);
+                                cart.setLastTurned(ETurn.Left);
+                                cart.setDirection(EDirection.turn(cart.getDirection(), ETurn.Left));
                                 break;
                         }
                         break;
@@ -261,7 +179,7 @@ public class MineCartMadness implements DailyProblem<String, String> {
     private static Cart crashed(Cart cart, List<Cart> dead, List<Cart> carts) {
         for (Cart c : carts) {
             if (c != cart) {
-                if (c.row == cart.row && c.col == cart.col) {
+                if (c.getRow() == cart.getRow() && c.getCol() == cart.getCol()) {
                     return c;
                 }
             }

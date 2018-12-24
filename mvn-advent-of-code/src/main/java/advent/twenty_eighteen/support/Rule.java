@@ -1,4 +1,4 @@
-package advent.common;
+package advent.twenty_eighteen.support;
 
 import java.util.Objects;
 
