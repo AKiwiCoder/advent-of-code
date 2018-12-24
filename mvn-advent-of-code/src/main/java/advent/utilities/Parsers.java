@@ -12,6 +12,10 @@ public interface Parsers {
         return input.trim();
     }
 
+    static String ToStringNoTrim(String input) {
+        return input;
+    }
+
     static Point ToPoint(String input) {
         String[] bits = input.split(",");
         return new Point(Integer.parseInt(bits[0].trim()), Integer.parseInt(bits[1].trim()));
