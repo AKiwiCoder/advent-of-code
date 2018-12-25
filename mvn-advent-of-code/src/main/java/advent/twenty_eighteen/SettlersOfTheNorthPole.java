@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SettlersOfTheNorthPole implements DailyProblem<Long, Long> {
+    private static final long LIMIT = 2000;
+
     private final long part1Answer;
     private final long part2Answer;
 
@@ -25,7 +27,7 @@ public class SettlersOfTheNorthPole implements DailyProblem<Long, Long> {
 
         char[][] temp = map;
         Map<Long, Long> cycleDetector = new HashMap<>();
-        for (long i = 1; i != 10001; i++) {
+        for (long i = 1; i != LIMIT; i++) {
             process(map, working);
 
             long result = (count(map, '#') * count(map, '|'));
@@ -37,7 +39,18 @@ public class SettlersOfTheNorthPole implements DailyProblem<Long, Long> {
             map = temp;
         }
 
-        long index2 = (1000000000 - 999) % 28 + 1000;
+        long cycleStartIndex = 1000;
+        long cycleStartValue = cycleDetector.get(cycleStartIndex);
+        long cycleEndIndex = 1000;
+
+        for (long i = cycleStartIndex + 1; i != LIMIT; i++) {
+            if (cycleDetector.get(i) == cycleStartValue) {
+                cycleEndIndex = i;
+                break;
+            }
+        }
+
+        long index2 = (1000000000 - 999) % (cycleEndIndex - cycleStartIndex) + 1000;
 
         this.part1Answer = cycleDetector.get(11l);
         this.part2Answer = cycleDetector.get(index2);

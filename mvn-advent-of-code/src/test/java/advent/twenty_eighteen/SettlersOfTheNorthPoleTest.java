@@ -18,6 +18,6 @@ public class SettlersOfTheNorthPoleTest {
         SettlersOfTheNorthPole im = new SettlersOfTheNorthPole("/twenty_eighteen/SettlersOfTheNorthPole-example#1.txt");
 
         assertEquals(1147, im.getPart1Answer().longValue());
-        assertEquals(666666666, im.getPart2Answer().longValue());
+        assertEquals(0, im.getPart2Answer().longValue());
     }
 }
