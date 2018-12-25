@@ -12,6 +12,15 @@ public interface ArrayUtilities {
         }
     }
 
+    static void print(char[][] input) {
+        for (int c = 0; c != input.length; c++) {
+            for (int r = 0; r != input[c].length; r++) {
+                System.out.print(input[c][r]);
+            }
+            System.out.println();
+        }
+    }
+
     static int[][] createIntArray(int width, int height, BiFunction<Integer, Integer, Integer> populator) {
         int[][] result = new int[height][];
         for (int y = 0; y != result.length; y++) {
