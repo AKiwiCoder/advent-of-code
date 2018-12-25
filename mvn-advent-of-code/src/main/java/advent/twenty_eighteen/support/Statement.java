@@ -56,4 +56,13 @@ public class Statement {
                 ", c=" + c +
                 '}';
     }
+
+    public static Statement ParseStatement(String line) {
+        String[] bits = line.split(" ");
+        EMnemonic mnemonic = EMnemonic.valueOf(bits[0].trim());
+        int a = Integer.parseInt(bits[1].trim());
+        int b = Integer.parseInt(bits[2].trim());
+        int c = Integer.parseInt(bits[3].trim());
+        return new Statement(mnemonic, a, b, c);
+    }
 }

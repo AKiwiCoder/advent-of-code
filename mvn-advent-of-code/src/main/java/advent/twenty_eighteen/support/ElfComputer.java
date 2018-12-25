@@ -20,12 +20,13 @@ public class ElfComputer {
             registers[ipRegister] = ip;
             Statement statement = statements[ip];
             statement.getMnemonic().execute(statement.getA(), statement.getB(), statement.getC(), registers);
-            ip = registers[ipRegister];
-            ip++;
 
             if (stopCondition.apply(registers)) {
                 break;
             }
+
+            ip = registers[ipRegister];
+            ip++;
         }
     }
 }
