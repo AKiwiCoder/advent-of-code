@@ -41,8 +41,6 @@ public class BeverageBandits implements DailyProblem<Integer, Integer> {
             }
         }
 
-        ArrayUtilities.print(map);
-
         this.part1Answer = simulate(map, clone(elves, 3), clone(goblins, 3), false);
 
         int power = 3;
