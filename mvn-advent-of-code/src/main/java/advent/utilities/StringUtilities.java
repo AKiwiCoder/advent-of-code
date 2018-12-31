@@ -13,4 +13,14 @@ public interface StringUtilities {
         }
         return result;
     }
+
+    static int countOccurrences(String line, char target) {
+        int count = 0;
+        for (char c : line.toCharArray()) {
+            if (c == target) {
+                count++;
+            }
+        }
+        return count;
+    }
 }

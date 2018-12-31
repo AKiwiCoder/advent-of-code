@@ -7,8 +7,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class Day04TheIdealStockingStuffer implements DailyProblem<Integer, Integer> {
 
-    private int part1Answer;
-    private int part2Answer;
+    private final int part1Answer;
+    private final int part2Answer;
 
     private MessageDigest digest = MessageDigest.getInstance("MD5");
 
@@ -27,7 +27,7 @@ public class Day04TheIdealStockingStuffer implements DailyProblem<Integer, Integ
     private String md5hashString(String text) {
         return bytesToHex(digest.digest(text.getBytes()));
     }
-    
+
     private boolean doesItStartWithXZeros(String hash, String zeros) {
        return hash.startsWith(zeros);
     }
