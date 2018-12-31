@@ -45,7 +45,7 @@ public class Day23ExperimentalEmergencyTeleportation implements DailyProblem<Int
     }
 
     public Day23ExperimentalEmergencyTeleportation(String filename) {
-        List<String> lines = FileUtilities.readLines(filename, Parsers::ToString);
+        List<String> lines = FileUtilities.readLines(filename, Parsers::TO_STRING);
         List<Nano> nanos = new ArrayList<>(lines.stream().map(line -> {
             int lb = line.indexOf('<');
             int rb = line.indexOf('>');

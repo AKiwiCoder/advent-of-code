@@ -14,7 +14,7 @@ public class Day05AlchemicalReduction implements DailyProblem<Integer, Integer> 
     private final String input;
 
     public Day05AlchemicalReduction(String filename) {
-        this.input = FileUtilities.readLines(filename, Parsers::ToString).get(0);
+        this.input = FileUtilities.readLines(filename, Parsers::TO_STRING).get(0);
     }
 
     private int performReduction(String input) {

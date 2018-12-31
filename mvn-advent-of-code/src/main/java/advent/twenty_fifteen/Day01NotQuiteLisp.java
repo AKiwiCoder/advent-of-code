@@ -10,7 +10,7 @@ public class Day01NotQuiteLisp implements DailyProblem<Integer, Integer> {
     private final int part2Answer;
 
     public Day01NotQuiteLisp(String filename) {
-        String line = FileUtilities.readLines(filename, Parsers::ToString).get(0);
+        String line = FileUtilities.readLines(filename, Parsers::TO_STRING).get(0);
 
         int floor = 0;
         int position = 0;

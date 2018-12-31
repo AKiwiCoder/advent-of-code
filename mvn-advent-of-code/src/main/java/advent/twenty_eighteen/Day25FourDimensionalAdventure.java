@@ -29,7 +29,7 @@ public class Day25FourDimensionalAdventure implements DailyProblem<Integer, Void
     }
 
     public Day25FourDimensionalAdventure(String filename) {
-        List<String> lines = FileUtilities.readLines(filename, Parsers::ToString);
+        List<String> lines = FileUtilities.readLines(filename, Parsers::TO_STRING);
 
         LinkedList<Point> points = new LinkedList<>();
         for (String line : lines) {

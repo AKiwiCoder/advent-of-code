@@ -18,7 +18,7 @@ public class Day07TheSumOfItsParts implements DailyProblem<String, Integer> {
     private final int completedInSeconds;
 
     public Day07TheSumOfItsParts(String name, int numberOfElfWorkers, int baseJobLength) {
-        List<String> lines = FileUtilities.readLines(name, Parsers::ToString);
+        List<String> lines = FileUtilities.readLines(name, Parsers::TO_STRING);
 
         this.graph = new DefaultDirectedGraph<>(DefaultEdge.class);
 

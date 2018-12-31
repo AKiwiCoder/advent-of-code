@@ -12,7 +12,7 @@ public class Day08MemoryManeuver implements DailyProblem<Integer, Integer> {
     private final List<Integer> input;
 
     public Day08MemoryManeuver(String name) {
-        String line = FileUtilities.readLines(name, Parsers::ToString).get(0);
+        String line = FileUtilities.readLines(name, Parsers::TO_STRING).get(0);
         this.input = StringUtilities.splitLine(line, "\\s", Integer::parseInt);
     }
 

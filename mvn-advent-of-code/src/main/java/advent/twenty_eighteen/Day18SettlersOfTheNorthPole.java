@@ -15,7 +15,7 @@ public class Day18SettlersOfTheNorthPole implements DailyProblem<Long, Long> {
     private final long part2Answer;
 
     public Day18SettlersOfTheNorthPole(String filename) {
-        List<String> lines = FileUtilities.readLines(filename, Parsers::ToStringNoTrim);
+        List<String> lines = FileUtilities.readLines(filename, Parsers::TO_STRING_NO_TRIM);
 
         char[][] map = new char[lines.size()][];
         char[][] working = new char[lines.size()][];

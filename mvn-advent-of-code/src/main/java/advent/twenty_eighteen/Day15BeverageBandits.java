@@ -3,7 +3,6 @@ package advent.twenty_eighteen;
 import advent.common.DailyProblem;
 import advent.twenty_eighteen.support.Location;
 import advent.twenty_eighteen.support.Unit;
-import advent.utilities.ArrayUtilities;
 import advent.utilities.FileUtilities;
 import advent.utilities.Parsers;
 
@@ -16,7 +15,7 @@ public class Day15BeverageBandits implements DailyProblem<Integer, Integer> {
     private final char[][] map;
 
     public Day15BeverageBandits(String name) {
-        List<String> lines = FileUtilities.readLines(name, Parsers::ToStringNoTrim);
+        List<String> lines = FileUtilities.readLines(name, Parsers::TO_STRING_NO_TRIM);
 
         List<Unit> elves = new LinkedList<>();
         List<Unit> goblins = new LinkedList<>();

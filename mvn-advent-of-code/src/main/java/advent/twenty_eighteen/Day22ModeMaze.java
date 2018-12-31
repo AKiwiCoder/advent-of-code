@@ -23,7 +23,7 @@ public class Day22ModeMaze implements DailyProblem<Integer, Integer> {
     private final Type[][] types;
 
     public Day22ModeMaze(String filename) {
-        List<String> lines = FileUtilities.readLines(filename, Parsers::ToString);
+        List<String> lines = FileUtilities.readLines(filename, Parsers::TO_STRING);
 
         int depth = Integer.parseInt(lines.get(0).substring(7));
         String[] bits = lines.get(1).substring(8).split(",");

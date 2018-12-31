@@ -13,7 +13,7 @@ public class Day01ChronalCalibration implements DailyProblem<Integer, Integer> {
     private final List<Integer> input;
 
     public Day01ChronalCalibration(String filename) {
-        this.input = FileUtilities.readLines(filename, Parsers::ToInteger);
+        this.input = FileUtilities.readLines(filename, Parsers::TO_INTEGER);
     }
 
     @Override

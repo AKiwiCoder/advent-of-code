@@ -16,7 +16,7 @@ public class Day21ChronalConversion implements DailyProblem<Integer, Integer> {
     private final int part2Answer;
 
     public Day21ChronalConversion(String filename) {
-        List<String> lines = FileUtilities.readLines(filename, Parsers::ToString);
+        List<String> lines = FileUtilities.readLines(filename, Parsers::TO_STRING);
 
         String ipLine = lines.get(0).trim();
         int ipRegister = Integer.parseInt(ipLine.substring(3).trim());

@@ -17,7 +17,7 @@ public class Day06ChronalCoordinates implements DailyProblem<Integer, Integer> {
     private final int minHeight;
 
     public Day06ChronalCoordinates(String filename, int part2Limit) {
-        this.input = FileUtilities.readLinesWithIndex(filename, Parsers::ToIndexedPoint);
+        this.input = FileUtilities.readLinesWithIndex(filename, Parsers::TO_INDEXEX_POINT);
         this.part2Limit = part2Limit;
 
         this.minWidth = input.stream().map(p -> p.getY()).min(Comparator.naturalOrder()).get();

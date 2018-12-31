@@ -12,7 +12,7 @@ public class Day02InventoryManagementSystem implements DailyProblem<Integer, Str
     private final List<String> input;
 
     public Day02InventoryManagementSystem(String filename) {
-        this.input = FileUtilities.readLines(filename, Parsers::ToString);
+        this.input = FileUtilities.readLines(filename, Parsers::TO_STRING);
     }
 
     @Override

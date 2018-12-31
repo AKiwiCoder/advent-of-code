@@ -159,7 +159,7 @@ public class Day20ARegularMap implements DailyProblem<Integer, Long> {
     }
 
     public Day20ARegularMap(String filename) {
-        String line = FileUtilities.readLines(filename, Parsers::ToString).get(0);
+        String line = FileUtilities.readLines(filename, Parsers::TO_STRING).get(0);
 
         Map<Point, Integer> distances = process(line);
 

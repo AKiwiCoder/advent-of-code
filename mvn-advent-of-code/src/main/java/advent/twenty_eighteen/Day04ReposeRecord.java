@@ -19,7 +19,7 @@ public class Day04ReposeRecord implements DailyProblem<Integer, Integer> {
     private final int part2Answer;
 
     public Day04ReposeRecord(String filename) {
-        this.input = FileUtilities.readLines(filename, Parsers::ToString);
+        this.input = FileUtilities.readLines(filename, Parsers::TO_STRING);
         this.input.sort(SORTER);
 
         final Integer[] currentGuard = new Integer[1];

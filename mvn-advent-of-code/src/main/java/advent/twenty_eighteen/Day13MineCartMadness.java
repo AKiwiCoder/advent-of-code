@@ -23,7 +23,7 @@ public class Day13MineCartMadness implements DailyProblem<String, String> {
     private final String part2Answer;
 
     public Day13MineCartMadness(String name) {
-        List<String> lines = FileUtilities.readLines(name, Parsers::ToStringNoTrim);
+        List<String> lines = FileUtilities.readLines(name, Parsers::TO_STRING_NO_TRIM);
 
         char[][] map = new char[lines.size()][];
         for (int i = 0; i != lines.size(); i++) {

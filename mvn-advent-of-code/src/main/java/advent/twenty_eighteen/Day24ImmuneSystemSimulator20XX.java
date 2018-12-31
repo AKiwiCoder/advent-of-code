@@ -77,7 +77,7 @@ public class Day24ImmuneSystemSimulator20XX implements DailyProblem<Integer, Int
     }
 
     public Day24ImmuneSystemSimulator20XX(String filename) {
-        List<String> lines = FileUtilities.readLines(filename, Parsers::ToString);
+        List<String> lines = FileUtilities.readLines(filename, Parsers::TO_STRING);
 
         this.defenders = new LinkedList<>();
         this.attackers = new LinkedList<>();

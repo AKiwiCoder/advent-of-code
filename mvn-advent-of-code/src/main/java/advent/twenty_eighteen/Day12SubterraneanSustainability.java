@@ -15,7 +15,7 @@ public class Day12SubterraneanSustainability implements DailyProblem<Long, Long>
     private long partTwoAnswer;
 
     public Day12SubterraneanSustainability(String filename) {
-        List<String> lines = FileUtilities.readLines(filename, Parsers::ToString);
+        List<String> lines = FileUtilities.readLines(filename, Parsers::TO_STRING);
 
         String input = lines.get(0).substring("initial state: ".length());
 

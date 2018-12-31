@@ -24,7 +24,7 @@ public class Day17ReservoirResearch implements DailyProblem<Integer, Integer> {
     private Integer part2Answer;
 
     public Day17ReservoirResearch(String filename) {
-        List<String> lines = FileUtilities.readLines(filename, Parsers::ToString);
+        List<String> lines = FileUtilities.readLines(filename, Parsers::TO_STRING);
 
         List<Data> data = new LinkedList<>();
 

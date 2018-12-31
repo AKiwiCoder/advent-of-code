@@ -32,7 +32,7 @@ public class Day11ChronalCharge implements DailyProblem<String, String> {
 
 
     public Day11ChronalCharge(String filename) {
-        this.serialNumber = FileUtilities.readLines(filename, Parsers::ToInteger).get(0);
+        this.serialNumber = FileUtilities.readLines(filename, Parsers::TO_INTEGER).get(0);
 
         int[][] powerLevels = ArrayUtilities.createIntArray(SIZE, SIZE, (x, y) -> powerLevel(serialNumber, x + 1, y + 1));
 

@@ -14,7 +14,7 @@ public class Day16ChronalClassification implements DailyProblem<Integer, Integer
     private final int part1Answer;
 
     public Day16ChronalClassification(String name) {
-        LinkedList<String> input = new LinkedList<>(FileUtilities.readLines(name, Parsers::ToString));
+        LinkedList<String> input = new LinkedList<>(FileUtilities.readLines(name, Parsers::TO_STRING));
 
         Map<Integer, Set<EMnemonic>> opcodeToMnemonicMap = new HashMap<>();
         List<Statement> statements = new LinkedList<>();

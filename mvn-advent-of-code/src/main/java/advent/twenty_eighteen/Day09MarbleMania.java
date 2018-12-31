@@ -15,7 +15,7 @@ public class Day09MarbleMania implements DailyProblem<Long, Long> {
     }
 
     public Day09MarbleMania(String name) {
-        String line = FileUtilities.readLines(name, Parsers::ToString).get(0);
+        String line = FileUtilities.readLines(name, Parsers::TO_STRING).get(0);
         String[] bits = line.trim().split("\\s");
 
         int players = Integer.parseInt(bits[0]);
