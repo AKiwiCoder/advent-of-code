@@ -111,7 +111,6 @@ public class ModeMaze implements DailyProblem<Integer, Integer> {
             considerNeighbour(previousStep, PointUtilities.east(previousStep.getPoint()));
         }
 
-        System.out.println("Target: " + bestStepForTool.get(target));
         return bestStepForTool.get(target).get(Step.Tool.Torch).intValue();
     }
 
@@ -174,7 +173,7 @@ public class ModeMaze implements DailyProblem<Integer, Integer> {
         }
         throw new IllegalArgumentException("No permitted tools " + tool + " " + point);
     }
-    
+
     private static final Map<Pair<Type, Type>, Step.Tool[]> ALLOWABLE_TOOLS = new HashMap<>();
 
     static {

@@ -59,7 +59,6 @@ public class ExperimentalEmergencyTeleportation  implements DailyProblem<Integer
         }).collect(Collectors.toList()));
 
         Nano biggest = nanos.stream().max(Comparator.comparingLong(n0 -> n0.r)).get();
-        System.out.println(biggest);
 
         List<Nano> inRange = nanos.stream().filter(n -> distance(biggest, n) <= biggest.r).collect(Collectors.toList());
 

@@ -17,7 +17,6 @@ public class ElfComputer {
     public void execute(int ipRegister, int[] registers, Function<int[], Boolean> stopCondition) {
         int ip = 0;
         while (registers[ipRegister] < statements.length) {
-            registers[ipRegister] = ip;
             Statement statement = statements[ip];
             statement.getMnemonic().execute(statement.getA(), statement.getB(), statement.getC(), registers);
 
@@ -27,6 +26,7 @@ public class ElfComputer {
 
             ip = registers[ipRegister];
             ip++;
+            registers[ipRegister] = ip;
         }
     }
 }
