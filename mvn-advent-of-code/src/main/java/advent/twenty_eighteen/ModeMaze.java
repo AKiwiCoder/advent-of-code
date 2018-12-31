@@ -1,6 +1,7 @@
 package advent.twenty_eighteen;
 
 import advent.common.DailyProblem;
+import advent.common.Pair;
 import advent.common.Point;
 import advent.twenty_eighteen.support.Step;
 import advent.utilities.FileUtilities;
@@ -127,13 +128,9 @@ public class ModeMaze implements DailyProblem<Integer, Integer> {
             }
         } else {
             long stepTime = previousStep.getCost() + STEP_TIME + TOOL_CHANGE_TIME;
-            if (!hasBestPoint(point, previousStep.getTool()) || getBestForPoint(point, previousStep.getTool()) > stepTime) {
-                addBestPoint(point, previousStep.getTool(), stepTime);
-            }
 
             // Tool not permitted
-            for (Step.Tool tool : allowableTools(point)) {
-//                long stepTime = previousStep.getCost() + STEP_TIME + TOOL_CHANGE_TIME;
+            for (Step.Tool tool : allowableTools(previousStep.getPoint(), point)) {
                 if (!hasBestPoint(point, tool) || getBestForPoint(point, tool) > stepTime) {
                     addBestPoint(point, tool, stepTime);
                     steps.push(new Step(point, stepTime, tool));
@@ -177,25 +174,46 @@ public class ModeMaze implements DailyProblem<Integer, Integer> {
         }
         throw new IllegalArgumentException("No permitted tools " + tool + " " + point);
     }
+    
+    private static final Map<Pair<Type, Type>, Step.Tool[]> ALLOWABLE_TOOLS = new HashMap<>();
 
-    private static final Step.Tool[] ROCKY_TYPES = new Step.Tool[]{Step.Tool.ClimbingGear, Step.Tool.Torch};
-    private static final Step.Tool[] WET_TYPES = new Step.Tool[]{Step.Tool.ClimbingGear, Step.Tool.Neither};
-    private static final Step.Tool[] NARROW_TYPES = new Step.Tool[]{Step.Tool.Torch, Step.Tool.Neither};
-    private static final Step.Tool[] START_END_TYPE = new Step.Tool[]{Step.Tool.Torch};
+    static {
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Rocky, Type.Rocky), new Step.Tool[]{Step.Tool.ClimbingGear, Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Rocky, Type.Narrow), new Step.Tool[]{Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Rocky, Type.Wet), new Step.Tool[]{Step.Tool.ClimbingGear});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Rocky, Type.Source), new Step.Tool[]{Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Rocky, Type.Target), new Step.Tool[]{Step.Tool.Torch});
 
-    private Step.Tool[] allowableTools(Point point) {
-        switch (types[point.getY()][point.getX()]) {
-            case Rocky:
-                return ROCKY_TYPES;
-            case Wet:
-                return WET_TYPES;
-            case Narrow:
-                return NARROW_TYPES;
-            case Source:
-            case Target:
-                return START_END_TYPE;
-        }
-        throw new IllegalArgumentException("No allowable tools " + point);
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Narrow, Type.Rocky), new Step.Tool[]{Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Narrow, Type.Narrow), new Step.Tool[]{Step.Tool.Torch, Step.Tool.Neither});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Narrow, Type.Wet), new Step.Tool[]{Step.Tool.Neither});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Narrow, Type.Source), new Step.Tool[]{Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Narrow, Type.Target), new Step.Tool[]{Step.Tool.Torch});
+
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Wet, Type.Rocky), new Step.Tool[]{Step.Tool.ClimbingGear});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Wet, Type.Narrow), new Step.Tool[]{Step.Tool.Neither});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Wet, Type.Wet), new Step.Tool[]{Step.Tool.ClimbingGear, Step.Tool.Neither});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Wet, Type.Source), new Step.Tool[]{});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Wet, Type.Target), new Step.Tool[]{});
+
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Source, Type.Rocky), new Step.Tool[]{Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Source, Type.Narrow), new Step.Tool[]{Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Source, Type.Wet), new Step.Tool[]{});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Source, Type.Source), new Step.Tool[]{Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Source, Type.Target), new Step.Tool[]{Step.Tool.Torch});
+
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Target, Type.Rocky), new Step.Tool[]{Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Target, Type.Narrow), new Step.Tool[]{Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Target, Type.Wet), new Step.Tool[]{});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Target, Type.Source), new Step.Tool[]{Step.Tool.Torch});
+        ALLOWABLE_TOOLS.put(new Pair<>(Type.Target, Type.Target), new Step.Tool[]{Step.Tool.Torch});
+    }
+
+    private Step.Tool[] allowableTools(Point here, Point there) {
+        Type current = types[here.getY()][here.getX()];
+        Type next = types[there.getY()][there.getX()];
+
+        return ALLOWABLE_TOOLS.get(new Pair<>(current, next));
     }
 
     @Override

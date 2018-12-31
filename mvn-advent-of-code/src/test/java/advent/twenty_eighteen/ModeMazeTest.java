@@ -10,7 +10,7 @@ public class ModeMazeTest {
         ModeMaze im = new ModeMaze("/twenty_eighteen/ModeMaze-input.txt");
 
         assertEquals(9659, im.getPart1Answer().intValue());
-//        assertEquals(1043, im.getPart2Answer().intValue());
+        assertEquals(1043, im.getPart2Answer().intValue());
     }
 
     @Test
