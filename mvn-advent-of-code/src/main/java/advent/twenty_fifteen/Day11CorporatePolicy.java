@@ -70,7 +70,7 @@ public class Day11CorporatePolicy implements DailyProblem<String, String> {
                 carry = true;
             }
 
-            working = working.substring(0, i) + (char)c + working.substring(i + 1);
+            working = working.substring(0, i) + (char) c + working.substring(i + 1);
 
             if (!carry) {
                 break;

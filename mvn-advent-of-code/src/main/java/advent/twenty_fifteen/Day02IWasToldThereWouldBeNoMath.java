@@ -38,7 +38,7 @@ public class Day02IWasToldThereWouldBeNoMath implements DailyProblem<Integer, In
         List<Parcel> parcels = FileUtilities.readLines(filename, Parcel::PARSE);
 
         this.part1Answer = parcels.stream().map(p -> surfaceArea(p) + surfaceAreaOfSmallestSize(p)).reduce(0, (a, b) -> a + b);
-        this.part2Answer = parcels.stream().map(p -> lengthToWrap(p) + lengthOfBow(p)).reduce(0, (a, b) -> a + b);;
+        this.part2Answer = parcels.stream().map(p -> lengthToWrap(p) + lengthOfBow(p)).reduce(0, (a, b) -> a + b);
     }
 
     @Override

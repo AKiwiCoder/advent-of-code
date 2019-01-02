@@ -52,7 +52,7 @@ public final class Parcel {
     }
 
     public static Parcel PARSE(String line) {
-        String[] bits= line.split("x");
+        String[] bits = line.split("x");
         return new Parcel(Integer.parseInt(bits[0]), Integer.parseInt(bits[1]), Integer.parseInt(bits[2]));
     }
 }

@@ -2,8 +2,6 @@ package advent.twenty_eighteen.support;
 
 import advent.common.AbstractValueObjectTest;
 
-import static org.junit.Assert.*;
-
 public class CartTest extends AbstractValueObjectTest<Cart> {
 
     @Override

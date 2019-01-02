@@ -29,7 +29,7 @@ public class Day01NotQuiteLisp implements DailyProblem<Integer, Integer> {
         }
 
         this.part1Answer = floor;
-        this.part2Answer = firstBasementIndex+1;
+        this.part2Answer = firstBasementIndex + 1;
     }
 
     @Override

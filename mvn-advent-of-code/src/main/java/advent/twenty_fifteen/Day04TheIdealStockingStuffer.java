@@ -16,7 +16,7 @@ public class Day04TheIdealStockingStuffer implements DailyProblem<Integer, Integ
 
     public static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
-        for ( int j = 0; j < bytes.length; j++ ) {
+        for (int j = 0; j < bytes.length; j++) {
             int v = bytes[j] & 0xFF;
             hexChars[j * 2] = hexArray[v >>> 4];
             hexChars[j * 2 + 1] = hexArray[v & 0x0F];
@@ -29,15 +29,15 @@ public class Day04TheIdealStockingStuffer implements DailyProblem<Integer, Integ
     }
 
     private boolean doesItStartWithXZeros(String hash, String zeros) {
-       return hash.startsWith(zeros);
+        return hash.startsWith(zeros);
     }
 
     public Day04TheIdealStockingStuffer(String key) throws NoSuchAlgorithmException {
         int part1Count = 9999;
-        while (!doesItStartWithXZeros(md5hashString(String.format("%s%d", key, ++part1Count)), "00000"));
+        while (!doesItStartWithXZeros(md5hashString(String.format("%s%d", key, ++part1Count)), "00000")) ;
 
         int part2Count = 9999;
-        while (!doesItStartWithXZeros(md5hashString(String.format("%s%d", key, ++part2Count)), "000000"));
+        while (!doesItStartWithXZeros(md5hashString(String.format("%s%d", key, ++part2Count)), "000000")) ;
 
         this.part1Answer = part1Count;
         this.part2Answer = part2Count;

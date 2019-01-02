@@ -5,7 +5,7 @@ import advent.common.Point;
 import java.util.Objects;
 
 public final class Step {
-    public enum Tool { Torch, ClimbingGear, Neither};
+    public enum Tool {Torch, ClimbingGear, Neither}
 
     private final Point point;
     private final long cost;

@@ -8,8 +8,8 @@ public class LightCommand {
     private final int eCol;
 
     enum Operation {
-        On,Off,Toggle
-    };
+        On, Off, Toggle
+    }
 
     public LightCommand(Operation operation, int sRow, int sCol, int eRow, int eCol) {
         this.operation = operation;
@@ -87,7 +87,7 @@ public class LightCommand {
 
     private static LightCommand PARSE_COMMAND(String[] bits, Operation operation, int start, int end) {
         String[] coords;
-        int sRow,sCol,eRow,eCol;
+        int sRow, sCol, eRow, eCol;
         coords = bits[start].split(",");
         sRow = Integer.parseInt(coords[0]);
         sCol = Integer.parseInt(coords[1]);

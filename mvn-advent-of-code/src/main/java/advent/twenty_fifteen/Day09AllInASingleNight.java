@@ -7,7 +7,7 @@ import advent.utilities.Parsers;
 
 import java.util.*;
 
-public class Day09AllInASingleNight implements DailyProblem<Integer, Integer>  {
+public class Day09AllInASingleNight implements DailyProblem<Integer, Integer> {
     private final int part1Answer;
     private final int part2Answer;
 
@@ -48,15 +48,15 @@ public class Day09AllInASingleNight implements DailyProblem<Integer, Integer>  {
 
     private int calculateLength(List<String> path, Map<Pair<String, String>, Integer> distances) {
         int total = 0;
-        for (int i = 1 ; i != path.size(); i++) {
-            total += distances.get(new Pair<>(path.get(i-1), path.get(i)));
+        for (int i = 1; i != path.size(); i++) {
+            total += distances.get(new Pair<>(path.get(i - 1), path.get(i)));
         }
         return total;
     }
 
     private List<List<String>> generatePath(String current, Map<Pair<String, String>, Integer> distances, List<String> path) {
         List<List<String>> result = new LinkedList<>();
-        for (Pair<String, String> key : distances.keySet()){
+        for (Pair<String, String> key : distances.keySet()) {
             if (key.getFirst().equals(current) && !path.contains(key.getSecond())) {
                 List<String> working = new LinkedList<>(path);
                 working.add(key.getSecond());

@@ -30,7 +30,7 @@ public class Day17ReservoirResearch implements DailyProblem<Integer, Integer> {
 
         for (String line : lines) {
             Data d = new Data();
-            String bits[] = line.split(",");
+            String[] bits = line.split(",");
             for (String bit : bits) {
                 String b = bit.trim();
                 if (b.startsWith(("x="))) {
@@ -63,7 +63,7 @@ public class Day17ReservoirResearch implements DailyProblem<Integer, Integer> {
         int rangeY = maxY - minY + 1;
         int rangeX = maxX - minX + 1;
 
-        char map[][] = new char[rangeY][];
+        char[][] map = new char[rangeY][];
         for (int y = 0; y != rangeY; y++) {
             map[y] = new char[rangeX];
             for (int x = 0; x != map[y].length; x++) {
@@ -262,10 +262,7 @@ public class Day17ReservoirResearch implements DailyProblem<Integer, Integer> {
         }
 
         public boolean supported(int y, int x) {
-            if (map[y + 1][x] == '#' || map[y + 1][x] == '~') {
-                return true;
-            }
-            return false;
+            return map[y + 1][x] == '#' || map[y + 1][x] == '~';
         }
     }
 

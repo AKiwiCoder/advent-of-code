@@ -21,7 +21,7 @@ public class Day14ChocolateCharts implements DailyProblem<String, String> {
     }
 
     private void generateRecipeArray(List<Integer> current, int loopMax, BiFunction<List<Integer>, Boolean, Boolean> shouldFinish) {
-        int elves[] = new int[] {0, 1};
+        int[] elves = new int[]{0, 1};
 
         while (current.size() < loopMax) {
             int e0 = current.get(elves[0]);
@@ -49,7 +49,7 @@ public class Day14ChocolateCharts implements DailyProblem<String, String> {
     public String getPart1Answer() {
         List<Integer> current = new ArrayList<>(Arrays.asList(3, 7));
 
-        generateRecipeArray(current, part1Number + 10,(list, flag) -> false);
+        generateRecipeArray(current, part1Number + 10, (list, flag) -> false);
 
         String result = "";
         for (int i = 0; i != 10; i++) {
@@ -62,7 +62,7 @@ public class Day14ChocolateCharts implements DailyProblem<String, String> {
     public String getPart2Answer() {
         List<Integer> current = new ArrayList<>(Arrays.asList(3, 7));
 
-        generateRecipeArray(current, Integer.MAX_VALUE,(list, flag) -> {
+        generateRecipeArray(current, Integer.MAX_VALUE, (list, flag) -> {
             int size = list.size();
             return ((size > 5 && check(current, 0)) || (flag && size > 6 && check(current, 1)));
         });

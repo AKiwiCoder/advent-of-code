@@ -33,15 +33,15 @@ public class Day05DoesntHeHaveInternElvesForThis implements DailyProblem<Integer
     }
 
     private boolean niceMethodOne(String line) {
-        int vowelCount = countOccurrences(line, 'a') + countOccurrences(line,'e') + countOccurrences(line,'i') + countOccurrences(line,'o') + countOccurrences(line, 'u');
+        int vowelCount = countOccurrences(line, 'a') + countOccurrences(line, 'e') + countOccurrences(line, 'i') + countOccurrences(line, 'o') + countOccurrences(line, 'u');
         boolean hasPair = hasPairedCharacters(line);
-        boolean hasBadString = line.contains("ab") || line.contains( "cd") || line.contains( "pq") || line.contains( "xy");
+        boolean hasBadString = line.contains("ab") || line.contains("cd") || line.contains("pq") || line.contains("xy");
         return (vowelCount >= 3) && hasPair && !hasBadString;
     }
 
     private boolean hasPairedCharacters(String line) {
-        for (int i = 0; i != line.length()-1; i++) {
-            if (line.charAt(i) == line.charAt(i+1)) {
+        for (int i = 0; i != line.length() - 1; i++) {
+            if (line.charAt(i) == line.charAt(i + 1)) {
                 return true;
             }
         }
@@ -49,8 +49,8 @@ public class Day05DoesntHeHaveInternElvesForThis implements DailyProblem<Integer
     }
 
     private boolean hasDoublePairedCharacters(String line) {
-        for (int i = 0; i != line.length()-1; i++) {
-            if (line.substring(i+2).contains("" + line.charAt(i) + line.charAt(i+1))) {
+        for (int i = 0; i != line.length() - 1; i++) {
+            if (line.substring(i + 2).contains("" + line.charAt(i) + line.charAt(i + 1))) {
                 return true;
             }
         }
@@ -58,8 +58,8 @@ public class Day05DoesntHeHaveInternElvesForThis implements DailyProblem<Integer
     }
 
     private boolean hasRepeatWithCharacterBetween(String line) {
-        for (int i = 0; i != line.length()-2; i++) {
-            if (line.charAt(i) == line.charAt(i+2)) {
+        for (int i = 0; i != line.length() - 2; i++) {
+            if (line.charAt(i) == line.charAt(i + 2)) {
                 return true;
             }
         }

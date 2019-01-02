@@ -53,7 +53,7 @@ public class Day13MineCartMadness implements DailyProblem<String, String> {
             }
         }
 
-        Cart crashes[] = new Cart[2];
+        Cart[] crashes = new Cart[2];
         findCrash(map, new LinkedList<>(carts), crashes);
         this.part1Answer = +crashes[0].getCol() + "," + crashes[0].getRow();
         this.part2Answer = crashes[1].getCol() + "," + crashes[1].getRow();

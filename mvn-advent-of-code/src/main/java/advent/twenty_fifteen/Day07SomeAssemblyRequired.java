@@ -1,7 +1,6 @@
 package advent.twenty_fifteen;
 
 import advent.common.DailyProblem;
-import advent.twenty_fifteen.support.BinaryOperation;
 import advent.twenty_fifteen.support.BitwiseParser;
 import advent.twenty_fifteen.support.IBitwiseLogic;
 import advent.utilities.FileUtilities;
@@ -10,7 +9,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Day07SomeAssemblyRequired implements DailyProblem<Map<String, Integer>, Map<String, Integer>> {
     private final Map<String, Integer> part1Answer;

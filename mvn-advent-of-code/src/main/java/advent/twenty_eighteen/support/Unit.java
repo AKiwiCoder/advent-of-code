@@ -63,11 +63,7 @@ public class Unit {
     public boolean couldAttack(Unit enemy) {
         if (enemy.loc.getRow() == loc.getRow() && Math.abs(enemy.loc.getCol() - loc.getCol()) == 1) {
             return true;
-        } else if (enemy.loc.getCol() == loc.getCol() && Math.abs(enemy.loc.getRow() - loc.getRow()) == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        } else return enemy.loc.getCol() == loc.getCol() && Math.abs(enemy.loc.getRow() - loc.getRow()) == 1;
     }
 
     @Override

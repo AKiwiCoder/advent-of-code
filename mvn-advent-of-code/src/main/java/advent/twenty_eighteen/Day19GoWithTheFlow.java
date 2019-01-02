@@ -32,11 +32,11 @@ public class Day19GoWithTheFlow implements DailyProblem<Integer, Integer> {
 
         ElfComputer computer = new ElfComputer(statements);
 
-        int[] registers = new int[]{0,0,0,0,0,0};
+        int[] registers = new int[]{0, 0, 0, 0, 0, 0};
         computer.execute(ipRegister, registers);
         this.part1Answer = registers[0];
 
-        registers = new int[]{1,0,0,0,0,0};
+        registers = new int[]{1, 0, 0, 0, 0, 0};
         computer.execute(ipRegister, registers, (reg) -> reg[ipRegister] >= 34);
         this.part2Answer = sumOfDivisors(registers[5]);
     }
