@@ -2,7 +2,6 @@ package advent.twenty_fifteen;
 
 import advent.common.DailyProblem;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class Day10ElvesLookElvesSay implements DailyProblem<Integer, Integer> {
     public Day10ElvesLookElvesSay(String input) {
         LinkedList<Integer> working = new LinkedList<>();
         for (Character c : input.toCharArray()) {
-            working.add(Integer.parseInt(""+c));
+            working.add(Integer.parseInt("" + c));
         }
 
         List<Integer> part1 = null;
