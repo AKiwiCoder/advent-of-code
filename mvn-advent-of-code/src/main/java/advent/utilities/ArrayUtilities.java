@@ -31,4 +31,27 @@ public interface ArrayUtilities {
         }
         return result;
     }
+
+    static char[][] createCharArray(int width, int height, BiFunction<Integer, Integer, Character> populator) {
+        char[][] result = new char[height][];
+        for (int y = 0; y != result.length; y++) {
+            result[y] = new char[width];
+            for (int x = 0; x != result[0].length; x++) {
+                result[y][x] = populator.apply(x, y).charValue();
+            }
+        }
+        return result;
+    }
+
+    static int count(char target, char[][] input) {
+        int result = 0;
+        for (int c = 0; c != input.length; c++) {
+            for (int r = 0; r != input[c].length; r++) {
+                if (input[r][c] == target) {
+                    result++;
+                }
+            }
+        }
+        return result;
+    }
 }
