@@ -258,4 +258,3 @@ public class Day22WizardSimulator20xx implements DailyProblem<Integer, Integer> 
         return part2Answer;
     }
 }
-s
