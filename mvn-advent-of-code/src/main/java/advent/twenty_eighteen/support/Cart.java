@@ -1,5 +1,8 @@
 package advent.twenty_eighteen.support;
 
+import advent.common.EDirection;
+import advent.common.ETurn;
+
 import java.util.Objects;
 
 public class Cart {

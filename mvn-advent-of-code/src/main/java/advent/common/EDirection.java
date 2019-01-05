@@ -1,4 +1,4 @@
-package advent.twenty_eighteen.support;
+package advent.common;
 
 public enum EDirection {
     North, South, East, West;

@@ -1,9 +1,9 @@
 package advent.twenty_eighteen;
 
 import advent.common.DailyProblem;
+import advent.common.EDirection;
+import advent.common.ETurn;
 import advent.twenty_eighteen.support.Cart;
-import advent.twenty_eighteen.support.EDirection;
-import advent.twenty_eighteen.support.ETurn;
 import advent.utilities.FileUtilities;
 import advent.utilities.Parsers;
 
