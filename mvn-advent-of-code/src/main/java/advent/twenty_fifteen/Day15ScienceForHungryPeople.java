@@ -52,7 +52,6 @@ public class Day15ScienceForHungryPeople implements DailyProblem<Integer, Intege
 
         this.part1Answer = cookieMakeup.values().stream().max(Integer::compareTo).get();
         this.part2Answer = validCookies.stream().map(key -> cookieMakeup.get(key)).max(Integer::compareTo).get();
-        ;
     }
 
     private List<List<Integer>> populate(int columns, int target) {

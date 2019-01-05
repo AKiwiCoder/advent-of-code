@@ -1,10 +1,9 @@
 package advent.twenty_fifteen;
 
 import advent.common.DailyProblem;
-import advent.common.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class Day24ItHangsInTheBalanceTest {
     @Test

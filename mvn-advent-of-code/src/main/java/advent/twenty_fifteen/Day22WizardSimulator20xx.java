@@ -87,8 +87,8 @@ public class Day22WizardSimulator20xx implements DailyProblem<Integer, Integer> 
         Boss boss = new Boss(bossHitpoints, bossDamage);
         Player player = new Player(50, 500, 0);
 
-        this.part1Answer = combat( player, boss, false).stream().min(Comparator.naturalOrder()).get();
-        this.part2Answer =  combat( player, boss, true).stream().min(Comparator.naturalOrder()).get();
+        this.part1Answer = combat(player, boss, false).stream().min(Comparator.naturalOrder()).get();
+        this.part2Answer = combat(player, boss, true).stream().min(Comparator.naturalOrder()).get();
     }
 
     static class State {

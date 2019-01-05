@@ -17,7 +17,7 @@ public class Day19MedicineForRudolph implements DailyProblem<Integer, Integer> {
     public Day19MedicineForRudolph(String filename) {
         List<String> lines = FileUtilities.readLines(filename, Parsers::TO_STRING);
 
-        List<Pair<String,String>> replacements = new ArrayList<>();
+        List<Pair<String, String>> replacements = new ArrayList<>();
 
         String input = "";
         for (String line : lines) {
@@ -37,15 +37,15 @@ public class Day19MedicineForRudolph implements DailyProblem<Integer, Integer> {
 
     private int calculatePartOne(List<Pair<String, String>> replacements, String input) {
         Set<String> molecules = new HashSet<>();
-        for (Pair<String,String> replacement : replacements) {
+        for (Pair<String, String> replacement : replacements) {
             String search = replacement.getFirst();
             String text = replacement.getSecond();
 
-            int index = input.indexOf(search, 0);
+            int index = input.indexOf(search);
             while (index >= 0) {
-                String molecule = input.substring(0, index) + text + input.substring(index+search.length());
+                String molecule = input.substring(0, index) + text + input.substring(index + search.length());
                 molecules.add(molecule);
-                index = input.indexOf(search, index+1);
+                index = input.indexOf(search, index + 1);
             }
         }
         return molecules.size();
@@ -59,7 +59,7 @@ public class Day19MedicineForRudolph implements DailyProblem<Integer, Integer> {
         while (!current.equals("e")) {
             boolean replacementMade = false;
 
-            for (Pair<String,String> replacement : replacements) {
+            for (Pair<String, String> replacement : replacements) {
                 String text = replacement.getFirst();
                 String search = replacement.getSecond();
 
@@ -69,7 +69,7 @@ public class Day19MedicineForRudolph implements DailyProblem<Integer, Integer> {
 
                 int index = current.lastIndexOf(search);
                 if (index >= 0) {
-                    current = current.substring(0, index) + text + current.substring(index+search.length());
+                    current = current.substring(0, index) + text + current.substring(index + search.length());
                     steps++;
                     replacementMade = true;
                 }

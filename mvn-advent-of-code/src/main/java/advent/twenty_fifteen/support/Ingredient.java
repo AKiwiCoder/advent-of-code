@@ -80,8 +80,8 @@ public final class Ingredient {
     public static Ingredient PARSE(String line) {
         int index = line.indexOf(":");
         String name = line.substring(0, index);
-        String[] bits = line.substring(index+1).split(",");
-        return new Ingredient(name, PARSE_VALUE(bits[0]),PARSE_VALUE(bits[1]),PARSE_VALUE(bits[2]),PARSE_VALUE(bits[3]),PARSE_VALUE(bits[4]));
+        String[] bits = line.substring(index + 1).split(",");
+        return new Ingredient(name, PARSE_VALUE(bits[0]), PARSE_VALUE(bits[1]), PARSE_VALUE(bits[2]), PARSE_VALUE(bits[3]), PARSE_VALUE(bits[4]));
     }
 
     private static int PARSE_VALUE(String line) {
