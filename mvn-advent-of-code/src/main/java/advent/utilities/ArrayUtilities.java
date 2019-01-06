@@ -13,12 +13,7 @@ public interface ArrayUtilities {
     }
 
     static void print(char[][] input) {
-        for (int c = 0; c != input.length; c++) {
-            for (int r = 0; r != input[c].length; r++) {
-                System.out.print(input[c][r]);
-            }
-            System.out.println();
-        }
+        System.out.println(dumpToString(input));
     }
 
     static int[][] createIntArray(int width, int height, BiFunction<Integer, Integer, Integer> populator) {
@@ -45,12 +40,23 @@ public interface ArrayUtilities {
 
     static int count(char target, char[][] input) {
         int result = 0;
-        for (int c = 0; c != input.length; c++) {
-            for (int r = 0; r != input[c].length; r++) {
+        for (int r = 0; r != input.length; r++) {
+            for (int c = 0; c != input[r].length; c++) {
                 if (input[r][c] == target) {
                     result++;
                 }
             }
+        }
+        return result;
+    }
+
+    static String dumpToString(char[][] input) {
+        String result = "";
+        for (int y = 0; y != input.length; y++) {
+            for (int x = 0; x != input[y].length; x++) {
+                result += input[y][x];
+            }
+            result += "\n";
         }
         return result;
     }
