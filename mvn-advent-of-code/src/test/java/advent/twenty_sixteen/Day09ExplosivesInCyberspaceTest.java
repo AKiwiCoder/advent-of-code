@@ -10,15 +10,15 @@ public class Day09ExplosivesInCyberspaceTest {
     public void checkReal() {
         DailyProblem<Long, Long> dp = new Day09ExplosivesInCyberspace("/twenty_sixteen/Day09-ExplosivesInCyberspace-input.txt");
 
-        assertEquals(70186, dp.getPart1Answer().longValue());
-        assertEquals(10915059201, dp.getPart2Answer().longValue());
+        assertEquals(70186l, dp.getPart1Answer().longValue());
+        assertEquals(10915059201l, dp.getPart2Answer().longValue());
     }
 
     @Test
     public void checkExample1() {
         DailyProblem<Long, Long> dp = new Day09ExplosivesInCyberspace("/twenty_sixteen/Day09-ExplosivesInCyberspace-example#1.txt");
 
-        assertEquals(57, dp.getPart1Answer().longValue());
-        assertEquals(56, dp.getPart2Answer().longValue());
+        assertEquals(57l, dp.getPart1Answer().longValue());
+        assertEquals(56l, dp.getPart2Answer().longValue());
     }
 }
