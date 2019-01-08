@@ -1,6 +1,7 @@
 package advent.utilities;
 
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public interface ArrayUtilities {
     static void print(Object[][] input) {
@@ -13,6 +14,10 @@ public interface ArrayUtilities {
     }
 
     static void print(char[][] input) {
+        System.out.println(dumpToString(input));
+    }
+
+    static void print(int[][] input) {
         System.out.println(dumpToString(input));
     }
 
@@ -50,6 +55,18 @@ public interface ArrayUtilities {
         return result;
     }
 
+    static int count(int[][] input, Function<Integer, Boolean> filter) {
+        int result = 0;
+        for (int r = 0; r != input.length; r++) {
+            for (int c = 0; c != input[r].length; c++) {
+                if (filter.apply(input[r][c])) {
+                    result++;
+                }
+            }
+        }
+        return result;
+    }
+
     static String dumpToString(char[][] input) {
         String result = "";
         for (int y = 0; y != input.length; y++) {
@@ -59,5 +76,20 @@ public interface ArrayUtilities {
             result += "\n";
         }
         return result;
+    }
+
+    static String dumpToString(int[][] input) {
+        String result = "";
+        for (int y = 0; y != input.length; y++) {
+            for (int x = 0; x != input[y].length; x++) {
+                result += input[y][x] + " ";
+            }
+            result += "\n";
+        }
+        return result;
+    }
+
+    static boolean isValidCoordinates(char[][] map, int row, int col) {
+        return row >= 0 && col >= 0 && row < map.length && col < map[0].length;
     }
 }
