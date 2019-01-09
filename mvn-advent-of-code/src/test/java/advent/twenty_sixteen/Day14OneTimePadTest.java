@@ -23,5 +23,4 @@ public class Day14OneTimePadTest {
         assertEquals(22728, dp.getPart1Answer().intValue());
         assertEquals(22551, dp.getPart2Answer().intValue());
     }
-
 }

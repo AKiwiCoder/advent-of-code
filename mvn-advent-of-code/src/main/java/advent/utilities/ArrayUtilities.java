@@ -44,8 +44,12 @@ public interface ArrayUtilities {
     }
 
     static int count(char target, char[][] input) {
+        return count(target, input, input.length);
+    }
+
+    static int count(char target, char[][] input, int rowsToCount) {
         int result = 0;
-        for (int r = 0; r != input.length; r++) {
+        for (int r = 0; r != rowsToCount; r++) {
             for (int c = 0; c != input[r].length; c++) {
                 if (input[r][c] == target) {
                     result++;
