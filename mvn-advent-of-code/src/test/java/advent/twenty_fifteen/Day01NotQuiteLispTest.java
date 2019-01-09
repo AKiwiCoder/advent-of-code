@@ -19,7 +19,7 @@ public class Day01NotQuiteLispTest {
         DailyProblem<Integer, Integer> dp = new Day01NotQuiteLisp("/twenty_fifteen/Day01-NotQuiteLisp-example#1.txt");
 
         assertEquals(0, dp.getPart1Answer().intValue());
-        assertEquals(0, dp.getPart2Answer().intValue());
+        assertEquals(-1, dp.getPart2Answer().intValue());
     }
 
     @Test
@@ -27,7 +27,7 @@ public class Day01NotQuiteLispTest {
         DailyProblem<Integer, Integer> dp = new Day01NotQuiteLisp("/twenty_fifteen/Day01-NotQuiteLisp-example#2.txt");
 
         assertEquals(0, dp.getPart1Answer().intValue());
-        assertEquals(0, dp.getPart2Answer().intValue());
+        assertEquals(-1, dp.getPart2Answer().intValue());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class Day01NotQuiteLispTest {
         DailyProblem<Integer, Integer> dp = new Day01NotQuiteLisp("/twenty_fifteen/Day01-NotQuiteLisp-example#3.txt");
 
         assertEquals(3, dp.getPart1Answer().intValue());
-        assertEquals(0, dp.getPart2Answer().intValue());
+        assertEquals(-1, dp.getPart2Answer().intValue());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class Day01NotQuiteLispTest {
         DailyProblem<Integer, Integer> dp = new Day01NotQuiteLisp("/twenty_fifteen/Day01-NotQuiteLisp-example#4.txt");
 
         assertEquals(3, dp.getPart1Answer().intValue());
-        assertEquals(0, dp.getPart2Answer().intValue());
+        assertEquals(-1, dp.getPart2Answer().intValue());
     }
 
     @Test

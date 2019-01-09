@@ -13,7 +13,7 @@ public class Day01NotQuiteLisp implements DailyProblem<Integer, Integer> {
         String line = FileUtilities.readLines(filename, Parsers::TO_STRING).get(0);
 
         int floor = 0;
-        int position = 0;
+        int position = 1;
         int firstBasementIndex = -1;
         for (char c : line.toCharArray()) {
             if (c == '(') {
@@ -29,7 +29,7 @@ public class Day01NotQuiteLisp implements DailyProblem<Integer, Integer> {
         }
 
         this.part1Answer = floor;
-        this.part2Answer = firstBasementIndex + 1;
+        this.part2Answer = firstBasementIndex;
     }
 
     @Override

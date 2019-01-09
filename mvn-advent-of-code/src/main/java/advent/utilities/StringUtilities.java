@@ -24,7 +24,7 @@ public interface StringUtilities {
         return count;
     }
 
-    char[] hexArray = new char[]{'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+    char[] hexArray = new char[]{'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
 
     static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
