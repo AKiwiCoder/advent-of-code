@@ -5,6 +5,8 @@ import java.util.Map;
 public interface ILeonardoOperation {
     int execute(int ip, Map<String, Integer> registers);
 
+    ILeonardoOperation toggle();
+
     static ILeonardoOperation PARSE(String line) {
         if (line.startsWith("cpy")) {
             // cpy x y
@@ -22,6 +24,10 @@ public interface ILeonardoOperation {
             // jnz x y
             String[] bits = line.split("\\s+");
             return new LeonardoJumpNotZeroOperation(bits[1], bits[2]);
+        } else if (line.startsWith("tgl")) {
+            // tgl x
+            String[] bits = line.split("\\s+");
+            return new LeonardoToggleOperation(bits[1]);
         }
         throw new IllegalStateException("Cannot parse '" + line + "'");
     }

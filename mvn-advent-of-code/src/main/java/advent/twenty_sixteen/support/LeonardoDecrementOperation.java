@@ -11,8 +11,15 @@ public class LeonardoDecrementOperation implements ILeonardoOperation {
 
     @Override
     public int execute(int ip, Map<String, Integer> registers) {
-        registers.put(x, registers.get(x) - 1);
+        if (registers.containsKey(x)) {
+            registers.put(x, registers.get(x) - 1);
+        }
         return ip + 1;
+    }
+
+    @Override
+    public ILeonardoOperation toggle() {
+        return new LeonardoIncrementOperation(x);
     }
 
     @Override

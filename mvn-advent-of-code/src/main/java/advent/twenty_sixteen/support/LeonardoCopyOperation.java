@@ -7,7 +7,13 @@ public class LeonardoCopyOperation implements ILeonardoOperation {
     private final String x;
     private final String y;
 
+    private final String originalX;
+    private final String originalY;
+
     public LeonardoCopyOperation(String x, String y) {
+        this.originalX = x;
+        this.originalY = y;
+
         Integer c = null;
         try {
             c = Integer.parseInt(x);
@@ -21,12 +27,19 @@ public class LeonardoCopyOperation implements ILeonardoOperation {
 
     @Override
     public int execute(int ip, Map<String, Integer> registers) {
-        if (constant != null) {
-            registers.put(y, constant);
-        } else {
-            registers.put(y, registers.get(x));
+        if (registers.containsKey(y)) {
+            if (constant != null) {
+                registers.put(y, constant);
+            } else {
+                registers.put(y, registers.get(x));
+            }
         }
         return ip + 1;
+    }
+
+    @Override
+    public ILeonardoOperation toggle() {
+        return new LeonardoJumpNotZeroOperation(originalX, originalY);
     }
 
     @Override
