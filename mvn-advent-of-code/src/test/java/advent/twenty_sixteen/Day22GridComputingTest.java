@@ -11,6 +11,13 @@ public class Day22GridComputingTest {
         DailyProblem<Integer, Integer> dp = new Day22GridComputing("/twenty_sixteen/Day22-GridComputing-input.txt");
 
         assertEquals(1003, dp.getPart1Answer().intValue());
-        assertEquals(0, dp.getPart2Answer().intValue());
+        assertEquals(192, dp.getPart2Answer().intValue());
+    }
+
+    @Test
+    public void checkExample1() {
+        DailyProblem<Integer, Integer> dp = new Day22GridComputing("/twenty_sixteen/Day22-GridComputing-example#1.txt");
+
+        assertEquals(7, dp.getPart1Answer().intValue());
     }
 }

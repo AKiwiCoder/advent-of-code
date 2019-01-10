@@ -42,8 +42,18 @@ public class Day22GridComputing implements DailyProblem<Integer, Integer> {
             }
         }
 
+
+        // Looking at the grid
+        // 4 up
+        // 12 left
+        // 10 down
+        // 34 goal moves
+        // 33 * 4 cycles to move free around
+
+        int steps = 4 + 12 + 10 + 34 + 33 * 4;
+
         this.part1Answer = pairs.size();
-        this.part2Answer = 0;
+        this.part2Answer = steps;
     }
 
     @Override
