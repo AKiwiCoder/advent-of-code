@@ -44,18 +44,13 @@ public class Day25ClockSignal implements DailyProblem<Integer, Integer> {
         while (ip < program.size()) {
             ILeonardoOperation operation = program.get(ip);
             if (operation instanceof LeonardoOutOperation) {
-                result += ((LeonardoOutOperation)operation).getOutput(registers);
+                result += ((LeonardoOutOperation) operation).getOutput(registers);
                 if (result.length() == 40) {
                     return result;
                 }
             }
 
-//            if (ip == 3) {
-//                registers.put("d", registers.get("d") + registers.get("b") * registers.get("c"));
-//                ip = 8;
-//            } else {
-                ip = operation.execute(ip, registers);
-//            }
+            ip = operation.execute(ip, registers);
         }
         return "";
     }

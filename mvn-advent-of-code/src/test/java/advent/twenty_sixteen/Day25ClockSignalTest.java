@@ -10,7 +10,6 @@ public class Day25ClockSignalTest {
     public void checkReal() {
         DailyProblem<Integer, Integer> dp = new Day25ClockSignal("/twenty_sixteen/Day25-ClockSignal-input.txt");
 
-        assertEquals(0, dp.getPart1Answer().intValue());
-        assertEquals(0, dp.getPart2Answer().intValue());
+        assertEquals(189, dp.getPart1Answer().intValue());
     }
 }
