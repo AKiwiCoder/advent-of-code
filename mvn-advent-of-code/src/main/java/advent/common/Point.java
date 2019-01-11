@@ -19,6 +19,14 @@ public class Point {
         return y;
     }
 
+    public int getCol() {
+        return x;
+    }
+
+    public int getRow() {
+        return y;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
