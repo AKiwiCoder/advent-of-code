@@ -28,6 +28,10 @@ public interface ILeonardoOperation {
             // tgl x
             String[] bits = line.split("\\s+");
             return new LeonardoToggleOperation(bits[1]);
+        } else if (line.startsWith("out")) {
+            // out x
+            String[] bits = line.split("\\s+");
+            return new LeonardoOutOperation(bits[1]);
         }
         throw new IllegalStateException("Cannot parse '" + line + "'");
     }
