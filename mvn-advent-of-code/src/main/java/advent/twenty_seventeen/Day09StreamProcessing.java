@@ -80,7 +80,6 @@ public class Day09StreamProcessing implements DailyProblem<Integer, Integer> {
             }
             index++;
         }
-        System.out.println(garbage + " " + score);
         return score;
     }
 
