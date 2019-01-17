@@ -1,4 +1,10 @@
-language: java
-jdk:
-  - oraclejdk8
-script: sh -c 'cd mvn-advent-of-code && mvn clean install'
+matrix:
+  include:
+    - language: java
+      jdk:
+        - oraclejdk8
+      script: sh -c 'cd mvn-advent-of-code && mvn clean test'
+    - language: scala
+      scala:
+        - 2.12.8
+      script: sh -c 'cd scala-advent-of-code && sbt clean test'
