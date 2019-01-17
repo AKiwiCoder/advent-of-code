@@ -1,5 +1,4 @@
 language: scala
 jdk:
   - openjdk8
-script: sh -c 'cd mvn-advent-of-code && mvn clean test'
-script: sh -c 'cd ../scala-advent-of-code && sbt clean test'
+script: sh -c 'cd mvn-advent-of-code && mvn clean test && cd ../scala-advent-of-code && sbt clean test'
