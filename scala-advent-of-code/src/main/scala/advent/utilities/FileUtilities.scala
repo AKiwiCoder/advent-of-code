@@ -4,9 +4,7 @@ import java.io.InputStream
 
 object FileUtilities {
   def readFile[T](filename: String, convertor: (String) => T): List[T] = {
-    val t = readFile(filename).map(line => convertor(line))
-    println(t);
-    t
+    readFile(filename).map(line => convertor(line))
   }
 
   def readFile(filename: String): List[String] = {
