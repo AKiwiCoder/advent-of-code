@@ -19,6 +19,18 @@ public enum EDirection {
                 break;
             case Straight:
                 return orig;
+            case Around:
+                switch (orig) {
+                    case North:
+                        return South;
+                    case South:
+                        return North;
+                    case East:
+                        return West;
+                    case West:
+                        return East;
+                }
+                break;
             case Right:
                 switch (orig) {
                     case North:

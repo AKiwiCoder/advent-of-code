@@ -1,6 +1,6 @@
 package advent.common;
 
 public enum ETurn {
-    Left, Straight, Right
+    Left, Straight, Around, Right
 }
 
