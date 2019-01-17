@@ -45,4 +45,9 @@ public class DuetRecoverOperation extends DuetOperation {
     public String getRegister() {
         return registerX;
     }
+
+    @Override
+    public String getGeneratedCode(int lineNo) {
+        throw new UnsupportedOperationException("No C equivalent to recv");
+    }
 }

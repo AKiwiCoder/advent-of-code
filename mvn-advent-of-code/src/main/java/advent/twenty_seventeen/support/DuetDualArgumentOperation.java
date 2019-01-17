@@ -54,4 +54,8 @@ public abstract class DuetDualArgumentOperation extends DuetOperation {
     public String toString() {
         return name + " " + ((constantX == null) ? registerX : constantX) + " " + ((constantY == null) ? registerY : constantY);
     }
+
+    protected Long getConstantY(){
+        return constantY;
+    }
 }

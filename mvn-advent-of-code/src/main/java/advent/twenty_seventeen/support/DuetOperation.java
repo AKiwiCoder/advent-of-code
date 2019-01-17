@@ -44,4 +44,10 @@ public abstract class DuetOperation {
         }
         throw new IllegalArgumentException("Cannot parse '" + line + "'");
     }
+
+    public Integer getRequiredGotoLabel(int lineNo) {
+        return null;
+    }
+
+    public abstract String getGeneratedCode(int lineNo);
 }

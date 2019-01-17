@@ -41,4 +41,10 @@ public class DuetSoundOperation extends DuetOperation {
         }
         return constantX;
     }
+
+
+    @Override
+    public String getGeneratedCode(int lineNo) {
+        throw new UnsupportedOperationException("No C equivalent to send");
+    }
 }
