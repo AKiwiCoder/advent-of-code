@@ -1,6 +1,6 @@
 matrix:
   include:
-    - language: java
+    - language: scala
       jdk:
         - openjdk8
       script: sh -c 'cd mvn-advent-of-code && mvn clean test'
