@@ -4,17 +4,16 @@ import advent.common.DailyProblem
 import advent.utilities.FileUtilities
 
 import scala.annotation.tailrec
-import scala.io.Source
 
 class Day01NotQuiteLisp(filename: String) extends DailyProblem[Int, Int] {
   private val line = FileUtilities.readFile(filename).head
 
   @tailrec
-  private def walk(line : List[Char], floor : Int, basement: Int, index : Int) : (Int, Int) = {
+  private def walk(line: List[Char], floor: Int, basement: Int, index: Int): (Int, Int) = {
     if (line.isEmpty) {
       (floor, basement)
     } else {
-      val newFloor = if (line.head == '(') floor + 1 else floor -1
+      val newFloor = if (line.head == '(') floor + 1 else floor - 1
       walk(line.tail, newFloor, if (newFloor == -1 && basement == -1) index else basement, index + 1)
     }
   }

@@ -1,9 +1,7 @@
 package advent.twenty_fifteen
 
 import advent.common.DailyProblem
-import advent.utilities.{ChecksumUtilities, FileUtilities}
-
-case class Point(col: Int, row: Int)
+import advent.utilities.ChecksumUtilities
 
 class Day04TheIdealStockingStuffer(key: String) extends DailyProblem[Int, Int] {
 

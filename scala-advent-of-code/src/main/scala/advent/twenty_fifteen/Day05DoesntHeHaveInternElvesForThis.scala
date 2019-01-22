@@ -24,7 +24,7 @@ class Day05DoesntHeHaveInternElvesForThis(filename: String) extends DailyProblem
 
   private def nice2(line: String): Boolean = {
     @tailrec
-    def hasPairOfPair(working : String) : Boolean = {
+    def hasPairOfPair(working: String): Boolean = {
       if (working.size <= 3) {
         return false
       }
@@ -35,7 +35,7 @@ class Day05DoesntHeHaveInternElvesForThis(filename: String) extends DailyProblem
     }
 
     @tailrec
-    def hasTriple(working : String) : Boolean = {
+    def hasTriple(working: String): Boolean = {
       if (working.size <= 2) {
         return false
       }

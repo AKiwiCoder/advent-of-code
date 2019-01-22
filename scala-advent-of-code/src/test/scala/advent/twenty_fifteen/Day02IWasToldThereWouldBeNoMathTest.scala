@@ -1,8 +1,8 @@
 package advent.twenty_fifteen
 
-import org.scalatest.{FlatSpec, FunSuite, Matchers}
+import org.scalatest.{FlatSpec, Matchers}
 
-class Day02IWasToldThereWouldBeNoMathTest  extends FlatSpec with Matchers {
+class Day02IWasToldThereWouldBeNoMathTest extends FlatSpec with Matchers {
   "2015 Day 2 - Input" should "calculate answers" in {
     val dp = new Day02IWasToldThereWouldBeNoMath("/twenty_fifteen/Day02-IWasToldThereWouldBeNoMath-input.txt")
     dp.part1Answer should be(1606483)
