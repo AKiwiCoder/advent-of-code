@@ -22,7 +22,7 @@ class Day06ProbablyAFireHazard(filename: String) extends DailyProblem[Int, Int] 
       case turnOnPattern(t, l, b, r) => Day06TurnOnCommand(t.toInt, l.toInt, b.toInt, r.toInt)
       case togglePattern(t, l, b, r) => Day06ToggleCommand(t.toInt, l.toInt, b.toInt, r.toInt)
       case turnOffPattern(t, l, b, r) => Day06TurnOffCommand(t.toInt, l.toInt, b.toInt, r.toInt)
-      case _ => throw new IllegalStateException("Cannot match '" + line + "'")
+      case _ => throw new IllegalStateException(s"Cannot match '$line'")
     }
 
   private def executeCommands(commands: List[Day06Command], lights: Array[Array[Int]], on: Int => Int, toggle: Int => Int, off: Int => Int): Int = {

@@ -21,7 +21,7 @@ class Day07SomeAssemblyRequired(filename: String) extends DailyProblem[Map[Strin
     value match {
       case wirePattern(name) => WireInput(name)
       case constantPattern(constant) => ConstantInput(constant.toInt)
-      case _ => throw new IllegalStateException("Cannot match '" + value + "'")
+      case _ => throw new IllegalStateException(s"Cannot match '$value'")
     }
   }
 
@@ -33,7 +33,7 @@ class Day07SomeAssemblyRequired(filename: String) extends DailyProblem[Map[Strin
       case lshiftPattern(in, count, out) => LShiftOperation(parse(in), count.toInt, out)
       case rshiftPattern(in, count, out) => RShiftOperation(parse(in), count.toInt, out)
       case notPattern(in, out) => NotOperation(parse(in), out)
-      case _ => throw new IllegalStateException("Cannot match '" + line + "'")
+      case _ => throw new IllegalStateException(s"Cannot match '$line'")
     }
 
   private val operations = FileUtilities.readFile(filename, parser)

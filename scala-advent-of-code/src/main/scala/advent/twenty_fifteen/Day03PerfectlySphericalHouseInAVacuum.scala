@@ -14,7 +14,7 @@ class Day03PerfectlySpericalHousesInAVacuum(filename: String) extends DailyProbl
       case 'v' => Point(point.col, point.row + 1)
       case '<' => Point(point.col - 1, point.row)
       case '>' => Point(point.col + 1, point.row)
-      case _ => throw new IllegalArgumentException(c + " is not parsable")
+      case _ => throw new IllegalArgumentException(s"$c is not parsable")
     }
     newP
   }
