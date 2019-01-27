@@ -1,5 +1,7 @@
 package advent.utilities
 
+import scala.annotation.tailrec
+
 object StringUtilities {
   private val hexArray = Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f')
 
@@ -12,5 +14,19 @@ object StringUtilities {
       (idx + 1)
     })
     output.mkString
+  }
+
+  def findNonOverlappingPairs(password: String): List[String] = {
+    @tailrec
+    def process(working: String, acc: List[String]): List[String] = {
+      if (working.isEmpty || working.length == 1) {
+        acc
+      } else if (working.charAt(0) == working.charAt(1)) {
+        process(working.drop(2), working.take(2) :: acc)
+      } else {
+        process(working.tail, acc)
+      }
+    }
+    process(password, List())
   }
 }
