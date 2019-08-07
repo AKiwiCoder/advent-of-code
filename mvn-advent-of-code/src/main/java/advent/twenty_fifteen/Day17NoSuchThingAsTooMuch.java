@@ -82,29 +82,6 @@ public class Day17NoSuchThingAsTooMuch implements DailyProblem<Integer, Integer>
         return result;
     }
 
-    private static Set<List<Container>> generate(List<Container> soFar, List<Container> remaining, int sum, int target) {
-        Set<List<Container>> result = new HashSet<>();
-        for (Container container : remaining) {
-            if (container.volume + sum > target) {
-                continue;
-            }
-
-            List<Container> newSoFar = new LinkedList<>(soFar);
-            newSoFar.add(container);
-            Collections.sort(newSoFar);
-
-            if (container.volume + sum == target) {
-                result.add(newSoFar);
-                continue;
-            }
-
-            List<Container> newRemaining = new LinkedList<>(remaining);
-            newRemaining.remove(container);
-            result.addAll(generate(newSoFar, newRemaining, sum + container.volume, target));
-        }
-        return result;
-    }
-
     @Override
     public Integer getPart1Answer() {
         return part1Answer;
