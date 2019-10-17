@@ -1,22 +1,22 @@
 package advent.twenty_sixteen
 
 import advent.common.DailyProblem
-import advent.utilities.{East, Facing, FileUtilities, Left, LocationHelper, North, Point, Right, South, Turn, West}
+import advent.utilities.{FacingEast, Facing, FileUtilities, TurnLeft, LocationHelper, FacingNorth, Point, TurnRight, FacingSouth, Turn, FacingWest}
 
 import scala.annotation.tailrec
 
 class Day01NoTimeForATaxicab(filename: String) extends DailyProblem[Int, Int] {
   private def parser(line: String): List[(Turn, Int)] = line.split(", ").map(step => {
     if (step.charAt(0) == 'L') {
-      (Left(), step.substring(1).toInt)
+      (TurnLeft(), step.substring(1).toInt)
     } else {
-      (Right(), step.substring(1).toInt)
+      (TurnRight(), step.substring(1).toInt)
     }
   }).toList
 
   private val moves = parser(FileUtilities.readFile(filename)(0))
 
-  private val journey = moves.foldLeft[(Facing, Point, List[Point])]((North(), Point(0, 0), List(Point(0, 0))))((current, step) => {
+  private val journey = moves.foldLeft[(Facing, Point, List[Point])]((FacingNorth(), Point(0, 0), List(Point(0, 0))))((current, step) => {
     val newFacing : Facing = LocationHelper.turn(current._1, step._1)
     val (newPosition : Point, steps : List[Point]) = LocationHelper.steps(current._2, newFacing, step._2, List())
     (newFacing, newPosition, steps ::: current._3)

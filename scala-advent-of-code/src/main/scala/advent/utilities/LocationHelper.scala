@@ -3,35 +3,35 @@ package advent.utilities
 import scala.annotation.tailrec
 
 abstract class Facing
-case class North() extends Facing
-case class West() extends Facing
-case class East() extends Facing
-case class South() extends Facing
+case class FacingNorth() extends Facing
+case class FacingWest() extends Facing
+case class FacingEast() extends Facing
+case class FacingSouth() extends Facing
 
 abstract class Turn
-case class Left() extends Turn
-case class Right() extends Turn
+case class TurnLeft() extends Turn
+case class TurnRight() extends Turn
 
 case class Point(y: Int, x: Int)
 
 object LocationHelper {
   def turn(facing: Facing, turn: Turn): Facing =
     facing match {
-      case North() => turn match {
-        case Left() => West()
-        case Right() => East()
+      case FacingNorth() => turn match {
+        case TurnLeft() => FacingWest()
+        case TurnRight() => FacingEast()
       }
-      case West() => turn match {
-        case Left() => South()
-        case Right() => North()
+      case FacingWest() => turn match {
+        case TurnLeft() => FacingSouth()
+        case TurnRight() => FacingNorth()
       }
-      case East() => turn match {
-        case Left() => North()
-        case Right() => South()
+      case FacingEast() => turn match {
+        case TurnLeft() => FacingNorth()
+        case TurnRight() => FacingSouth()
       }
-      case South() => turn match {
-        case Left() => East()
-        case Right() => West()
+      case FacingSouth() => turn match {
+        case TurnLeft() => FacingEast()
+        case TurnRight() => FacingWest()
       }
     }
 
@@ -47,9 +47,9 @@ object LocationHelper {
 
   def step(start: Point, facing: Facing): Point =
     facing match {
-      case North() => Point(start.y - 1, start.x)
-      case West() => Point(start.y, start.x - 1)
-      case East() => Point(start.y, start.x + 1)
-      case South() => Point(start.y + 1, start.x)
+      case FacingNorth() => Point(start.y - 1, start.x)
+      case FacingWest() => Point(start.y, start.x - 1)
+      case FacingEast() => Point(start.y, start.x + 1)
+      case FacingSouth() => Point(start.y + 1, start.x)
     }
 }
