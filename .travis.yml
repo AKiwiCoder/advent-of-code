@@ -1,4 +1,4 @@
 language: scala
 jdk:
-  - openjdk8
+  - openjdk12
 script: sh -c 'cd java-advent-of-code && mvn clean test && cd ../scala-advent-of-code && sbt clean test'
