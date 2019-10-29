@@ -1,4 +1,9 @@
 language: scala
 jdk:
   - openjdk8
-script: sh -c 'cd java-advent-of-code && mvn clean test && cd ../scala-advent-of-code && sbt clean test'
+jobs:
+  include:
+    - stage: Java
+      script: sh -c 'cd java-advent-of-code && mvn clean test
+    - stage: Scala
+      script: sh -c 'cd java-advent-of-code && sbt clean test
