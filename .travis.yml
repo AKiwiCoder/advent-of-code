@@ -4,6 +4,6 @@ jdk:
 jobs:
   include:
     - stage: Java
-      script: sh -c 'cd java-advent-of-code && mvn clean test
+      script: sh -c 'cd java-advent-of-code && mvn clean test'
     - stage: Scala
-      script: sh -c 'cd java-advent-of-code && sbt clean test
+      script: sh -c 'cd java-advent-of-code && sbt clean test'
