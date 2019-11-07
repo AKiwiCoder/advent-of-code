@@ -1,4 +1,4 @@
-name := "sbt-advent-of-code"
+name := "scala-advent-of-code"
 
 version := "0.1"
 
