@@ -6,4 +6,6 @@ jobs:
     - stage: Java
       script: sh -c 'cd java-advent-of-code && mvn clean test'
     - stage: Scala
-      script: sh -c 'cd java-advent-of-code && sbt clean test'
+      script: sh -c 'cd scala-advent-of-code && sbt clean test'
+    - stage: Kotlin
+      script: sh -c 'cd kotlin-advent-of-code && mvn clean test' 
