@@ -1,16 +1,19 @@
 matrix:
   include:
-    - language: scala
+    - name: Scala
+      language: scala
       scala: 2.12.2
       script:
         - sh -c 'cd scala-advent-of-code && sbt clean test'
 
-    - language: java
+    - name: Java
+      language: java
       jdk: openjdk11
       script:
         - sh -c 'cd java-advent-of-code && mvn clean test'
 
-    - language: java
+    - name: Kotlin
+      language: java
       jdk: openjdk11
       script:
         - sh -c 'cd kotlin-advent-of-code && mvn clean test' 
