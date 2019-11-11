@@ -8,13 +8,13 @@ matrix:
 
     - name: Java
       language: java
-      jdk: openjdk11
+      jdk: openjdk13
       script:
         - sh -c 'cd java-advent-of-code && mvn clean test'
 
     - name: Kotlin
       language: java
-      jdk: openjdk11
+      jdk: openjdk13
       script:
         - sh -c 'cd kotlin-advent-of-code && mvn clean test' 
 
