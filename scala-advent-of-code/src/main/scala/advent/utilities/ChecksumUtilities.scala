@@ -9,7 +9,11 @@ object ChecksumUtilities {
 
   private val digest = MessageDigest.getInstance("MD5")
 
-  def md5hashString(text: String): String = StringUtilities.bytesToHex(digest.digest(text.getBytes))
+  def md5hashString(text: String): String = {
+    synchronized {
+      StringUtilities.bytesToHex(digest.digest(text.getBytes))
+    }
+  }
 
   def doesItStartWithXZeros(hash: String, zeros: String): Boolean = hash.startsWith(zeros)
 
