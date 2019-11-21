@@ -25,3 +25,8 @@ matrix:
       script:
         - sh -c 'cd dotnet-advent-of-code && dotnet test'
 
+    - name: Python
+      language: python
+      python: 3.8
+      script:
+        - sh -c 'cd python-advent-of-code && python -m unittest discover -p "*test.py"'
