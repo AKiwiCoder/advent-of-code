@@ -3,14 +3,14 @@ package advent.twenty_nineteen
 import advent.common.DailyProblem
 import advent.utilities._
 
-class Day01TheTyrannyOfTheRocketEquation(filename: String) extends DailyProblem[Int, Int] {
+import scala.annotation.tailrec
 
-  override val part1Answer: Int = masses.map(mass => calculateFuel(mass)).sum.toInt
-  override val part2Answer: Int = masses.map(mass => calculateFuel(0, mass)).sum.toInt
+class Day01TheTyrannyOfTheRocketEquation(filename: String) extends DailyProblem[Int, Int] {
   private val masses = FileUtilities.readFile(filename, line => line.toInt)
 
   private def calculateFuel(mass: Int): Int = (Math.round(Math.floor(mass / 3)) - 2).toInt
 
+  @tailrec
   private def calculateFuel(soFar: Int, mass: Int): Int = {
     val fuel = calculateFuel(mass)
     if (fuel < 0) {
@@ -19,4 +19,7 @@ class Day01TheTyrannyOfTheRocketEquation(filename: String) extends DailyProblem[
       calculateFuel(soFar + fuel, fuel)
     }
   }
+
+  override val part1Answer: Int = masses.map(mass => calculateFuel(mass)).sum.toInt
+  override val part2Answer: Int = masses.map(mass => calculateFuel(0, mass)).sum.toInt
 }
