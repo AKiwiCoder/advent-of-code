@@ -5,16 +5,14 @@ import advent.utilities.{FileUtilities, Point}
 
 import scala.annotation.tailrec
 
-case class Move(direction: Char, count: Int)
-
 class Day03CrossedWires(filename: String) extends DailyProblem[Int, Int] {
+  case class Move(direction: Char, count: Int)
+
   private def parser(line: String): List[Move] = {
     line.split(",").map(str => Move(str.charAt(0), str.substring(1).toInt)).toList
   }
 
   private val input = FileUtilities.readFile(filename, parser)
-
-  def manhattanDistance(current: Point, start: Point): Int = Math.abs(start.y - current.y) + Math.abs(start.x - current.x)
 
   @tailrec
   private def generatePath(steps: List[Move], current: Point, path: List[Point]): List[Point] = {
@@ -35,6 +33,6 @@ class Day03CrossedWires(filename: String) extends DailyProblem[Int, Int] {
   private val paths = input.map(steps => generatePath(steps, Point(0, 0), List(Point(0,0))))
   private val crossings = paths(0).toSet.intersect(paths(1).toSet) - Point(0, 0)
 
-  override val part1Answer: Int = crossings.map(crossing => manhattanDistance(crossing, Point(0, 0))).min
+  override val part1Answer: Int = crossings.map(crossing => Point.manhattanDistance(crossing, Point(0, 0))).min
   override val part2Answer: Int = crossings.map(point => paths(0).indexOf(point) + paths(1).indexOf(point)).min
 }

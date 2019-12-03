@@ -14,6 +14,10 @@ case class TurnRight() extends Turn
 
 case class Point(y: Int, x: Int)
 
+object Point {
+  def manhattanDistance(current: Point, start: Point): Int = Math.abs(start.y - current.y) + Math.abs(start.x - current.x)
+}
+
 object LocationHelper {
   def turn(facing: Facing, turn: Turn): Facing =
     facing match {
