@@ -16,24 +16,6 @@ class Day03CrossedWires(filename: String) extends DailyProblem[Int, Int] {
 
   def manhattanDistance(current: Point, start: Point): Int = Math.abs(start.y - current.y) + Math.abs(start.x - current.x)
 
-  def generatePath(steps: List[Move]): List[Point] = {
-    var result = scala.collection.mutable.ListBuffer[Point]()
-    var current = Point(0, 0)
-    result += current
-    for (step <- steps) {
-      for (s <- 0 until step.count) {
-        step.direction match {
-          case 'U' => current = Point(current.y + 1, current.x)
-          case 'D' => current = Point(current.y - 1, current.x)
-          case 'L' => current = Point(current.y, current.x - 1)
-          case 'R' => current = Point(current.y, current.x + 1)
-        }
-        result += current
-      }
-    }
-    result.toList
-  }
-
   @tailrec
   private def generatePath(steps: List[Move], current: Point, path: List[Point]): List[Point] = {
     if (steps.isEmpty) {
