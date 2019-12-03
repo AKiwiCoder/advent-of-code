@@ -6,6 +6,7 @@ import advent.utilities.{FileUtilities, Point}
 import scala.annotation.tailrec
 
 class Day03CrossedWires(filename: String) extends DailyProblem[Int, Int] {
+
   case class Move(direction: Char, count: Int)
 
   private def parser(line: String): List[Move] = {
@@ -30,7 +31,7 @@ class Day03CrossedWires(filename: String) extends DailyProblem[Int, Int] {
     }
   }
 
-  private val paths = input.map(steps => generatePath(steps, Point(0, 0), List(Point(0,0))))
+  private val paths = input.map(steps => generatePath(steps, Point(0, 0), List(Point(0, 0))))
   private val crossings = paths(0).toSet.intersect(paths(1).toSet) - Point(0, 0)
 
   override val part1Answer: Int = crossings.map(crossing => Point.manhattanDistance(crossing, Point(0, 0))).min

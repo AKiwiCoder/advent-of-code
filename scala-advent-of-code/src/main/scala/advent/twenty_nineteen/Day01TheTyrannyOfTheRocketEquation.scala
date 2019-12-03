@@ -20,6 +20,6 @@ class Day01TheTyrannyOfTheRocketEquation(filename: String) extends DailyProblem[
     }
   }
 
-  override val part1Answer: Int = masses.map(mass => calculateFuel(mass)).sum.toInt
-  override val part2Answer: Int = masses.map(mass => calculateFuel(0, mass)).sum.toInt
+  override val part1Answer: Int = masses.map(mass => calculateFuel(mass)).sum
+  override val part2Answer: Int = masses.map(mass => calculateFuel(0, mass)).sum
 }
