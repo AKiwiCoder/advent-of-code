@@ -86,3 +86,4 @@ Find the input noun and verb that cause the program to produce the output 196907
 
 Your puzzle answer was 5379.
 
+:copyright: https://adventofcode.com/
