@@ -5,7 +5,7 @@
 #include <fcntl.h>
 #include <math.h>
 
-template <class T> void assertEquals(T expected, T actual) {
+template <class T> int assertEquals(T expected, T actual) {
   printf("%d == %d", expected, actual);
   if (expected == actual) {
     printf("  Passed\n");
