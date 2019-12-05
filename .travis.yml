@@ -30,3 +30,9 @@ matrix:
       python: 3.8
       script:
         - sh -c 'cd python-advent-of-code && python -m unittest discover -p "*test.py"'
+
+    - name: C++
+      language: cpp
+      compiler: gcc
+      script:
+        - sh -c 'cd cpp-advent-of-code && make'
