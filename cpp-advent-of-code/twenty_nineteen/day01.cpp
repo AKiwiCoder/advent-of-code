@@ -7,10 +7,13 @@
 
 template <class T> void assertEquals(T expected, T actual) {
   printf("%d == %d", expected, actual);
-  if (expected == actual)
+  if (expected == actual) {
     printf("  Passed\n");
-  else
-    printf("  FAILED\n");
+    return 0;
+  }
+		      
+  printf("  FAILED\n");
+  return -1;
 }
 
 int calculateFuelRequired(int mass) {
@@ -39,11 +42,13 @@ int main(int argv, char **argc) {
     part2 += calculateFuelRequiredAccumulating(moduleMass);
   }
 
+  
+  int rc = 0;
   printf("2019 Day 1\n");  
   printf("  Part 1: ");
-  assertEquals(part1, 3233481);
+  rc += assertEquals(part1, 3233481);
   printf("  Part 2: ");
-  assertEquals(part2, 4847351);
+  rc += assertEquals(part2, 4847351);
   
-  return 0;
+  return rc;
 }
