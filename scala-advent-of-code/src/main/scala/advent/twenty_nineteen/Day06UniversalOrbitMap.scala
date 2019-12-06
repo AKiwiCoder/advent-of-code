@@ -13,12 +13,12 @@ class Day06UniversalOrbitMap(filename : String) extends DailyProblem[Int, Int] {
 
   private val orbitBodyMap = FileUtilities.readFile(filename, parser).map(e => e._2 -> e._1).toMap
 
+  @tailrec
   private def generatePath(length : Int, current : String, acc : List[String]): List[String] = {
     if (current == "COM") {
       acc
     } else {
-      val next = orbitBodyMap(current)
-      generatePath(length + 1, next, current :: acc)
+      generatePath(length + 1, orbitBodyMap(current), current :: acc)
     }
   }
 
