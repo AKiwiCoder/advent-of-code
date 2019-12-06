@@ -8,7 +8,6 @@ import scala.annotation.tailrec
 class Day05SunnyWithAChanceOfAsteroids(filename: String) extends DailyProblem[Int, Int] {
   private val program = FileUtilities.readFile(filename)(0).split(",").zipWithIndex.map(t => t._2 -> t._1.toInt).toMap
 
-
   private def get(index: Int, mode: Int, memory: Map[Int, Int]): Int = {
     if (mode == 0) memory(memory(index)) else memory(index)
   }
