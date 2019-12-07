@@ -13,6 +13,10 @@ class Day07AmplificationCircuit(filename: String) extends DailyProblem[Int, Int]
     if (mode == 0) memory(memory(index)) else memory(index)
   }
 
+  private def phaseFilter(phase: (Int, Int, Int, Int, Int)): Boolean = {
+    Set(phase._1, phase._2, phase._3, phase._4, phase._5).size == 5
+  }
+
   @tailrec
   private def execute(memory: Map[Int, Int], pc: Int, input: List[Int], output: List[Int]): (Map[Int, Int], Int, List[Int]) = {
     if (memory(pc) == 99) {
@@ -60,26 +64,15 @@ class Day07AmplificationCircuit(filename: String) extends DailyProblem[Int, Int]
   }
 
   private def doPart1(): Int = {
-    var maxValue1 = 0;
-    for (a <- 0 until 5) {
-      for (b <- 0 until 5) {
-        for (c <- 0 until 5) {
-          for (d <- 0 until 5) {
-            for (e <- 0 until 5) {
-              if (Set(a, b, c, d, e).size == 5) {
-                val outa = execute(program, 0, List(a, 0), List())._3.head
-                val outb = execute(program, 0, List(b, outa), List())._3.head
-                val outc = execute(program, 0, List(c, outb), List())._3.head
-                val outd = execute(program, 0, List(d, outc), List())._3.head
-                val oute = execute(program, 0, List(e, outd), List())._3.head
-                maxValue1 = Math.max(oute, maxValue1)
-              }
-            }
-          }
-        }
-      }
-    }
-    maxValue1
+    val phases = (for (a <- 0 to 4; b <- 0 to 4; c <- 0 to 4; d <- 0 to 4; e <- 0 to 4) yield (a, b, c, d, e)).filter(p => phaseFilter(p))
+    phases.map(phase => {
+      val outa = execute(program, 0, List(phase._1, 0), List())._3.head
+      val outb = execute(program, 0, List(phase._2, outa), List())._3.head
+      val outc = execute(program, 0, List(phase._3, outb), List())._3.head
+      val outd = execute(program, 0, List(phase._4, outc), List())._3.head
+      val oute = execute(program, 0, List(phase._5, outd), List())._3.head
+      oute
+    }).max
   }
 
   private def doPart2() = {
@@ -114,22 +107,8 @@ class Day07AmplificationCircuit(filename: String) extends DailyProblem[Int, Int]
       result
     }
 
-    var maxValue2 = 0;
-    for (a <- 5 to 9) {
-      for (b <- 5 to 9) {
-        for (c <- 5 to 9) {
-          for (d <- 5 to 9) {
-            for (e <- 5 to 9) {
-              if (Set(a, b, c, d, e).size == 5) {
-                val value = executeInParallel(List(a, 0), List(b), List(c), List(d), List(e))
-                maxValue2 = Math.max(value, maxValue2)
-              }
-            }
-          }
-        }
-      }
-    }
-    maxValue2
+    val phases = (for (a <- 5 to 9; b <- 5 to 9; c <- 5 to 9; d <- 5 to 9; e <- 5 to 9) yield (a, b, c, d, e)).filter(p => phaseFilter(p))
+    phases.map(phase => executeInParallel(List(phase._1, 0), List(phase._2), List(phase._3), List(phase._4), List(phase._5))).max
   }
 
   override val part1Answer: Int = doPart1()
