@@ -3,7 +3,7 @@ package advent.twenty_nineteen
 import advent.common.DailyProblem
 import advent.utilities._
 
-class Day021202ProgramAlarm(filename: String, part1 : (Long, Long), part2Target: Option[Long]) extends DailyProblem[Map[Long,Long], Long] {
+class Day02TwelveOhTwoProgramAlarm(filename: String, part1 : (Long, Long), part2Target: Option[Long]) extends DailyProblem[Map[Long,Long], Long] {
   private val program = IntComputer.loadProgram(filename)
 
   private def execute(memory: Map[Long, Long], noun : Long, verb: Long): Map[Long, Long] = {
