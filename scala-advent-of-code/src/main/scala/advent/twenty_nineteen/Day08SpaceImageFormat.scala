@@ -39,7 +39,7 @@ class Day08SpaceImageFormat(filename: String, width: Int, height: Int) extends D
     }
     result
   }
-  
+
   override val part1Answer: Int = checksum.head._2
   override val part2Answer: String = calculatePart2()
 }
