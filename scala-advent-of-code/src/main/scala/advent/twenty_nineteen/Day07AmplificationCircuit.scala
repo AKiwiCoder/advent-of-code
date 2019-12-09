@@ -1,7 +1,6 @@
 package advent.twenty_nineteen
 
 import advent.common.DailyProblem
-import advent.utilities.FileUtilities
 
 class Day07AmplificationCircuit(filename: String) extends DailyProblem[Long, Long] {
   private val program = IntComputer.loadProgram(filename)
@@ -13,11 +12,11 @@ class Day07AmplificationCircuit(filename: String) extends DailyProblem[Long, Lon
   private def doPart1(): Long = {
     val phases = (for (a <- 0 to 4; b <- 0 to 4; c <- 0 to 4; d <- 0 to 4; e <- 0 to 4) yield (a.toLong, b.toLong, c.toLong, d.toLong, e.toLong)).filter(p => phaseFilter(p))
     phases.map(phase => {
-      val outa = IntComputer.execute(program, 0, 0,List(phase._1, 0), List())._3.head
-      val outb = IntComputer.execute(program, 0, 0,List(phase._2, outa), List())._3.head
-      val outc = IntComputer.execute(program, 0, 0,List(phase._3, outb), List())._3.head
-      val outd = IntComputer.execute(program, 0, 0,List(phase._4, outc), List())._3.head
-      val oute = IntComputer.execute(program, 0, 0,List(phase._5, outd), List())._3.head
+      val outa = IntComputer.execute(IntComputerState(program, 0, 0, List(phase._1, 0), List())).output.head
+      val outb = IntComputer.execute(IntComputerState(program, 0, 0, List(phase._2, outa), List())).output.head
+      val outc = IntComputer.execute(IntComputerState(program, 0, 0, List(phase._3, outb), List())).output.head
+      val outd = IntComputer.execute(IntComputerState(program, 0, 0, List(phase._4, outc), List())).output.head
+      val oute = IntComputer.execute(IntComputerState(program, 0, 0, List(phase._5, outd), List())).output.head
       oute
     }).max
   }
@@ -27,28 +26,28 @@ class Day07AmplificationCircuit(filename: String) extends DailyProblem[Long, Lon
       var result = 0L
       var finished = false
 
-      var statea = (program, 0L, intA)
-      var stateb = (program, 0L, intB)
-      var statec = (program, 0L, intC)
-      var stated = (program, 0L, intD)
-      var statee = (program, 0L, intE)
+      var stateA = IntComputerState(program, 0L, 0L, intA, List())
+      var stateB = IntComputerState(program, 0L, 0L, intB, List())
+      var stateC = IntComputerState(program, 0L, 0L, intC, List())
+      var stateD = IntComputerState(program, 0L, 0L, intD, List())
+      var stateE = IntComputerState(program, 0L, 0L, intE, List())
 
       while (!finished) {
-        val tempa = if (statea._2 == -1) statea else IntComputer.execute(statea._1, statea._2, 0,statea._3, List())
-        val tempb = if (stateb._2 == -1) stateb else IntComputer.execute(stateb._1, stateb._2, 0,stateb._3, List())
-        val tempc = if (statec._2 == -1) statec else IntComputer.execute(statec._1, statec._2, 0,statec._3, List())
-        val tempd = if (stated._2 == -1) stated else IntComputer.execute(stated._1, stated._2, 0,stated._3, List())
-        val tempe = if (statee._2 == -1) statee else IntComputer.execute(statee._1, statee._2, 0,statee._3, List())
+        val workingA = if (stateA.isFinished()) stateA else IntComputer.execute(stateA)
+        val workingB = if (stateB.isFinished()) stateB else IntComputer.execute(stateB)
+        val workingC = if (stateC.isFinished()) stateC else IntComputer.execute(stateC)
+        val workingD = if (stateD.isFinished()) stateD else IntComputer.execute(stateD)
+        val workingE = if (stateE.isFinished()) stateE else IntComputer.execute(stateE)
 
-        if (tempe._2 == -1) {
+        if (workingE.isFinished()) {
           finished = true
-          result = tempe._3.head
+          result = workingE.output.head
         } else {
-          statea = (tempa._1, tempa._2, tempe._3)
-          stateb = (tempb._1, tempb._2, tempa._3)
-          statec = (tempc._1, tempc._2, tempb._3)
-          stated = (tempd._1, tempd._2, tempc._3)
-          statee = (tempe._1, tempe._2, tempd._3)
+          stateA = IntComputerState(workingA.memory, workingA.pc, workingA.relativeBase, workingE.output, List())
+          stateB = IntComputerState(workingB.memory, workingB.pc, workingB.relativeBase, workingA.output, List())
+          stateC = IntComputerState(workingC.memory, workingC.pc, workingC.relativeBase, workingB.output, List())
+          stateD = IntComputerState(workingD.memory, workingD.pc, workingD.relativeBase, workingC.output, List())
+          stateE = IntComputerState(workingE.memory, workingE.pc, workingE.relativeBase, workingD.output, List())
         }
       }
       result

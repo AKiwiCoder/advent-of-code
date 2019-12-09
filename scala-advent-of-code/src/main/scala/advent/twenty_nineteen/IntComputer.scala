@@ -4,6 +4,12 @@ import advent.utilities.FileUtilities
 
 import scala.annotation.tailrec
 
+case class IntComputerState(memory : Map[Long, Long], pc : Long, relativeBase : Long, input : List[Long], output: List[Long]) {
+  def isFinished() : Boolean = {
+    pc < 0
+  }
+}
+
 object IntComputer {
   def loadProgram(filename: String) : Map[Long,Long] = {
     FileUtilities.readFile(filename)(0).split(",").zipWithIndex.map(t => t._2.toLong -> t._1.toLong).toMap.withDefaultValue(0L)
@@ -34,10 +40,10 @@ object IntComputer {
   }
 
   @tailrec
-  def execute(memory: Map[Long, Long], pc: Long, relativeBase: Long, input: List[Long], output: List[Long]): (Map[Long, Long], Long, List[Long]) = {
+  def execute(memory: Map[Long, Long], pc: Long, relativeBase: Long, input: List[Long], output: List[Long]): IntComputerState = {
     if (memory(pc) == 99) {
       // Finished All Done
-      (memory, -1, output)
+      IntComputerState(memory, -1, -1, input, output)
     } else {
       val opcode: Long = memory(pc)
       val operation = opcode % 100
@@ -47,7 +53,7 @@ object IntComputer {
 
       if (operation == 3 && input.size == 0) {
         // Pending Input
-        (memory, pc, output)
+        IntComputerState(memory, pc, relativeBase, input, output)
       } else {
         val (value: (Long, Long), newOutput: List[Long], newRelativeBase: Long) = operation match {
           case 1 => (getWriteIndex(pc + 3, mode3, relativeBase, memory) -> (getReadValue(pc + 1, mode1, relativeBase, memory) + getReadValue(pc + 2, mode2, relativeBase, memory)), output, relativeBase)
@@ -78,5 +84,9 @@ object IntComputer {
         execute(memory + value, newPc, newRelativeBase, if (operation == 3) input.tail else input, newOutput)
       }
     }
+  }
+
+  def execute(state : IntComputerState): IntComputerState = {
+    execute(state.memory, state.pc, state.relativeBase, state.input, state.output)
   }
 }

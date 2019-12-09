@@ -7,7 +7,7 @@ class Day021202ProgramAlarm(filename: String, part1 : (Long, Long), part2Target:
   private val program = IntComputer.loadProgram(filename)
 
   private def execute(memory: Map[Long, Long], noun : Long, verb: Long): Map[Long, Long] = {
-    IntComputer.execute(memory + (1L -> noun) + (2L -> verb), 0, 0,  List(), List())._1
+    IntComputer.execute(memory + (1L -> noun) + (2L -> verb), 0, 0,  List(), List()).memory
   }
 
   def execute(target : Long): Long = {

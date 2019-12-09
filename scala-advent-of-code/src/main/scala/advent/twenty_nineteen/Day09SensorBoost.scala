@@ -9,8 +9,8 @@ class Day09SensorBoost(filename: String) extends DailyProblem[Long, Long] {
   val part1 = IntComputer.execute(program, 0L, 0L, List[Long](1), List[Long]())
   val part2 = IntComputer.execute(program, 0L, 0L, List[Long](2), List[Long]())
 
-  override val part1Answer: Long = part1._3.head
-  override val part2Answer: Long = part2._3.head
+  override val part1Answer: Long = part1.output.head
+  override val part2Answer: Long = part2.output.head
 }
 
 
