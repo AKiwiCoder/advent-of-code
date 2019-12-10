@@ -8,11 +8,11 @@ class Day10MonitoringStation(filename: String) extends DailyProblem[Int, Int] {
 
   val locs = input.zipWithIndex.map(entry => entry._1.toList.zipWithIndex.filter(d => d._1 == '#').map(e => (e._2, entry._2, e._1))).flatten.map(a => Point(a._2, a._1))
 
-  def distance(a: Point, b: Point): Double = {
+  private def distance(a: Point, b: Point): Double = {
     Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
   }
 
-  def isBlocked(base: Point, asteroid: Point, check: Point): Boolean = {
+  private def isBlocked(base: Point, asteroid: Point, check: Point): Boolean = {
     Math.abs(distance(base, check) + distance(asteroid, check) - distance(base, asteroid)) < 0.000001
   }
 
@@ -38,8 +38,8 @@ class Day10MonitoringStation(filename: String) extends DailyProblem[Int, Int] {
     counts
   }
 
-  def calculateAngle(P1: Point, P2: Point, P3: Point): Double = {
-    val deg = Math.toDegrees(Math.atan2(P3.y - P1.y, P3.x - P1.x) - Math.atan2(P2.y - P1.y, P2.x - P1.x))
+  def calculateAngle(origin: Point, vertical: Point, target: Point): Double = {
+    val deg = Math.toDegrees(Math.atan2(target.y - origin.y, target.x - origin.x) - Math.atan2(vertical.y - origin.y, vertical.x - origin.x))
     if (deg < 0) deg + 360 else deg
   }
 
