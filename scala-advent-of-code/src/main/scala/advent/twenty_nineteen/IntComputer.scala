@@ -59,7 +59,7 @@ object IntComputer {
           case 1 => (getWriteIndex(pc + 3, mode3, relativeBase, memory) -> (getReadValue(pc + 1, mode1, relativeBase, memory) + getReadValue(pc + 2, mode2, relativeBase, memory)), output, relativeBase)
           case 2 => (getWriteIndex(pc + 3, mode3, relativeBase, memory) -> (getReadValue(pc + 1, mode1, relativeBase, memory) * getReadValue(pc + 2, mode2, relativeBase, memory)), output, relativeBase)
           case 3 => (getWriteIndex(pc + 1, if (mode1 == 2) 2 else 1, relativeBase, memory) -> input.head, output, relativeBase)
-          case 4 => (Long.MaxValue -> -1L, getReadValue(pc + 1, mode1, relativeBase, memory) :: output, relativeBase)
+          case 4 => (Long.MaxValue -> -1L, output ::: getReadValue(pc + 1, mode1, relativeBase, memory) :: Nil, relativeBase)
           case 5 => (Long.MaxValue -> -1L, output, relativeBase)
           case 6 => (Long.MaxValue -> -1L, output, relativeBase)
           case 7 => (getWriteIndex(pc + 3, mode3, relativeBase, memory) -> (if (getReadValue(pc + 1, mode1, relativeBase, memory) < getReadValue(pc + 2, mode2, relativeBase, memory)) 1L else 0L), output, relativeBase)

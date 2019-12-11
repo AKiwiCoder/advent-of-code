@@ -16,6 +16,17 @@ case class Point(y: Int, x: Int)
 
 object Point {
   def manhattanDistance(current: Point, start: Point): Int = Math.abs(start.y - current.y) + Math.abs(start.x - current.x)
+
+  def distance(a: Point, b: Point): Double = Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
+
+  def calculateAngle(a: Point, b: Point, c: Point): Double = {
+    val deg = Math.toDegrees(Math.atan2(c.y - a.y, c.x - a.x) - Math.atan2(b.y - a.y, b.x - a.x))
+    if (deg < 0) deg + 360 else deg
+  }
+
+  def isBlocking(origin: Point, target: Point, blocker: Point): Boolean = {
+    Math.abs(Point.distance(origin, blocker) + Point.distance(target, blocker) - Point.distance(origin, target)) < 0.000001
+  }
 }
 
 object LocationHelper {

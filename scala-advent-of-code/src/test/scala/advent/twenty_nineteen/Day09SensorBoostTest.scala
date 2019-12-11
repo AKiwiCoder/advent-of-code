@@ -13,8 +13,8 @@ class Day09SensorBoostTest extends FlatSpec with Matchers {
   "2019 Day 09 - Example #1" should "calculate answers" in {
     val dp = new Day09SensorBoost("/twenty_nineteen/Day09-SensorBoost-example#1.txt")
 
-    dp.part1Answer should be(99)
-    dp.part2Answer should be(99)
+    dp.part1Answer should be(109)
+    dp.part2Answer should be(109)
   }
 
   "2019 Day 09 - Example #2" should "calculate answers" in {
