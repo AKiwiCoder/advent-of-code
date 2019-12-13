@@ -19,10 +19,9 @@ matrix:
         - sh -c 'cd kotlin-advent-of-code && mvn test' 
 
     - name: C#
-      dist: xenial
       language: csharp
       mono: none
-      dotnet: 3.0.100
+      dotnet: 3.0
       script:
         - sh -c 'cd dotnet-advent-of-code && dotnet test'
 
