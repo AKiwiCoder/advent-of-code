@@ -18,13 +18,6 @@ matrix:
       script:
         - sh -c 'cd kotlin-advent-of-code && mvn test' 
 
-    - name: C#
-      language: csharp
-      mono: none
-      dotnet: 3.0
-      script:
-        - sh -c 'cd dotnet-advent-of-code && dotnet test'
-
     - name: Python
       language: python
       python: 3.8
