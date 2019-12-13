@@ -10,6 +10,12 @@ case class IntComputerState(memory : Map[Long, Long], pc : Long, relativeBase : 
   }
 }
 
+object IntComputerState {
+  def copyState(original: IntComputerState, input: List[Long]): IntComputerState =  original.copy(input = input, output = List())
+
+  def newState(program: Map[Long, Long]): IntComputerState = IntComputerState(program, 0,0,List(),List())
+}
+
 object IntComputer {
   def loadProgram(filename: String) : Map[Long,Long] = {
     FileUtilities.readFile(filename)(0).split(",").zipWithIndex.map(t => t._2.toLong -> t._1.toLong).toMap.withDefaultValue(0L)
