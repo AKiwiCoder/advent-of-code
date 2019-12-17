@@ -22,10 +22,7 @@ class Day15OxygenSystem(filename: String) extends DailyProblem[Int, Int] {
     if (pending.isEmpty) {
       current
     } else {
-      val command = pending.head
-      val direction = command._1
-      val location = command._2
-      val state = command._3
+      val (direction, location, state) = pending.head
 
       val newState = IntComputer.execute(IntComputerState.copyState(state, List(direction)))
 
@@ -33,7 +30,7 @@ class Day15OxygenSystem(filename: String) extends DailyProblem[Int, Int] {
 
       val result = newState.output.head
 
-      val newCommands = List(1, 2, 3, 4).map(direction => (direction, newLocation, newState)).filter(command => !current.contains(move(command._1, command._2)))
+      val newCommands = List(1, 2, 3, 4).map(direction => (direction, newLocation, newState)).filter(command => !current.contains(move(direction, location)))
 
       // Hit wall
       if (result == 0) {
@@ -48,21 +45,19 @@ class Day15OxygenSystem(filename: String) extends DailyProblem[Int, Int] {
 
   @tailrec
   private def floodFill(map: Map[Point, Char], pending: List[(Int, Point)], bestSoFar: Map[Point, Int]): Map[Point, Int] = {
-    if (pending.isEmpty) {
-      bestSoFar
-    } else {
-      val pend = pending.head
-
-      val currentBest = bestSoFar.getOrElse(pend._2, Integer.MAX_VALUE)
-
-      if (pend._1 < currentBest) {
-        // We are on a shorter path
-        val newBestSoFar = if (pend._1 < currentBest) bestSoFar + (pend._2 -> pend._1) else bestSoFar
-        val newSteps = List(1, 2, 3, 4).map(direction => (pend._1 + 1, move(direction, pend._2))).filter(next => map.getOrElse(next._2, '#') != '#')
-        floodFill(map, pending.tail ::: newSteps, newBestSoFar)
-      } else {
-        // We had already found the shortest
-        floodFill(map, pending.tail, bestSoFar)
+    pending match {
+      case Nil => bestSoFar
+      case (pBest, pLocation) :: pRest => {
+        val currentBest = bestSoFar.getOrElse(pLocation, Integer.MAX_VALUE)
+        if (pBest < currentBest) {
+          // We are on a shorter path
+          val newBestSoFar = if (pBest < currentBest) bestSoFar + (pLocation -> pBest) else bestSoFar
+          val newSteps = List(1, 2, 3, 4).map(direction => (pBest + 1, move(direction, pLocation))).filter{ case (_, location) => map.getOrElse(location, '#') != '#'}
+          floodFill(map, pRest ::: newSteps, newBestSoFar)
+        } else {
+          // We had already found the shortest
+          floodFill(map, pRest, bestSoFar)
+        }
       }
     }
   }

@@ -11,6 +11,8 @@ case class FacingSouth() extends Facing
 abstract class Turn
 case class TurnLeft() extends Turn
 case class TurnRight() extends Turn
+case class TurnNone() extends Turn
+case class TurnReverse() extends Turn
 
 case class Point(y: Int, x: Int)
 
@@ -35,18 +37,26 @@ object LocationHelper {
       case FacingNorth() => turn match {
         case TurnLeft() => FacingWest()
         case TurnRight() => FacingEast()
+        case TurnNone() => facing
+        case TurnReverse() => FacingSouth()
       }
       case FacingWest() => turn match {
         case TurnLeft() => FacingSouth()
         case TurnRight() => FacingNorth()
+        case TurnNone() => facing
+        case TurnReverse() => FacingEast()
       }
       case FacingEast() => turn match {
         case TurnLeft() => FacingNorth()
         case TurnRight() => FacingSouth()
+        case TurnNone() => facing
+        case TurnReverse() => FacingWest()
       }
       case FacingSouth() => turn match {
         case TurnLeft() => FacingEast()
         case TurnRight() => FacingWest()
+        case TurnNone() => facing
+        case TurnReverse() => FacingNorth()
       }
     }
 
