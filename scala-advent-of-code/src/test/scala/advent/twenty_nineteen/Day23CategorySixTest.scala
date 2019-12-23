@@ -7,7 +7,7 @@ class Day23CategorySixTest extends FlatSpec with Matchers {
     val dp = new Day23CategorySix("/twenty_nineteen/Day23-CategorySix-input.txt")
 
     dp.part1Answer should be(17283)
-    dp.part2Answer should be(0)
+    dp.part2Answer should be(11319)
   }
 }
 
