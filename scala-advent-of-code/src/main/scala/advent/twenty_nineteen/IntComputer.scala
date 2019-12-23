@@ -4,20 +4,20 @@ import advent.utilities.FileUtilities
 
 import scala.annotation.tailrec
 
-case class IntComputerState(memory : Map[Long, Long], pc : Long, relativeBase : Long, input : List[Long], output: List[Long]) {
-  def isFinished() : Boolean = {
+case class IntComputerState(memory: Map[Long, Long], pc: Long, relativeBase: Long, input: List[Long], output: List[Long]) {
+  def isFinished(): Boolean = {
     pc < 0
   }
 }
 
 object IntComputerState {
-  def copyState(original: IntComputerState, input: List[Long]): IntComputerState =  original.copy(input = input, output = List())
+  def copyState(original: IntComputerState, input: List[Long]): IntComputerState = original.copy(input = input, output = List())
 
-  def newState(program: Map[Long, Long]): IntComputerState = IntComputerState(program, 0,0,List(),List())
+  def newState(program: Map[Long, Long]): IntComputerState = IntComputerState(program, 0, 0, List(), List())
 }
 
 object IntComputer {
-  def loadProgram(filename: String) : Map[Long,Long] = {
+  def loadProgram(filename: String): Map[Long, Long] = {
     FileUtilities.readFile(filename)(0).split(",").zipWithIndex.map(t => t._2.toLong -> t._1.toLong).toMap.withDefaultValue(0L)
   }
 
@@ -46,7 +46,7 @@ object IntComputer {
   }
 
   @tailrec
-  def execute(memory: Map[Long, Long], pc: Long, relativeBase: Long, input: List[Long], output: List[Long]): IntComputerState = {
+  def execute(memory: Map[Long, Long], pc: Long, relativeBase: Long, input: List[Long], output: List[Long], breakOnOutput: Int = Integer.MAX_VALUE): IntComputerState = {
     if (memory(pc) == 99) {
       // Finished All Done
       IntComputerState(memory, -1, -1, input, output)
@@ -57,7 +57,7 @@ object IntComputer {
       val mode2 = if (opcode > 999) opcode / 1000 % 10 else 0L
       val mode3 = if (opcode > 9999) opcode / 10000 % 10 else 1L
 
-      if (operation == 3 && input.size == 0) {
+      if ((operation == 3 && input.size == 0) || (output.size >= breakOnOutput)) {
         // Pending Input
         IntComputerState(memory, pc, relativeBase, input, output)
       } else {
@@ -92,7 +92,11 @@ object IntComputer {
     }
   }
 
-  def execute(state : IntComputerState): IntComputerState = {
+  def execute(state: IntComputerState): IntComputerState = {
     execute(state.memory, state.pc, state.relativeBase, state.input, state.output)
+  }
+
+  def execute(state: IntComputerState, breakOnOutput : Int): IntComputerState = {
+    execute(state.memory, state.pc, state.relativeBase, state.input, state.output, breakOnOutput)
   }
 }
