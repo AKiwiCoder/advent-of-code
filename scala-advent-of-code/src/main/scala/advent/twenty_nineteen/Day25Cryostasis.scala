@@ -1,9 +1,6 @@
 package advent.twenty_nineteen
 
 import advent.common.DailyProblem
-import advent.utilities._
-
-import scala.annotation.tailrec
 
 class Day25Cryostasis(filename: String) extends DailyProblem[Int, Int] {
 
