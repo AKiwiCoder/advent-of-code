@@ -29,3 +29,9 @@ matrix:
       compiler: gcc
       script:
         - sh -c 'cd cpp-advent-of-code && make'
+
+    - name: Go
+      language: go
+      compiler: go
+      script:
+        - sh -c 'cd go-advent-of-code && make'
