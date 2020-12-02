@@ -10,29 +10,34 @@ class Day01ReportRepair(filename : String) extends DailyProblem[Int, Int] {
 
   private def parse(line: String): Int = line.toInt
 
-  private def part1(): Int = {
-    def calc(h : Int, t : List[Int]) : Int = {
-      if (t.isEmpty) {
-        -1
+  def calcPair(target : Int, h : Int, t : List[Int]) : Int = {
+    if (t.isEmpty) {
+      -1
+    } else {
+      val found = t.filter(n => n + h == target)
+      if (found.size == 1) {
+        h * found.head
       } else {
-        val found = t.filter(n => n + h == 2020)
-        if (found.size == 1) {
-          h * found.head
-        } else {
-          calc(t.head, t.tail)
-        }
+        calcPair(target, t.head, t.tail)
       }
     }
-    calc(input.head, input.tail)
   }
 
-  private def part2(): Int = {
-    val t = input.flatMap(a => input.tail.map(b => input.tail.tail.map(c => if (a + b + c == 2020) a * b * c else 0))).map(t => t.sum).filter(t => t > 0).head
-    t
+  def calcTriple(target : Int, h : Int, t : List[Int]) : Int = {
+    if (t.isEmpty) {
+      -1
+    } else {
+      val found = calcPair(target - h, t.head, t.tail)
+      if (found != -1) {
+        h * found
+      } else {
+        calcTriple(target, t.head, t.tail)
+      }
+    }
   }
 
-  override val part1Answer: Int = part1()
-  override val part2Answer: Int = part2()
+  override val part1Answer: Int = calcPair(2020, input.head, input.tail)
+  override val part2Answer: Int = calcTriple(2020, input.head, input.tail)
 }
 
 
