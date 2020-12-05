@@ -49,35 +49,6 @@ class Day19TractorBeam(filename: String) extends DailyProblem[Int, Int] {
     }
   }
 
-  def disabled() {
-    val maxX = 1100
-    val maxY = 1100
-
-    for (y <- 1080 until maxY) {
-      var skip = false
-      for (x <- 0 until maxX) {
-        if (!skip) {
-          val state1 = IntComputer.execute(IntComputerState(program, 0, 0, List(x, y), List()))
-          if (state1.output.head == 1) {
-            val state2 = IntComputer.execute(IntComputerState(program, 0, 0, List(x + 99, y), List()))
-            if (state2.output.head == 1) {
-              val state3 = IntComputer.execute(IntComputerState(program, 0, 0, List(x, y + 99), List()))
-              if (state3.output.head == 1) {
-                val state4 = IntComputer.execute(IntComputerState(program, 0, 0, List(x + 99, y + 99), List()))
-                if (state4.output.head == 1) {
-                  println("Found : " + y + " " + x + " " + (10000 * x + y))
-                }
-              }
-            } else {
-              skip = true
-            }
-          }
-        }
-      }
-      println(y)
-    }
-  }
-
   override val part1Answer: Int = calculatePartOne(0, 0, 0)
   override val part2Answer: Int = calculatePartTwo(1000, 1000)
 }

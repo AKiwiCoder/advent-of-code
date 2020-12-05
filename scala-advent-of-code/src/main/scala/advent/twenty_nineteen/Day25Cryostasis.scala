@@ -10,12 +10,9 @@ class Day25Cryostasis(filename: String) extends DailyProblem[Int, Int] {
 
   def execute(commands : List[String]) : String = {
     var result = IntComputer.execute(state)
-    println(result.output.map(_.toChar).mkString)
     for (command <- commands) {
       result = IntComputerState.copyState(result, command.map(_.toLong).toList)
-      println("CMD> " + command)
       result = IntComputer.execute(result)
-      println(result.output.map(_.toChar).mkString)
     }
     result.output.map(_.toChar).mkString
   }

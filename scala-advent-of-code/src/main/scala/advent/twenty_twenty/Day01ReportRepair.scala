@@ -10,7 +10,8 @@ class Day01ReportRepair(filename : String) extends DailyProblem[Int, Int] {
 
   private def parse(line: String): Int = line.toInt
 
-  def calcPair(target : Int, h : Int, t : List[Int]) : Int = {
+  @tailrec
+  private def calcPair(target : Int, h : Int, t : List[Int]) : Int = {
     if (t.isEmpty) {
       -1
     } else {
@@ -23,7 +24,8 @@ class Day01ReportRepair(filename : String) extends DailyProblem[Int, Int] {
     }
   }
 
-  def calcTriple(target : Int, h : Int, t : List[Int]) : Int = {
+  @tailrec
+  private def calcTriple(target : Int, h : Int, t : List[Int]) : Int = {
     if (t.isEmpty) {
       -1
     } else {

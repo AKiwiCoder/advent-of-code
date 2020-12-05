@@ -9,7 +9,8 @@ class Day03TobogganTrajectory(filename : String) extends DailyProblem[Long, Long
 
   private val input = FileUtilities.readFile(filename)
 
-  def walk(x : Int, y : Int, dX : Int, dY : Int, count : Long): Long = {
+  @tailrec
+  private def walk(x : Int, y : Int, dX : Int, dY : Int, count : Long): Long = {
     if (y >= input.size) {
       count
     } else {

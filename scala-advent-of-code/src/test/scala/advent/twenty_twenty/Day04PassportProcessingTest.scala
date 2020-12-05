@@ -7,7 +7,7 @@ class Day04PassportProcessingTest extends FlatSpec with Matchers {
     val dp = new Day04PassportProcessing("/twenty_twenty/Day04-PassportProcessing-input.txt")
 
     dp.part1Answer should be(256)
-    dp.part2Answer should be(0)
+    dp.part2Answer should be(198)
   }
 
   "2020 Day 04 - Example #1" should "calculate answers" in {

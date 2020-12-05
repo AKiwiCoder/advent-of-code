@@ -7,7 +7,7 @@ class Day02PasswordPhilosophyTest extends FlatSpec with Matchers {
     val dp = new Day02PasswordPhilosophy("/twenty_twenty/Day02-PasswordPhilosophy-input.txt")
 
     dp.part1Answer should be(418)
-    dp.part2Answer should be(0)
+    dp.part2Answer should be(616)
   }
 
   "2020 Day 02 - Example #1" should "calculate answers" in {
