@@ -3,12 +3,15 @@ package advent.twenty_sixteen
 import advent.common.DailyProblem
 import advent.utilities.ChecksumUtilities
 
+import scala.annotation.tailrec
+
 class Day05HowAboutANiceGameOfChess(input: String) extends DailyProblem[String, String] {
 
   private def generatePassword(password : Map[Char, Char]) : String = {
     "" +password('0') + password('1') + password('2') + password('3') + password('4') + password('5') + password('6') + password('7')
   }
 
+  @tailrec
   private def generatePassword(index : Long, part1Password : String, part2Password : Map[Char, Char]) : (String, String) = {
     val result = generatePassword(part2Password)
     if (result.indexOf('-') < 0) {
