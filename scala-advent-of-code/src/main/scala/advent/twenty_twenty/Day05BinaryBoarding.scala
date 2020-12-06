@@ -37,7 +37,7 @@ class Day05BinaryBoarding(filename : String) extends DailyProblem[Int, Int] {
     val max = seats.max
     (min to max).filter(id => !seats.contains(id)).head
   }
-  
+
   override val part1Answer: Int = rowIds.max
   override val part2Answer: Int = findFirstMissing()
 }
