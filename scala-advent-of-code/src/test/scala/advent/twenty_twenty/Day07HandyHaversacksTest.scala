@@ -7,7 +7,7 @@ class Day07HandyHaversacksTest extends FlatSpec with Matchers {
     val dp = new Day07HandyHaversacks("/twenty_twenty/Day07-HandyHaversacks-input.txt")
 
     dp.part1Answer should be(278)
-    dp.part2Answer should be(0)
+    dp.part2Answer should be(45157)
   }
 
   "2020 Day 07 - Example #1" should "calculate answers" in {
