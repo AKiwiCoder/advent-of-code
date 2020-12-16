@@ -11,6 +11,7 @@ class Day15RambunctiousRecitation(filename: String) extends DailyProblem[Long, L
   private val turnMap = input.map(entry => entry._1.toLong -> ((entry._2 + 1l).toLong, -1l)).toMap
 
   private def part1(limit : Long): Long = {
+    @tailrec
     def talk(turn: Long, lastSpoken: Long, memory: Map[Long, (Long, Long)]): Long = {
       if (turn > limit) {
         lastSpoken
