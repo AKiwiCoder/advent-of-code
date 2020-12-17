@@ -1,7 +1,7 @@
 package advent.twenty_twenty
 
 import advent.common.DailyProblem
-import advent.utilities.FileUtilities
+import advent.utilities.{FileUtilities, Point2d}
 
 import scala.annotation.tailrec
 
@@ -15,11 +15,7 @@ case class South() extends Facing
 
 case class North() extends Facing
 
-case class Point(x: Long, y: Long)
-
 class Day12RainRisk(filename: String) extends DailyProblem[Long, Long] {
-
-
   private val input = FileUtilities.readFile(filename)
 
   def left(facing: Facing, count: Int): Facing = {
@@ -70,18 +66,18 @@ class Day12RainRisk(filename: String) extends DailyProblem[Long, Long] {
     }
   }
 
-  def forward(current: Point, facing: Facing, count: Int): Point = {
+  def forward(current: Point2d, facing: Facing, count: Int): Point2d = {
     facing match {
-      case North() => Point(current.x, current.y + count)
-      case South() => Point(current.x, current.y - count)
-      case West() => Point(current.x - count, current.y)
-      case East() => Point(current.x + count, current.y)
+      case North() => Point2d(current.x, current.y + count)
+      case South() => Point2d(current.x, current.y - count)
+      case West() => Point2d(current.x - count, current.y)
+      case East() => Point2d(current.x + count, current.y)
     }
   }
 
   def part1(): Long = {
     @tailrec
-    def walk(current: Point, facing: Facing, path: List[String]): Long = {
+    def walk(current: Point2d, facing: Facing, path: List[String]): Long = {
       if (path == Nil) {
         Math.abs(current.x) + Math.abs(current.y)
       } else {
@@ -90,10 +86,10 @@ class Day12RainRisk(filename: String) extends DailyProblem[Long, Long] {
         val count = move.tail.toInt
 
         m match {
-          case 'N' => walk(Point(current.x, current.y + count), facing, path.tail)
-          case 'S' => walk(Point(current.x, current.y - count), facing, path.tail)
-          case 'E' => walk(Point(current.x + count, current.y), facing, path.tail)
-          case 'W' => walk(Point(current.x - count, current.y), facing, path.tail)
+          case 'N' => walk(Point2d(current.x, current.y + count), facing, path.tail)
+          case 'S' => walk(Point2d(current.x, current.y - count), facing, path.tail)
+          case 'E' => walk(Point2d(current.x + count, current.y), facing, path.tail)
+          case 'W' => walk(Point2d(current.x - count, current.y), facing, path.tail)
           case 'L' => walk(current, left(facing, count), path.tail)
           case 'R' => walk(current, right(facing, count), path.tail)
           case 'F' => walk(forward(current, facing, count), facing, path.tail)
@@ -101,30 +97,30 @@ class Day12RainRisk(filename: String) extends DailyProblem[Long, Long] {
       }
     }
 
-    walk(Point(0, 0), East(), input)
+    walk(Point2d(0, 0), East(), input)
   }
 
-  def rotateLeft(point: Point, count: Int): Point = {
+  def rotateLeft(point: Point2d, count: Int): Point2d = {
     count match {
-      case 90 => Point(-point.y, point.x)
-      case 180 => Point(-point.x, -point.y)
-      case 270 => Point(point.y, -point.x)
+      case 90 => Point2d(-point.y, point.x)
+      case 180 => Point2d(-point.x, -point.y)
+      case 270 => Point2d(point.y, -point.x)
       case 360 => point
     }
   }
 
-  def rotateRight(point: Point, count: Int): Point = {
+  def rotateRight(point: Point2d, count: Int): Point2d = {
     count match {
-      case 90 => Point(point.y, -point.x)
-      case 180 => Point(-point.x, -point.y)
-      case 270 => Point(-point.y, point.x)
+      case 90 => Point2d(point.y, -point.x)
+      case 180 => Point2d(-point.x, -point.y)
+      case 270 => Point2d(-point.y, point.x)
       case 360 => point
     }
   }
 
   def part2(): Long = {
     @tailrec
-    def walk(ship: Point, waypoint: Point, facing: Facing, path: List[String]): Long = {
+    def walk(ship: Point2d, waypoint: Point2d, facing: Facing, path: List[String]): Long = {
       if (path == Nil) {
         Math.abs(ship.x ) + Math.abs(ship.y)
       } else {
@@ -133,18 +129,18 @@ class Day12RainRisk(filename: String) extends DailyProblem[Long, Long] {
         val count = move.tail.toInt
 
         m match {
-          case 'N' => walk(ship, Point(waypoint.x, waypoint.y + count), facing, path.tail)
-          case 'S' => walk(ship, Point(waypoint.x, waypoint.y - count), facing, path.tail)
-          case 'E' => walk(ship, Point(waypoint.x + count, waypoint.y), facing, path.tail)
-          case 'W' => walk(ship, Point(waypoint.x - count, waypoint.y), facing, path.tail)
+          case 'N' => walk(ship, Point2d(waypoint.x, waypoint.y + count), facing, path.tail)
+          case 'S' => walk(ship, Point2d(waypoint.x, waypoint.y - count), facing, path.tail)
+          case 'E' => walk(ship, Point2d(waypoint.x + count, waypoint.y), facing, path.tail)
+          case 'W' => walk(ship, Point2d(waypoint.x - count, waypoint.y), facing, path.tail)
           case 'L' => walk(ship, rotateLeft(waypoint, count), facing,path.tail)
           case 'R' => walk(ship, rotateRight(waypoint, count), facing,path.tail)
-          case 'F' => walk(Point(ship.x + waypoint.x * count, ship.y + waypoint.y * count), waypoint, facing, path.tail)
+          case 'F' => walk(Point2d(ship.x + waypoint.x * count, ship.y + waypoint.y * count), waypoint, facing, path.tail)
         }
       }
     }
 
-    walk(Point(0, 0), Point(10, 1), East(), input)
+    walk(Point2d(0, 0), Point2d(10, 1), East(), input)
   }
 
   override val part1Answer: Long = part1()
