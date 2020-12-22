@@ -14,7 +14,7 @@ class Day21AllergenAssessment(filename: String) extends DailyProblem[Int, String
   }
 
   private val input = FileUtilities.readFile(filename, parse)
-  
+
   @tailrec
   private def cleanup(working: Map[String, Set[String]]): Map[String, String] = {
     if (working.forall(entry => entry._2.size == 1)) {
