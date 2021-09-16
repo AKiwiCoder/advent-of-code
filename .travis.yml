@@ -2,7 +2,7 @@ matrix:
   include:
     - name: Scala
       language: scala
-      scala: 2.12.2
+      scala: 2.13.6
       script:
         - sh -c 'cd scala-advent-of-code && sbt test'
 

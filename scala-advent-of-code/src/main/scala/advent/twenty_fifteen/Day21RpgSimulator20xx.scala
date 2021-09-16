@@ -52,7 +52,7 @@ class Day21RpgSimulator20xx(filename: String) extends DailyProblem[Int, Int] {
   )
 
   private def combine[A](xs: Traversable[Traversable[A]]): Seq[Seq[A]] = xs.foldLeft(Seq(Seq.empty[A])) {
-    (x, y) => for (a <- x.view; b <- y) yield a :+ b
+    (x, y) => for (a <- x; b <- y) yield a :+ b
   }
 
   private def runSimulations(): ResultCost = {
