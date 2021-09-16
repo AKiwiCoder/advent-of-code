@@ -6,7 +6,7 @@ class Day25ComboBreakerTest extends FlatSpec with Matchers {
   "2020 Day 25 - Input" should "calculate answers" in {
     val dp = new Day25ComboBreaker("/twenty_twenty/Day25-ComboBreaker-input.txt")
 
-    dp.part1Answer should be(0)
+    dp.part1Answer should be(10548634)
     dp.part2Answer should be(0)
   }
 
