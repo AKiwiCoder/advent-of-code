@@ -21,7 +21,6 @@ class Day24PlanetOfDiscord(filename: String, part2Steps: Int) extends DailyProbl
       }
       result += "\n"
     }
-    println(result);
     result
   }
 

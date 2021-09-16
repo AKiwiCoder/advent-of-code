@@ -151,10 +151,6 @@ class Day18ManyWorldsInterpretation(filename: String) extends DailyProblem[Int, 
 
     @tailrec
     def walk(states: Set[State], seen: Map[State, Int]): Map[State, Int] = {
-      if (states.size % 100 == 0) {
-        println(states.size)
-      }
-
       if (states.isEmpty) {
         seen
       } else {

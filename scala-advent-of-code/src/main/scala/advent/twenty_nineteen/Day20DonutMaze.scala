@@ -167,8 +167,6 @@ class Day20DonutMaze(filename: String) extends DailyProblem[Int, Int] {
     }
   }
 
-  println(portalList.filter(p => p._2.size > 2))
-
   var startPoint = portalList("AA").head
   var endPoint = portalList("ZZ").head
   val portals = portalList.foldLeft(Map[Point, Point]())((acc, entry) => if (entry._2.size == 1) acc else acc + (entry._2(0) -> entry._2(1)) + (entry._2(1) -> entry._2(0)))
@@ -207,7 +205,6 @@ class Day20DonutMaze(filename: String) extends DailyProblem[Int, Int] {
       if (portals.contains(current.point)) {
         PointWithDepth(portals(current.point), current.depth + (if (isInner(current.point)) 1 else -1))
       } else {
-        println("Not a portal " + current.point + " " + startPoint + " " + endPoint)
         PointWithDepth(current.point, current.depth)
       }
     } else {
