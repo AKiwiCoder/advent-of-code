@@ -29,3 +29,12 @@ matrix:
       compiler: gcc
       script:
         - sh -c 'cd cpp-advent-of-code && make'
+
+    - name C-Sharp
+      language: sharp
+      mono: none
+      dotnet: 5.0
+      script:
+        - dotnet restore
+        - dotnet build
+        - dotnet test  
