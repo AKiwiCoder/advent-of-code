@@ -35,4 +35,4 @@ matrix:
       mono: none
       dotnet: 5.0
       script:
-        - sh -c 'cd cpp-advent-of-code && dotnet restore && dotnet build && dotnet test'
+        - sh -c 'cd dotnet-advent-of-code && dotnet restore && dotnet build && dotnet test'
