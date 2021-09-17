@@ -30,8 +30,8 @@ matrix:
       script:
         - sh -c 'cd cpp-advent-of-code && make'
 
-    - name C-Sharp
-      language: sharp
+    - name: C-Sharp
+      language: csharp
       mono: none
       dotnet: 5.0
       script:
