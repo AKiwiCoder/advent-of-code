@@ -14,7 +14,7 @@ class Day01NoTimeForATaxicab(filename: String) extends DailyProblem[Int, Int] {
     }
   }).toList
 
-  private val moves = parser(FileUtilities.readFile(filename)(0))
+  private val moves = parser(FileUtilities.readFile(filename).head)
 
   private val journey = moves.foldLeft[(Facing, Point, List[Point])]((FacingNorth(), Point(0, 0), List(Point(0, 0))))((current, step) => {
     val newFacing : Facing = LocationHelper.turn(current._1, step._1)

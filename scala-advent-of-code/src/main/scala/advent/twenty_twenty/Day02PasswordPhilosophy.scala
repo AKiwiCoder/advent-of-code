@@ -6,12 +6,12 @@ import advent.utilities.FileUtilities
 import scala.annotation.tailrec
 
 case class PasswordPolicy(min: Int, max :Int, c : Char, password : String) {
-  def isValidPart1() : Boolean = {
+  def isValidPart1: Boolean = {
     val count = password.toList.count(pc => pc == c)
     count >= min && count <= max
   }
 
-  def isValidPart2() : Boolean = {
+  def isValidPart2: Boolean = {
     val charAtOne = password.charAt(min-1) == c
     val charAtTwo = password.charAt(max-1) == c
     (charAtOne && !charAtTwo) || (!charAtOne && charAtTwo)
@@ -29,8 +29,8 @@ class Day02PasswordPhilosophy(filename : String) extends DailyProblem[Int, Int] 
     }
   }
 
-  override val part1Answer: Int = input.count(p => p.isValidPart1())
-  override val part2Answer: Int = input.count(p => p.isValidPart2())
+  override val part1Answer: Int = input.count(p => p.isValidPart1)
+  override val part2Answer: Int = input.count(p => p.isValidPart2)
 }
 
 

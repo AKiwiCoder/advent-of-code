@@ -4,6 +4,7 @@ import advent.common.DailyProblem
 import advent.utilities.FileUtilities
 
 import scala.annotation.tailrec
+import scala.util.matching.Regex
 
 class Day18OperationOrder(filename: String) extends DailyProblem[Long, Long] {
   abstract class Token
@@ -12,8 +13,8 @@ class Day18OperationOrder(filename: String) extends DailyProblem[Long, Long] {
   case class LeftBracket() extends Token
   case class RightBracket() extends Token
 
-  val digit = "[0-9]".r
-  val operator = "([+-/*])".r
+  val digit: Regex = "[0-9]".r
+  val operator: Regex = "([+-/*])".r
 
   def tokenize(line: List[Char], working: String, acc: List[Token]): List[Token] = {
     if (line.isEmpty) {
@@ -44,10 +45,10 @@ class Day18OperationOrder(filename: String) extends DailyProblem[Long, Long] {
       token match {
         case Number(n) => evaluate(rpn.tail, Number(n) :: stack)
         case Operator(o) => o match {
-          case '+' => evaluate(rpn.tail, Number(stack(0).num + stack(1).num) :: stack.drop(2))
-          case '-' =>evaluate(rpn.tail, Number(stack(0).num - stack(1).num) :: stack.drop(2))
-          case '/' =>evaluate(rpn.tail, Number(stack(0).num / stack(1).num) :: stack.drop(2))
-          case '*' =>evaluate(rpn.tail, Number(stack(0).num * stack(1).num) :: stack.drop(2))
+          case '+' => evaluate(rpn.tail, Number(stack.head.num + stack(1).num) :: stack.drop(2))
+          case '-' =>evaluate(rpn.tail, Number(stack.head.num - stack(1).num) :: stack.drop(2))
+          case '/' =>evaluate(rpn.tail, Number(stack.head.num / stack(1).num) :: stack.drop(2))
+          case '*' =>evaluate(rpn.tail, Number(stack.head.num * stack(1).num) :: stack.drop(2))
         }
       }
     }

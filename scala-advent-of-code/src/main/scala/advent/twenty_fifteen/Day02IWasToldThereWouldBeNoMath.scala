@@ -21,6 +21,6 @@ class Day02IWasToldThereWouldBeNoMath(filename: String) extends DailyProblem[Int
 
   private def lengthOfBow(p: Parcel) = p.width * p.length * p.height
 
-  override val part1Answer = parcels.foldLeft(0)((a, p) => a + surfaceArea(p) + surfaceAreaOfSmallestSide(p))
-  override val part2Answer = parcels.foldLeft(0)((a, p) => a + lengthToWrap(p) + lengthOfBow(p))
+  override val part1Answer: Int = parcels.foldLeft(0)((a, p) => a + surfaceArea(p) + surfaceAreaOfSmallestSide(p))
+  override val part2Answer: Int = parcels.foldLeft(0)((a, p) => a + lengthToWrap(p) + lengthOfBow(p))
 }

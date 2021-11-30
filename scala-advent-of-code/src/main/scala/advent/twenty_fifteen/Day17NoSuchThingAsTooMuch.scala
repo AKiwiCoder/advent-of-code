@@ -9,7 +9,7 @@ case class Container(id : Int, volume : Int)
 
 class Day17NoSuchThingAsTooMuch(filename: String, target : Int) extends DailyProblem[Int, Int] {
   private val lines = FileUtilities.readFile(filename)
-  private val containers = (0 until lines.size).map(id => Container(id, lines(id).toInt)).toSet
+  private val containers = lines.indices.map(id => Container(id, lines(id).toInt)).toSet
 
   private val answers = containers.subsets.toList.filter(e => e.toList.map(x => x.volume).sum == target)
   private val minimum = answers.map(e => e.size).min

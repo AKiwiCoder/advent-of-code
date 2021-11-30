@@ -25,7 +25,7 @@ class Day08SpaceImageFormat(filename: String, width: Int, height: Int) extends D
     for (y <- 0 until height) {
       for (x <- 0 until width) {
         var c = '.'
-        for (l <- 0 until layers.length) {
+        for (l <- layers.indices) {
           if (layers(l)(y)(x) == '0' && c == '.') {
             c = '#'
           }

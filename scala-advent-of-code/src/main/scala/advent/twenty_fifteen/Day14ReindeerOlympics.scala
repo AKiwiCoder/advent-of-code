@@ -32,7 +32,7 @@ class Day14ReindeerOlympics(filename: String, target: Int) extends DailyProblem[
         acc
       } else {
         val currentPositions = calculatePositions(time)
-        val inFrontPositions = currentPositions.map(e => e._2).max
+        val inFrontPositions = currentPositions.values.max
         val ahead = currentPositions.filter(e => e._2 == inFrontPositions)
         iterate(time + 1, acc.map(entry => if (ahead.contains(entry._1)) entry._1 -> (acc(entry._1) + 1) else entry))
       }
@@ -41,6 +41,6 @@ class Day14ReindeerOlympics(filename: String, target: Int) extends DailyProblem[
     iterate(1, reindeer.map(r => r.name -> 0).toMap)
   }
 
-  override val part1Answer: Int = calculatePositions(target).map(e => e._2).max
-  override val part2Answer: Int = calculatePoints().map(e => e._2).max
+  override val part1Answer: Int = calculatePositions(target).values.max
+  override val part2Answer: Int = calculatePoints().values.max
 }

@@ -30,8 +30,8 @@ class Day16FlawedFrequencyTransmission(filename: String, steps: Int) extends Dai
   }
 
   private def part2Faster(previous: Array[Int], output: Array[Int]): Array[Int] = {
-    output(previous.size - 1) = previous(previous.size - 1)
-    for (idx <- previous.size - 2 to 0 by -1) {
+    output(previous.length - 1) = previous(previous.length - 1)
+    for (idx <- previous.length - 2 to 0 by -1) {
       output(idx) = (previous(idx) + output(idx + 1)) % 10
     }
     output
@@ -52,7 +52,7 @@ class Day16FlawedFrequencyTransmission(filename: String, steps: Int) extends Dai
     val part2Working = List.fill(10000)(initialValue).flatten.drop(if (offset > (initialValue.size * 10000)) 0 else offset)
 
     var input = part2Working.toArray
-    var output = Array.ofDim[Int](input.size)
+    var output = Array.ofDim[Int](input.length)
     for (step <- 0 until steps) {
       output = part2Faster(input, output)
       input = output

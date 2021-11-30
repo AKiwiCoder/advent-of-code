@@ -26,7 +26,7 @@ class Day06ProbablyAFireHazard(filename: String) extends DailyProblem[Int, Int] 
     }
 
   private def executeCommands(commands: List[Day06Command], lights: Array[Array[Int]], on: Int => Int, toggle: Int => Int, off: Int => Int): Int = {
-    def process(top: Int, left: Int, bottom: Int, right: Int, operation: Int => Int) = {
+    def process(top: Int, left: Int, bottom: Int, right: Int, operation: Int => Int): Unit = {
       for (col <- left to right)
         for (row <- top to bottom)
           lights(row)(col) = operation(lights(row)(col))
@@ -43,6 +43,6 @@ class Day06ProbablyAFireHazard(filename: String) extends DailyProblem[Int, Int] 
 
   private val commands = FileUtilities.readFile(filename, parser)
 
-  override val part1Answer = executeCommands(commands, Array.ofDim[Int](1000, 1000), _ => 1, a => if (a == 0) 1 else 0, _ => 0)
-  override val part2Answer = executeCommands(commands, Array.ofDim[Int](1000, 1000), a => a + 1, a => a + 2, a => Math.max(0, a - 1))
+  override val part1Answer: Int = executeCommands(commands, Array.ofDim[Int](1000, 1000), _ => 1, a => if (a == 0) 1 else 0, _ => 0)
+  override val part2Answer: Int = executeCommands(commands, Array.ofDim[Int](1000, 1000), a => a + 1, a => a + 2, a => Math.max(0, a - 1))
 }
