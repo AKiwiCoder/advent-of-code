@@ -18,6 +18,7 @@ case class Point(y: Int, x: Int)
 
 object Point {
   def manhattanDistance(current: Point, start: Point): Int = Math.abs(start.y - current.y) + Math.abs(start.x - current.x)
+  def manhattanDistance(current: Point2d, start: Point2d): Int = Math.abs(start.y - current.y) + Math.abs(start.x - current.x)
 
   def distance(a: Point, b: Point): Double = Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
 
