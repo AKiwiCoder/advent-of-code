@@ -16,16 +16,19 @@ class Day12PassagePathing(filename : String) extends DailyProblem[Int, Int] {
 
   private val patternSmall = "([a-z]+)".r
 
+  private val smallNodes = paths.keys.filter(_ match {
+    case patternSmall(_) => true
+    case _ => false
+  }).toSet
+
   private def calculatePathParameters(path : List[String]) : (Int, Int, Int, Int) = {
     val starts = path.count(_ == "start")
     val ends = path.count(_ == "end")
-    val visitedSmallCount = path.filter(_ match {
-      case patternSmall(_) => true
-      case _ => false
-    }).groupBy(identity).view.mapValues(_.size)
+    val visitedSmallCount = path.filter(smallNodes.contains).groupBy(identity).view.mapValues(_.size)
 
-    val visitedMoreThanOnce = visitedSmallCount.count(e => e._2 > 1)
-    val visitedMoreThanTwice = visitedSmallCount.count(e => e._2 > 2)
+    val (visitedMoreThanOnce, visitedMoreThanTwice) = visitedSmallCount.foldLeft((0,0))((acc, entry) =>
+      (if (entry._2 > 1) acc._1 + 1 else acc._1,
+       if (entry._2 > 2) acc._2 + 1 else acc._2))
 
     (starts, ends, visitedMoreThanOnce, visitedMoreThanTwice)
   }
@@ -49,8 +52,8 @@ class Day12PassagePathing(filename : String) extends DailyProblem[Int, Int] {
         val (newConsidering, newFinished) = if (current.head == "end") {
           (considering.tail, finished + current)
         } else {
-          val newConsidering = paths(current.head).map(next => next :: current).diff(finished).toList ::: considering.tail
-          (newConsidering.filter(isValid), finished)
+          val newConsidering = paths(current.head).map(next => next :: current).filter(isValid).diff(finished).toList ::: considering.tail
+          (newConsidering, finished)
         }
         walk(newConsidering, newFinished)
       }
