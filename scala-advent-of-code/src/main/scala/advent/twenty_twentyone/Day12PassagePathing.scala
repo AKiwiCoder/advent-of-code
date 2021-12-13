@@ -44,6 +44,7 @@ class Day12PassagePathing(filename : String) extends DailyProblem[Int, Int] {
   }
 
   private def countNumberOfPaths(isValid : List[String] => Boolean): Set[List[String]] = {
+    @tailrec
     def walk(considering : List[List[String]], finished : Set[List[String]]) : Set[List[String]] = {
       if (considering.isEmpty) {
         finished
