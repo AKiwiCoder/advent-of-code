@@ -38,7 +38,6 @@ class Day15Chiton(filename: String) extends DailyProblem[Int, Int] {
     }
 
     val result = walk(0, Set(Point2d(0, 0)), Map(Point2d(0,0) -> problemMap(Point2d(0,0))))
-    println("DONE")
     result(END) - problemMap(Point2d(0,0))
   }
 
