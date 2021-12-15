@@ -20,8 +20,7 @@ class Day14ExtendedPolymerization(filename: String) extends DailyProblem[Long, L
       val pair = "" + lastChar + thisChar
       val number = pairMap.getOrElse(pair, 0L) + 1
       (pairMap + (pair -> number), thisChar)
-    }
-    )._1
+    })._1
   }
 
   def performInsertions(startingString: String, iterations: Int): Long = {
@@ -35,7 +34,7 @@ class Day14ExtendedPolymerization(filename: String) extends DailyProblem[Long, L
             val pairOne: String = entry._1(0) + addition
             val pairTwo: String = addition + entry._1(1)
 
-            val r = if (pairOne.equals(pairTwo)) {
+            if (pairOne.equals(pairTwo)) {
               val pairOneCount: Long = acc.getOrElse(pairOne, 0L) + entry._2 * 2
               acc + (pairOne -> (pairOneCount))
             } else {
@@ -43,8 +42,6 @@ class Day14ExtendedPolymerization(filename: String) extends DailyProblem[Long, L
               val pairTwoCount: Long = acc.getOrElse(pairTwo, 0L) + entry._2
               acc + (pairOne -> pairOneCount) + (pairTwo -> pairTwoCount)
             }
-
-            r
           }
           case None => {
             acc + entry
