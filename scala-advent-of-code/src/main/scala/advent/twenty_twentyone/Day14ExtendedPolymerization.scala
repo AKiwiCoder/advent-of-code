@@ -53,6 +53,8 @@ class Day14ExtendedPolymerization(filename: String) extends DailyProblem[Long, L
 
     val result = execute(iterations, convertToPairs(startingString))
 
+    println(result)
+
     val counts = result.foldLeft(Map[Char, Long](polymerTemplate(0) -> 1, polymerTemplate.last -> 1))((counts, entry) => {
       val charOne = entry._1(0)
       val charTwo = entry._1(1)
@@ -66,6 +68,8 @@ class Day14ExtendedPolymerization(filename: String) extends DailyProblem[Long, L
         counts + (charOne -> charOneCount) + (charTwo -> charTwoCount)
       }
     }).map(e => (e._1 -> e._2 / 2))
+
+    println(counts)
 
     val mostCommon = counts.values.max
     val leastCommon = counts.values.min
