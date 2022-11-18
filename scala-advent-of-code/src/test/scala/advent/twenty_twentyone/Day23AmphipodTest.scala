@@ -28,7 +28,7 @@ class Day23AmphipodTest extends FlatSpec with Matchers {
   "2020 Day 23 - Example #3" should "calculate answers" in {
     val dp = new Day23AmphipodOne("/twenty_twentyone/Day23-Amphipod-example#3.txt")
 
-    dp.part1Answer should be(0L)
+    dp.part1Answer should be(46L)
   }
 }
 
