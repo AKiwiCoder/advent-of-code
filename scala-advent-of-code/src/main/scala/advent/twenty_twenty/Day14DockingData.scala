@@ -65,7 +65,7 @@ class Day14DockingData(filename: String, skipPart2 : Boolean = false) extends Da
       }
     }
 
-    val ans = enumerate(mask.map(applyMask(_)), List(0))
+    val ans = enumerate(mask.map(applyMask), List(0))
     ans
   }
 

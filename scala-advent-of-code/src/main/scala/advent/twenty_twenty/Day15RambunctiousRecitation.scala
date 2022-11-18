@@ -6,7 +6,7 @@ import advent.utilities.FileUtilities
 import scala.annotation.tailrec
 
 class Day15RambunctiousRecitation(filename: String) extends DailyProblem[Long, Long] {
-  private val input = FileUtilities.readFile(filename)(0).split(",").map(_.toLong).zipWithIndex
+  private val input = FileUtilities.readFile(filename).head.split(",").map(_.toLong).zipWithIndex
 
   private def part1(limit : Long): Long = {
     @tailrec

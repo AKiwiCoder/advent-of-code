@@ -54,7 +54,7 @@ class Day16TicketTranslation(filename : String) extends DailyProblem[Int, Long] 
       }
     }
 
-    val numFields = validTickets(0).size
+    val numFields = validTickets.head.size
     val possibleFields = (0 until numFields).foldLeft(List[List[Field]]())((acc, _) => fields:: acc).zipWithIndex
     val fieldIndexes = process(possibleFields, List())
     fieldIndexes.filter(_._1.name.startsWith("departure")).map(e => myTickets(e._2).toLong).product

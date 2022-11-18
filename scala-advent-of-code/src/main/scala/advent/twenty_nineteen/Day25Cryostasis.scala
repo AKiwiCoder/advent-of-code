@@ -24,7 +24,7 @@ class Day25Cryostasis(filename: String) extends DailyProblem[Int, Int] {
   // - giant electromagnet
   // - escape pod
 
-  val sequence =
+  private val sequence =
     """north
       |take weather machine
       |north
@@ -81,9 +81,9 @@ class Day25Cryostasis(filename: String) extends DailyProblem[Int, Int] {
       |east
       |""".stripMargin
 
-  val result = execute(sequence.split("\n").toList.map(line => line + "\n"))
+  private val result = execute(sequence.split("\n").toList.map(line => line + "\n"))
 
-  val password = result.substring(result.indexOf("typing ") + 7).split(" ")(0).toInt
+  private val password = result.substring(result.indexOf("typing ") + 7).split(" ")(0).toInt
 
   override val part1Answer: Int = password
   override val part2Answer: Int = 0

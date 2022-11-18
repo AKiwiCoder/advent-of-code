@@ -7,7 +7,7 @@ import scala.annotation.tailrec
 class Day23CategorySix(filename: String) extends DailyProblem[Long, Long] {
   private val program = IntComputer.loadProgram(filename)
 
-  val map = (0L to 50L).map(idx => idx -> IntComputerState.copyState(IntComputerState.newState(program), List(idx, -1L))).toMap
+  private val map = (0L to 50L).map(idx => idx -> IntComputerState.copyState(IntComputerState.newState(program), List(idx, -1L))).toMap
 
   @tailrec
   private def executeNetworkPart1(next: Long, states: Map[Long, IntComputerState]): (Long, Long) = {
@@ -20,13 +20,13 @@ class Day23CategorySix(filename: String) extends DailyProblem[Long, Long] {
 
       val messages = newState.output.grouped(3).toList
 
-      val natMessages = messages.filter(p => p(0) == 255)
+      val natMessages = messages.filter(p => p.head == 255)
       if (natMessages.nonEmpty) {
         (natMessages.head(1), natMessages.head(2))
       }
       else {
         val newStates = messages.foldLeft(states)((acc, msg) => {
-          val destAddress = msg(0)
+          val destAddress = msg.head
           val oldDestState = acc(destAddress)
           val newDestState = IntComputerState.copyState(oldDestState, oldDestState.input ::: List(msg(1), msg(2)))
 
@@ -55,10 +55,10 @@ class Day23CategorySix(filename: String) extends DailyProblem[Long, Long] {
         executeNetworkPart2((next + 1) % 50, idleCount + 1, states + (next -> newState), lastNat, natSent)
       } else {
         val messages = newState.output.grouped(3).toList
-        val natMessages = messages.filter(p => p(0) == 255)
+        val natMessages = messages.filter(p => p.head == 255)
         val newLastNat = natMessages.foldLeft(lastNat)((acc, msg) => (msg(1), msg(2)) :: acc)
-        val newStates = messages.filter(msg => msg(0) != 255).foldLeft(states)((acc, msg) => {
-          val destAddress = msg(0)
+        val newStates = messages.filter(msg => msg.head != 255).foldLeft(states)((acc, msg) => {
+          val destAddress = msg.head
           val oldDestState = acc(destAddress)
           val newDestState = IntComputerState.copyState(oldDestState, oldDestState.input ::: List(msg(1), msg(2)))
 

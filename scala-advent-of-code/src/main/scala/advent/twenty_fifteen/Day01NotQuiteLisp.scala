@@ -20,6 +20,6 @@ class Day01NotQuiteLisp(filename: String) extends DailyProblem[Int, Int] {
 
   private val (finalFloor, firstBasement) = walk(line.toList, 0, -1, 1)
 
-  override val part1Answer = finalFloor
-  override val part2Answer = firstBasement
+  override val part1Answer: Int = finalFloor
+  override val part2Answer: Int = firstBasement
 }

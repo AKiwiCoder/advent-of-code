@@ -167,13 +167,13 @@ class Day20DonutMaze(filename: String) extends DailyProblem[Int, Int] {
     }
   }
 
-  var startPoint = portalList("AA").head
-  var endPoint = portalList("ZZ").head
-  val portals = portalList.foldLeft(Map[Point, Point]())((acc, entry) => if (entry._2.size == 1) acc else acc + (entry._2(0) -> entry._2(1)) + (entry._2(1) -> entry._2(0)))
-  val distances = floodFill(inputMap, portals, List((0, startPoint)), Map())
+  private var startPoint = portalList("AA").head
+  private var endPoint = portalList("ZZ").head
+  private val portals = portalList.foldLeft(Map[Point, Point]())((acc, entry) => if (entry._2.size == 1) acc else acc + (entry._2(0) -> entry._2(1)) + (entry._2(1) -> entry._2(0)))
+  private val distances = floodFill(inputMap, portals, List((0, startPoint)), Map())
 
-  val topLeftWall = inputMap.filter(e => e._2 == '#').keySet.toList.sortWith((lhs, rhs) => Point.manhattanDistance(lhs, Point(0, 0)) < Point.manhattanDistance(rhs, Point(0, 0))).head
-  val bottomRightWall = inputMap.filter(e => e._2 == '#').keySet.toList.sortWith((lhs, rhs) => Point.manhattanDistance(lhs, Point(0, 0)) > Point.manhattanDistance(rhs, Point(0, 0))).head
+  private val topLeftWall = inputMap.filter(e => e._2 == '#').keySet.toList.sortWith((lhs, rhs) => Point.manhattanDistance(lhs, Point(0, 0)) < Point.manhattanDistance(rhs, Point(0, 0))).head
+  private val bottomRightWall = inputMap.filter(e => e._2 == '#').keySet.toList.sortWith((lhs, rhs) => Point.manhattanDistance(lhs, Point(0, 0)) > Point.manhattanDistance(rhs, Point(0, 0))).head
 
   def isOuter(point: Point): Boolean = {
     (point.y <= topLeftWall.y || point.y >= bottomRightWall.y) || (point.x <= topLeftWall.x || point.x >= bottomRightWall.x)
@@ -191,10 +191,10 @@ class Day20DonutMaze(filename: String) extends DailyProblem[Int, Int] {
     })
   }
 
-  val part2Top = modifyMap(inputMap, portals)
-  val part2Bottom = modifyMap(inputMap, Map(startPoint -> endPoint))
+  private val part2Top = modifyMap(inputMap, portals)
+  private val part2Bottom = modifyMap(inputMap, Map(startPoint -> endPoint))
 
-  val distances2 = floodFill2(List(part2Top, part2Bottom), portals, List((0, PointWithDepth(startPoint, 0))), Map())
+  private val distances2 = floodFill2(List(part2Top, part2Bottom), portals, List((0, PointWithDepth(startPoint, 0))), Map())
 
   override val part1Answer: Int = distances.getOrElse(endPoint, -1)
   override val part2Answer: Int = distances2.getOrElse(PointWithDepth(endPoint, 0), -1)

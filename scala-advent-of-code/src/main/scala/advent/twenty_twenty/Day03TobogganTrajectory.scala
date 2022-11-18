@@ -14,7 +14,7 @@ class Day03TobogganTrajectory(filename : String) extends DailyProblem[Long, Long
     if (y >= input.size) {
       count
     } else {
-      val nX = (x + dX) % input(0).size
+      val nX = (x + dX) % input.head.length
       val nY = y + dY
       walk(nX, nY, dX, dY, if (input(y)(x) == '#') count +1 else count)
     }

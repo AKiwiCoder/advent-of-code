@@ -34,7 +34,7 @@ class Day20JurassicJigsaw(filename: String, size: Int) extends DailyProblem[Long
   private val data = "([.#]+)".r
 
   private def build(id: String, data: List[String], lastIdx: Int): Piece = {
-    val top = data(0)
+    val top = data.head
     val bottom = data(lastIdx)
     val left = data.foldLeft("")((acc, line) => acc + line(0))
     val right = data.foldLeft("")((acc, line) => acc + line(lastIdx))

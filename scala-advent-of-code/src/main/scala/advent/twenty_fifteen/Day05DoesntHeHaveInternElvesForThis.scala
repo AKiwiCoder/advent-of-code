@@ -15,7 +15,7 @@ class Day05DoesntHeHaveInternElvesForThis(filename: String) extends DailyProblem
     val charList = line.toCharArray
     val pairs = charList.take(charList.size - 1).zip(charList.tail)
 
-    val niceVowels = charList.filter(c => vowelSet.contains(c)).size >= 3
+    val niceVowels = charList.count(c => vowelSet.contains(c)) >= 3
     val nicePairs = pairs.exists(p => p._1 == p._2)
     val naughtyPairs = pairs.exists(p => naughty.contains(p))
 
@@ -25,7 +25,7 @@ class Day05DoesntHeHaveInternElvesForThis(filename: String) extends DailyProblem
   private def nice2(line: String): Boolean = {
     @tailrec
     def hasPairOfPair(working: String): Boolean = {
-      if (working.size <= 3) {
+      if (working.length <= 3) {
         return false
       }
       if (working.indexOf(working.take(2), 2) >= 0) {
@@ -36,7 +36,7 @@ class Day05DoesntHeHaveInternElvesForThis(filename: String) extends DailyProblem
 
     @tailrec
     def hasTriple(working: String): Boolean = {
-      if (working.size <= 2) {
+      if (working.length <= 2) {
         return false
       }
       if (working.charAt(0) == working.charAt(2) && working.charAt(0) != working.charAt(1)) {
@@ -50,6 +50,6 @@ class Day05DoesntHeHaveInternElvesForThis(filename: String) extends DailyProblem
 
   private val counts = lines.foldLeft((0, 0))((acc, line) => (if (nice1(line)) acc._1 + 1 else acc._1, if (nice2(line)) acc._2 + 1 else acc._2))
 
-  override val part1Answer = counts._1
-  override val part2Answer = counts._2
+  override val part1Answer: Int = counts._1
+  override val part2Answer: Int = counts._2
 }

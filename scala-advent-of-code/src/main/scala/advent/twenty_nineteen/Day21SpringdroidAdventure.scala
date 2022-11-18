@@ -47,8 +47,8 @@ class Day21SpringdroidAdventure(filename: String) extends DailyProblem[Long, Lon
       |""".stripMargin
 
 
-  val ranPart1 = IntComputer.execute(IntComputerState.copyState(state, part1.toList.map(_.toLong)))
-  val ranPart2 = IntComputer.execute(IntComputerState.copyState(state, part2.toList.map(_.toLong)))
+  private val ranPart1 = IntComputer.execute(IntComputerState.copyState(state, part1.toList.map(_.toLong)))
+  private val ranPart2 = IntComputer.execute(IntComputerState.copyState(state, part2.toList.map(_.toLong)))
 
   override val part1Answer: Long = ranPart1.output.last
   override val part2Answer: Long = ranPart2.output.last
