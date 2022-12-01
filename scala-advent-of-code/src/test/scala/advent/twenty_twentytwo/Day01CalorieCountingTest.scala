@@ -6,8 +6,8 @@ class Day01CalorieCountingTest extends FlatSpec with Matchers {
   "2020 Day 01 - Input" should "calculate answers" in {
     val dp = new Day01CalorieCounting("/twenty_twentytwo/Day01-CalorieCounting-input.txt")
 
-    dp.part1Answer should be(70720)
-    dp.part2Answer should be(207148)
+    dp.part1Answer should be(70369)
+    dp.part2Answer should be(203002)
   }
 
   "2020 Day 01 - Example #1" should "calculate answers" in {
