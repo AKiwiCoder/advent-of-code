@@ -7,7 +7,7 @@ class Day04CampCleanupTest extends FlatSpec with Matchers {
     val dp = new Day04CampCleanup("/twenty_twentytwo/Day04-CampCleanup-input.txt")
 
     dp.part1Answer should be(483)
-    dp.part2Answer should be(0)
+    dp.part2Answer should be(874)
   }
 
   "2020 Day 03 - Example #1" should "calculate answers" in {
