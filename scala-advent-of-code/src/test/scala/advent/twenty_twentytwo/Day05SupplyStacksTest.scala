@@ -7,7 +7,7 @@ class Day05SupplyStacksTest extends FlatSpec with Matchers {
     val dp = new Day05SupplyStacks("/twenty_twentytwo/Day05-SupplyStacks-input.txt")
 
     dp.part1Answer should be("FZCMJCRHZ")
-    dp.part2Answer should be("")
+    dp.part2Answer should be("JSDHQMZGF")
   }
 
   "2020 Day 05 - Example #1" should "calculate answers" in {
