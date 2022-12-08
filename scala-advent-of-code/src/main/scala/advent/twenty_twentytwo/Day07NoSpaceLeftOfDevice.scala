@@ -6,13 +6,20 @@ import advent.utilities.FileUtilities
 import scala.annotation.tailrec
 
 abstract class FileSystemObject {
-   def name() : String
+  def name(): String
 }
 
-case class Directory(parent: Directory, name : String) extends FileSystemObject {
+case class Directory(parent: Directory, name: String) extends FileSystemObject {
+  def path(): String = {
+    if (parent == null) {
+      name
+    } else {
+      parent.path + "/" + name
+    }
+  }
 }
 
-case class File(directory : Directory, name : String, size : Long) extends FileSystemObject {
+case class File(directory: Directory, name: String, size: Long) extends FileSystemObject {
 }
 
 class Day07NoSpaceLeftOfDevice(filename: String) extends DailyProblem[Long, Long] {
@@ -24,7 +31,7 @@ class Day07NoSpaceLeftOfDevice(filename: String) extends DailyProblem[Long, Long
   private val file_entry = "([0-9]+) (.+)".r
 
   @tailrec
-  private def walk(remain : List[String], dir : Directory, root : Directory, acc : Map[Directory, List[FileSystemObject]]) : Map[Directory, List[FileSystemObject]] = {
+  private def walk(remain: List[String], dir: Directory, root: Directory, acc: Map[Directory, List[FileSystemObject]]): Map[Directory, List[FileSystemObject]] = {
     if (remain.isEmpty) {
       acc
     } else {
@@ -43,7 +50,7 @@ class Day07NoSpaceLeftOfDevice(filename: String) extends DailyProblem[Long, Long
         }
         case ls_cmd() => walk(remain.tail, dir, root, acc)
         case dir_entry(name) => {
-          val child : List[FileSystemObject] = acc(dir)
+          val child: List[FileSystemObject] = acc(dir)
           val new_dir = Directory(dir, name)
 
           val new_acc_1: Map[Directory, List[FileSystemObject]] = acc + (dir -> (new_dir :: child))
@@ -62,18 +69,20 @@ class Day07NoSpaceLeftOfDevice(filename: String) extends DailyProblem[Long, Long
 
   private val files = walk(input, root, root, Map(root -> List[FileSystemObject]()))
 
-  private def calc_sizes(dir : Directory): Long = {
+  private def calc_sizes(dir: Directory): Long = {
     files(dir).map {
       case d: Directory => calc_sizes(d)
       case f: File => f.size
     }.sum
   }
 
-  println(files.keys)
-  println(files.keys.map(d => (d.name, calc_sizes(d))))
-  println(files.keys.map(d => calc_sizes(d)).filter(_ <= 100000))
+  private val dir_size = files.keys.toList.map(d => calc_sizes(d))
 
-  override val part1Answer: Long = files.keys.map(d => calc_sizes(d)).filter(_ <= 100000).sum
-  override val part2Answer: Long = 0
+  private val free_space = 70000000L - dir_size.max
+  private val space_needed = 30000000L - free_space
+
+  override val part1Answer: Long = dir_size.filter(_ <= 100000).sum
+  override val part2Answer: Long = dir_size.sorted.find(size => size >= space_needed).get
 }
+
 
