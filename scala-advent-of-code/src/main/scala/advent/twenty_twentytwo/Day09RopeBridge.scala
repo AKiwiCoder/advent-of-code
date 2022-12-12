@@ -5,9 +5,10 @@ import advent.utilities.FileUtilities
 
 import scala.annotation.tailrec
 
-case class Point(x: Int, y: Int)
 
 class Day09RopeBridge(filename: String) extends DailyProblem[Int, Int] {
+  case class Point(x: Int, y: Int)
+
   private val input = FileUtilities.readFile(filename).foldLeft(List[Char]())((lst, move) => (0 until move.tail.trim.toInt).foldLeft(lst)((l, _) => move(0) :: l)).reverse
 
   println(input)
