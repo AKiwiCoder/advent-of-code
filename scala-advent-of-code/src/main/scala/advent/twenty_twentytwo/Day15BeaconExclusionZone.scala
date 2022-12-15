@@ -49,25 +49,33 @@ class Day15BeaconExclusionZone(filename: String, part1Row: Int, p2minX:Int, p2ma
     }
   }
 
-  def search(y: Int): (Int, Int, List[Int]) = {
-    (p2minX to p2maxX).foldLeft((Integer.MAX_VALUE, Integer.MIN_VALUE, List[Int]()))((acc, x) => {
+  @tailrec
+  private def search(y: Int, x : Int, left : Int, right : Int, acc : List[Int]): List[Int] = {
+    if (x > p2maxX) {
+      acc
+    } else {
       val check = Point(x, y)
-      if (input.exists(r => manhatten(check, r.sensor) <= r.distance)) {
-        (Math.min(acc._1, x), Math.max(acc._2, x), acc._3)
+      val s = input.find(r => manhatten(check, r.sensor) <= r.distance)
+      if (s.isEmpty) {
+        search(y, x + 1, left, right, if (acc.size > 2) acc else x :: acc)
       } else {
-        (acc._1, acc._2, if (acc._3.size > 2) acc._3 else x :: acc._3)
+        val step = Math.max(1, s.get.sensor.x - x)
+        search(y, x + step, Math.min(left, x), Math.max(right, x), acc)
       }
-    })
+    }
   }
 
   @tailrec
   private def part2search(y : Int) : Long = {
+    if (y % 1000 == 0) {
+      println(y)
+    }
     if (y > p2maxY) {
       -1
     } else {
-      val s = search(y)
-      if (s._3.size == 1) {
-        s._3.head * 4000000L + y
+      val s = search(y, p2minX, Integer.MAX_VALUE, Integer.MIN_VALUE, List())
+      if (s.size == 1) {
+        s.head * 4000000L + y
       } else {
         part2search(y + 1)
       }
