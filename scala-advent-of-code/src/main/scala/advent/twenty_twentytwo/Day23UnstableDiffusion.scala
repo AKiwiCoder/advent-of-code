@@ -10,38 +10,38 @@ class Day23UnstableDiffusion(filename: String) extends DailyProblem[Int, Int] {
   case class Point(x: Int, y: Int)
 
   abstract class Move {
-    def canMove(current: List[Point], p: Point): Boolean
+    def canMove(current: Set[Point], p: Point): Boolean
 
     def move(p: Point): Point
   }
 
   case class North() extends Move {
-    override def canMove(current: List[Point], p: Point): Boolean = !(current.contains(Point(p.x, p.y - 1)) || current.contains(Point(p.x - 1, p.y - 1)) || current.contains(Point(p.x + 1, p.y - 1)))
+    override def canMove(current: Set[Point], p: Point): Boolean = !(current.contains(Point(p.x, p.y - 1)) || current.contains(Point(p.x - 1, p.y - 1)) || current.contains(Point(p.x + 1, p.y - 1)))
 
     override def move(p: Point): Point = Point(p.x, p.y - 1)
   }
 
   case class South() extends Move {
-    override def canMove(current: List[Point], p: Point): Boolean = !(current.contains(Point(p.x, p.y + 1)) || current.contains(Point(p.x - 1, p.y + 1)) || current.contains(Point(p.x + 1, p.y + 1)))
+    override def canMove(current: Set[Point], p: Point): Boolean = !(current.contains(Point(p.x, p.y + 1)) || current.contains(Point(p.x - 1, p.y + 1)) || current.contains(Point(p.x + 1, p.y + 1)))
 
 
     override def move(p: Point): Point = Point(p.x, p.y + 1)
   }
 
   case class West() extends Move {
-    override def canMove(current: List[Point], p: Point): Boolean = !(current.contains(Point(p.x - 1, p.y)) || current.contains(Point(p.x - 1, p.y + 1)) || current.contains(Point(p.x - 1, p.y - 1)))
+    override def canMove(current: Set[Point], p: Point): Boolean = !(current.contains(Point(p.x - 1, p.y)) || current.contains(Point(p.x - 1, p.y + 1)) || current.contains(Point(p.x - 1, p.y - 1)))
 
     override def move(p: Point): Point = Point(p.x - 1, p.y)
   }
 
   case class East() extends Move {
-    override def canMove(current: List[Point], p: Point): Boolean = !(current.contains(Point(p.x + 1, p.y)) || current.contains(Point(p.x + 1, p.y + 1)) || current.contains(Point(p.x + 1, p.y - 1)))
+    override def canMove(current: Set[Point], p: Point): Boolean = !(current.contains(Point(p.x + 1, p.y)) || current.contains(Point(p.x + 1, p.y + 1)) || current.contains(Point(p.x + 1, p.y - 1)))
 
     override def move(p: Point): Point = Point(p.x + 1, p.y)
   }
 
 
-  def shouldMove(current: List[Point], p: Point): Boolean = {
+  def shouldMove(current: Set[Point], p: Point): Boolean = {
     current.contains(Point(p.x, p.y - 1)) ||
       current.contains(Point(p.x - 1, p.y - 1)) ||
       current.contains(Point(p.x + 1, p.y - 1)) ||
@@ -54,10 +54,10 @@ class Day23UnstableDiffusion(filename: String) extends DailyProblem[Int, Int] {
 
   private val input = FileUtilities.readFile(filename)
 
-  private val startingElves = input.indices.foldLeft(List[Point]())((acc, y) => input(y).indices.foldLeft(acc)((acc, x) => if (input(y)(x) == '#') Point(x, y) :: acc else acc))
+  private val startingElves = input.indices.foldLeft(List[Point]())((acc, y) => input(y).indices.foldLeft(acc)((acc, x) => if (input(y)(x) == '#') Point(x, y) :: acc else acc)).toSet
 
 
-  def dump(elves: List[Point]): Unit = {
+  def dump(elves: Set[Point]): Unit = {
     val minx = elves.map(_.x).min - 1
     val maxx = elves.map(_.x).max + 1
     val miny = elves.map(_.y).min - 1
@@ -76,7 +76,7 @@ class Day23UnstableDiffusion(filename: String) extends DailyProblem[Int, Int] {
   }
 
   @tailrec
-  private def part1(round: Int, elves: List[Point], directions: List[Move]): List[Point] = {
+  private def part1(round: Int, elves: Set[Point], directions: List[Move]): Set[Point] = {
     if (round == 0) {
       elves
     } else {
@@ -94,13 +94,13 @@ class Day23UnstableDiffusion(filename: String) extends DailyProblem[Int, Int] {
 
         val movedElves = suggestedMoves.foldLeft(List[Point]())((acc, mv) => if (suggestedMoves.values.count(_ == mv._2) == 2) mv._1 :: acc else mv._2 :: acc)
 
-        part1(round - 1, elvesInRightPlace ::: movedElves, directions.tail ::: List(directions.head))
+        part1(round - 1, elvesInRightPlace ++ movedElves, directions.tail ::: List(directions.head))
       }
     }
   }
 
   @tailrec
-  private def part2(round : Int, elves: List[Point], directions: List[Move]): Int = {
+  private def part2(round : Int, elves: Set[Point], directions: List[Move]): Int = {
     val elvesInRightPlace = elves.filterNot(p => shouldMove(elves, p))
     val needingMove = elves.filter(p => shouldMove(elves, p))
     if (needingMove.isEmpty) {
@@ -113,16 +113,15 @@ class Day23UnstableDiffusion(filename: String) extends DailyProblem[Int, Int] {
         }
       })
       val movedElves = suggestedMoves.foldLeft(List[Point]())((acc, mv) => if (suggestedMoves.values.count(_ == mv._2) == 2) mv._1 :: acc else mv._2 :: acc)
-      part2(round + 1, elvesInRightPlace ::: movedElves, directions.tail ::: List(directions.head))
+      part2(round + 1, elvesInRightPlace ++  movedElves, directions.tail ::: List(directions.head))
     }
   }
 
-  private def count(map: List[Point]): Int = {
+  private def count(map: Set[Point]): Int = {
     val minx = map.map(_.x).min
     val maxx = map.map(_.x).max + 1
     val miny = map.map(_.y).min
     val maxy = map.map(_.y).max + 1
-    println(minx, maxx, miny, maxy, map.size, (((maxx - minx) * (maxy - miny)) - map.size))
     ((maxx - minx) * (maxy - miny)) - map.size
   }
 
