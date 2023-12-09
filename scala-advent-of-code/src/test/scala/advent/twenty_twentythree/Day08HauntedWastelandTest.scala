@@ -7,7 +7,7 @@ class Day08HauntedWastelandTest extends FlatSpec with Matchers {
     val dp = new Day08HauntedWasteland("/twenty_twentythree/Day08-HauntedWasteland-input.txt", true, true)
 
     dp.part1Answer should be(19951)
-    dp.part2Answer should be(16342438708751)
+    dp.part2Answer should be(16342438708751L)
   }
 
   "2023 Day 08 - Example #1" should "calculate answers" in {
