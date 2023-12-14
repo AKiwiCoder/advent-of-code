@@ -143,7 +143,7 @@ class Day14ParabolicReflectorDish(filename: String) extends DailyProblem[Int, In
       spinCycle(te, iteration + 1, cache + (te -> iteration))
     }
   }
-  
+
   private val partTwo = spinCycle(rocks, 0, Map(rocks -> 0))
 
   override val part1Answer: Int = tiltNorth(rocks).filter(e => e._2 == 'O').map(input.length - _._1.y).sum
