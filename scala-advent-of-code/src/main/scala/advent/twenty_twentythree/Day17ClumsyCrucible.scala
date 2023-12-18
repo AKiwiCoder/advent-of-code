@@ -21,9 +21,9 @@ class Day17ClumsyCrucible(filename: String) extends DailyProblem[Int, Int] {
   private val start = Point(0, 0)
   private val end = Point(input.length - 1, input.head.length - 1)
 
-  private case class StateKey(path: Point, facing: Facing, steps: Int)
+   case class StateKey(path: Point, facing: Facing, steps: Int)
 
-  private case class State(path: Point, facing: Facing, steps: Int, heatLoss: Int) {
+   case class State(path: Point, facing: Facing, steps: Int, heatLoss: Int) {
     def key(): StateKey = StateKey(path, facing, steps)
   }
 
@@ -156,8 +156,8 @@ class Day17ClumsyCrucible(filename: String) extends DailyProblem[Int, Int] {
   val startUltraSouth = State(startSouth3,FacingSouth(), 4, heatloss(startSouth0) + heatloss(startSouth1) + heatloss(startSouth2) + heatloss(startSouth3))
   val startUltraEast = State(startEast3,FacingEast(), 4, heatloss(startEast0) + heatloss(startEast1) + heatloss(startEast2) + heatloss(startEast3))
 
-  override val part1Answer: Int = moveCrucible(0, mutable.PriorityQueue(State(start, FacingSouth(), 0, 0), State(start, FacingEast(), 0, 0))(Ordering.by(order)), Map())
-  override val part2Answer: Int = moveUltraCrucible(0, mutable.PriorityQueue(startUltraSouth, startUltraEast)(Ordering.by(order)), Map())
+  override val part1Answer: Int = moveCrucible(mutable.PriorityQueue(State(start, FacingSouth(), 0, 0), State(start, FacingEast(), 0, 0))(Ordering.by(order)), Map())
+  override val part2Answer: Int = moveUltraCrucible(mutable.PriorityQueue(startUltraSouth, startUltraEast)(Ordering.by(order)), Map())
 }
 
 
