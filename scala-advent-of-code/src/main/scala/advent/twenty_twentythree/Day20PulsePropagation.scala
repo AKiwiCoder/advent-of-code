@@ -86,7 +86,7 @@ class Day20PulsePropagation(filename : String, outputName : String, watch : Set[
   }
 
   private val moduleMap = FileUtilities.readFile(filename).flatMap(parse).map(e => e.name -> e).toMap
-  
+
   @tailrec
   private def processSignals(signals : List[Signal], acc : (Int,Int)): (Int,Int) = {
     if (signals.isEmpty) {
@@ -107,7 +107,6 @@ class Day20PulsePropagation(filename : String, outputName : String, watch : Set[
       val signal = signals.head
 
       val newFound = if (watch.contains(signal.destination) && !signal.level) {
-        println(found)
         found + (signal.destination ->  acc)
       } else {
         found
