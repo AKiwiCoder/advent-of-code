@@ -124,12 +124,15 @@ class Day20PulsePropagation(filename : String, outputName : String, watch : Set[
   }
 
 
+  private def leastCommonMultiple(list: Seq[Long]): Long =
+    list.foldLeft(1: Long) {
+      (a, b) => b * a / Stream.iterate((a, b)) { case (x, y) => (y, x % y) }.dropWhile(_._2 != 0).head._1.abs
+    }
   @tailrec
   private def runPartTwo(idx : Long, found : Map[String, Long]): Long = {
     val newFound = processSignalsPart2(List(Signal("button", "broadcaster", level = false)), idx, found)
     if (newFound.size == watch.size) {
-      println(newFound)
-      newFound.values.product
+      leastCommonMultiple(newFound.values.toList)
     } else runPartTwo(idx+1, newFound);
   }
 
