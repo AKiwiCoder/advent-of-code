@@ -10,13 +10,13 @@ class Day22SandSlabs(filename: String) extends DailyProblem[Int, Int] {
 
   private val pattern = "([0-9]+),([0-9]+),([0-9]+)~([0-9]+),([0-9]+),([0-9]+)".r
 
-  def parse(input : (Int, String)): Brick = {
-    input._2 match {
-      case pattern(x1, y1, z1, x2, y2, z2) => Brick(input._1, Point3d(x1.toInt, y1.toInt, z1.toInt), Point3d(x2.toInt, y2.toInt, z2.toInt))
+  def parse(input : (String, Int)): Brick = {
+    input._1 match {
+      case pattern(x1, y1, z1, x2, y2, z2) => Brick(input._2, Point3d(x1.toInt, y1.toInt, z1.toInt), Point3d(x2.toInt, y2.toInt, z2.toInt))
     }
   }
 
-  private val input = FileUtilities.readFile(filename).zipWithIndex.map(parse)
+  private val input = FileUtilities.readFile(filename).zipWithIndex.map(i => parse(i))
 
   private def canDrop(brick : Brick, bricks : List[Brick]) : Boolean = {
     val brickZ = Math.min(brick.start.z, brick.end.z)
